@@ -23,7 +23,7 @@
     <meta property="og:url" content="{{ page.url | prepend: site.baseurl }}">
     <meta property="og:site_name" content="{{ site.title }}">
     <!-- END: Open Graph -->
-    
+
     {% if site.google_verify %}<meta name="google-site-verification" content="{{ site.google_verify }}">{% endif %}
     {% if site.bing_verify %}<meta name="msvalidate.01" content="{{ site.bing_verify }}">{% endif %}
 
@@ -31,7 +31,7 @@
     <link href="{{ site.url }}/feed.xml" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
     {% if site.owner.google_plus %}<link rel="author" href="{{ site.owner.google_plus }}?rel=author">{% endif %}
 
-    <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
+    <link rel="stylesheet" href="{{ "/css/main.min.css" | prepend: site.baseurl }}">
 
     <!-- Icons -->
     <!-- 16x16 -->
