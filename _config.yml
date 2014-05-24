@@ -13,4 +13,5 @@ links:
 
 # Build settings
 markdown: kramdown
+highlighter: pygments
 permalink: pretty
