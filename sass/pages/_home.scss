@@ -1,0 +1,49 @@
+.home p {
+    text-align: center;
+}
+
+@media only screen and (min-width: 35em){
+    .home p {
+        margin: 0 20%;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .posts li span.post-date {
+        display: inline;
+        float: right;
+        position: absolute;
+        right: 0;
+        top: 0.8125em;
+        z-index: 1;
+    }
+    .posts a {
+        z-index: 10;
+    }
+}
+
+.home h1 {
+    text-align: center;
+    font-size: 1.1764em;
+    font-weight: normal;
+}
+
+.posts {
+    margin: 0;
+    padding: 0;
+    li {
+        list-style: none;
+        border-top: 1px solid $light-grey;
+        position: relative;
+        a {
+            display: block;
+            padding: 0.8em 0;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+        .post-date {
+            display: none;
+        }
+    }
+}

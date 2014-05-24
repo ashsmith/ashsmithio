@@ -1,0 +1,54 @@
+// Mobile first...
+body {
+    margin: 1em;
+}
+.header-wrap {
+    overflow: hidden;
+}
+.masthead h1, h3 {
+    margin: 0;
+}
+
+nav {
+    overflow: hidden;
+    margin: 2em 0;
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+    li {
+        float: left;
+        width: 33%;
+    }
+    a {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    body {
+        width: 700px;
+        margin: 0 auto;
+    }
+}
+
+
+@media only screen and (min-width: 700px) {
+    .masthead {
+        float: left;
+        width: 50%;
+        min-height: 5em;
+        h1,h3 {
+            text-align: left;
+        }
+    }
+    nav {
+        float:right;
+        width: 50%;
+        min-height: 5em;
+        margin: 0;
+        ul {
+            margin-top: 1em;
+        }
+    }
+}
