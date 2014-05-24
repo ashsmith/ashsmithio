@@ -1,16 +1,16 @@
 module.exports = function(grunt) {
 
     grunt.initConfig({
-      sass: {                              // Task
-        dist: {                            // Target
-          options: {                       // Target options
-            style: 'compact'
-          },
-          files: {                         // Dictionary of files
-            'css/main.min.css': 'sass/main.scss',       // 'destination': 'source'
-          }
+        sass: {
+            dist: {
+                options: {
+                    style: 'compressed'
+                },
+                files: {
+                    'css/main.min.css': 'sass/main.scss',
+                }
+            }
         }
-      }
     });
 
     grunt.loadNpmTasks('grunt-contrib-sass');
