@@ -3,16 +3,17 @@ layout: default
 ---
 
 <div class="home">
+    <p>I’m a Magento Developer working for <a href="https://www.meanbee.com/">Meanbee</a>. This is my attempt at documenting everything I learn.</p>
+    <p><a href="{{ "/about/" | prepend: site.baseurl}}">Learn more about me</a></p>
 
-  <h1>Posts</h1>
-
-  <ul class="posts">
+    <h1>My Latest Posts</h1>
+    <ul class="posts">
     {% for post in site.posts %}
-      <li>
-        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-      </li>
+        <li>
+            <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+        </li>
     {% endfor %}
-  </ul>
+    </ul>
 
 </div>

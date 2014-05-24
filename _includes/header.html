@@ -1,11 +1,13 @@
-<header class="main-head">
-    <h1><a href="{{ "/" | prepend: site.baseurl}}">{{ site.title}}</a><h1>
-    <h3>{{ site.description }}</h3>
-</header>
-<nav>
-    <ul>
-        {% for link in site.links %}
-        <li><a href="{{ link.url | prepend: site.baseurl }}">{{ link.title }}</a></li>
-        {% endfor %}
-    </ul>
-</nav>
+<div class="header-wrap">
+    <header class="masthead">
+        <h1><a href="{{ "/" | prepend: site.baseurl}}">{{ site.title }}</a></h1>
+        <h3 class="subheading">{{ site.description }}</h3>
+    </header>
+    <nav>
+        <ul>
+            {% for link in site.links %}
+            <li><a {% if page.url == link.url or page.layout == link.layout %}class="current"{% endif %} href="{{ link.url | prepend: site.baseurl }}">{{ link.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+</div>

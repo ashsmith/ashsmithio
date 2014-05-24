@@ -8,6 +8,10 @@
 
 ## Get running:
 
+Get dependencies:
+    
+    npm install
+
 Generate the CSS with:
 
     grunt sass
