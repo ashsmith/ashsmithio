@@ -4,6 +4,8 @@ email: me@ashsmith.io
 description: "Magento Developer @ Meanbee"
 baseurl: ""
 url: "http://ashsmith.io"
+google_analytics: UA-10830573-3
+disqus_shortname: meteorify
 
 links:
     - title: Home
