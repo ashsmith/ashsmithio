@@ -22,14 +22,14 @@ After you have done your basic stock take, we now know how much of each item we 
 
 ## 2) Stock Consumption
 
-<img class="alignleft size-full wp-image-187" alt="products-ordered-path" src="/images//images/uploads/2013/03/products-ordered-path.png" width="292" height="232" />
+<img class="alignleft size-full wp-image-187" alt="products-ordered-path" src="/images/uploads/2013/03/products-ordered-path.png" width="292" height="232" />
 
 You absolutely must know how much you&#8217;re selling, and over what time period. Without this you will hit stock shortages on a regular basis, which is a nightmare if your priority is bringing in sales.  
 Magento has an in-built report which can tell you how many of each item you have sold, it&#8217;s called the Products Ordered report. This is located here: `Reports > Products > Products Ordered`
 
 Below you can see the response from running the report over a 1 month period
 
-<img class="alignnone size-full wp-image-189" style="font-size: 1rem; line-height: 1;" alt="products-ordered-report" src="/images//images/uploads/2013/03/products-ordered-report.png" width="989" height="323" />
+<img class="alignnone size-full wp-image-189" style="font-size: 1rem; line-height: 1;" alt="products-ordered-report" src="/images/uploads/2013/03/products-ordered-report.png" width="989" height="323" />
 
 ## 3) Stock Run Rate
 
@@ -39,7 +39,7 @@ The run rate report below is a very simple one, and not all that intelligent but
 
 We don&#8217;t take seasonal variation into account, however if we have last years data, we could use that instead of the past six months.
 
-<a style="font-size: 1rem; color: #0f3647;" href="/images//images/uploads/2013/03/run-rate-report-example.png"><img class="alignnone size-full wp-image-188" alt="run-rate-report-example" src="/images//images/uploads/2013/03/run-rate-report-example.png" width="704" height="128" /></a>
+<img class="alignnone size-full wp-image-188" alt="run-rate-report-example" src="/images/uploads/2013/03/run-rate-report-example.png" width="704" height="128" />
 
 ## Finishing up on stock reporting
 
