@@ -2,9 +2,6 @@
 layout: default
 ---
 <h1 class="entry-title">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %}</h1>
-{{ content }}
-
-{% if page.comments %}
 
 <footer class="entry-meta">
   <span class="entry-date date published"><time datetime="{{ page.date | date_to_xmlschema }}"><i class="icon-calendar-empty"></i> {{ page.date | date: "%B %d, %Y" }}</time></span>
@@ -12,5 +9,10 @@ layout: default
   {% if site.disqus_shortname and page.comments %}<span class="entry-comments"><i class="icon-comment-alt"></i> <a href="#disqus_thread">Comment</a></span>{% endif %}
   <span><a href="{{ site.url }}{{ page.url }}" rel="bookmark" title="{{ page.title }}"><i class="icon-link"></i> Permalink</a></span>
 </footer>
+
+{{ content }}
+
+{% if page.comments %}
+
 <div id="disqus_thread"></div><!-- /#disqus_thread -->
 {% endif %}

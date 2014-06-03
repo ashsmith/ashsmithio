@@ -10,10 +10,10 @@ disqus_shortname: meteorify
 links:
     - title: Home
       url: /
-    - title: About
-      url: /about/
-    - title: Contact
-      url: /contact/
+    # - title: About
+    #   url: /about/
+    # - title: Contact
+    #   url: /contact/
 
 # Build settings
 markdown: kramdown
