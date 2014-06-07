@@ -34,4 +34,9 @@
 </script>
 {% endif %}
 <script src="/js/instantclick.min.js" data-no-instant></script>
-<script data-no-instant>InstantClick.init();</script>
+<script data-no-instant>
+  InstantClick.on('change', function() {
+    ga('send', 'pageview', location.pathname + location.search);
+  });
+  InstantClick.init();
+</script>
