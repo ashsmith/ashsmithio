@@ -36,7 +36,7 @@ For the best performance results, use a dedicated server. VPS&#8217;s are great,
 rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 yum install mysql mysql-server
-/etc/init.d/mysqld restart
+/etc/init.d/mysqld start
 /usr/bin/mysql_secure_installation
 {% endhighlight %}
 
@@ -49,7 +49,7 @@ yum --enablerepo=remi install php-fpm php-mysql php-pdo php-common php-mcrypt ph
 vi /etc/php.ini
 {% endhighlight %}
 
-When you open up php.ini, find `cgi.fix_pathinfo` and set the value to ``
+When you open up php.ini, find `cgi.fix_pathinfo` and set the value to `0`
 
 Next up we need to create our virtual host in Nginx so our site can be accessed from the web! to do this simply enter:
 
@@ -127,10 +127,10 @@ Most importantly I have set nginx to run on port 8080 rather than the usual port
 
 Next we want to configure php-fpm to work nicely with Nginx, to do this simply open up /etc/php-fpm.d/www.conf and find the User & Group settings, and set both the user and group to &#8216;nginx&#8217;.
 
-Now restart php-fpm:
+Now start php-fpm:
 
 {% highlight bash %}
-service php-fpm restart
+service php-fpm start
 {% endhighlight %}
 
 If you want to quickly test your changes before adding your magento installation simply create a file in your root directory you defined in your nginx conf and set it to output phpinfo();
