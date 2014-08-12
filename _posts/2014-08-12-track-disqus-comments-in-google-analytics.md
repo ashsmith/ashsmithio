@@ -93,3 +93,20 @@ Let me know in the comments if you have any questions!
 
 - [Google Analytics Documentation on Events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
 - [Disqus Capturing commenting activity](https://help.disqus.com/customer/portal/articles/466258-capturing-disqus-commenting-activity-via-callbacks)
+
+
+### Update: 12/08 22:44pm
+
+If you are using InstantClick (like this blog does), then you may find all your events tracks as the homepage. Which is very annoying! You can fix this by using the following code instead:
+
+{% highlight js %}
+
+    var disqus_config = function() {
+        this.callbacks.onNewComment.push(function() {
+            ga('send', 'event', 'Comments', 'New Comment', 'New Comment', 1, {'page': location.pathname + location.search});
+        });
+    };
+
+{% endhighlight %}
+
+Thanks all!

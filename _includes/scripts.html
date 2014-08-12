@@ -20,7 +20,7 @@
 
         var disqus_config = function() {
             this.callbacks.onNewComment.push(function() {
-                ga('send', 'event', 'Comments', 'New Comment', 'New Comment', 1);
+                ga('send', 'event', 'Comments', 'New Comment', 'New Comment', 1, {'page': location.pathname + location.search});
             });
         };
     </script>
