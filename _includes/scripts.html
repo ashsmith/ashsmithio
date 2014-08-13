@@ -20,16 +20,9 @@
 
         var disqus_config = function() {
             this.callbacks.onNewComment.push(function() {
-                ga('send', 'event', 'Comments', 'New Comment', 'New Comment', 1, {'page': location.pathname + location.search});
+                ga('send', 'event', 'Comments', 'New Comment', 'New Comment', 1);
             });
         };
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 {% endif %}
-<script src="/js/instantclick.min.js" data-no-instant></script>
-<script data-no-instant>
-  InstantClick.on('change', function() {
-    ga('send', 'pageview', location.pathname + location.search);
-  });
-  InstantClick.init();
-</script>
