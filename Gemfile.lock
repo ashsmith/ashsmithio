@@ -11,6 +11,7 @@ GEM
       execjs
     coffee-script-source (1.7.1)
     colorator (0.1)
+    eventmachine (1.0.3)
     execjs (2.2.1)
     fast-stemmer (1.0.2)
     ffi (1.9.3)
@@ -50,6 +51,8 @@ GEM
     mina (0.3.0)
       open4
       rake
+    node (0.0.2)
+      eventmachine
     open4 (1.3.4)
     parslet (1.5.0)
       blankslate (~> 2.0)
@@ -82,7 +85,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  execjs
   grunt
   jekyll
   mina
+  node
