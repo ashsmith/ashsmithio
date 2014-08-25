@@ -82,6 +82,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  execjs
   grunt
   jekyll
   mina
