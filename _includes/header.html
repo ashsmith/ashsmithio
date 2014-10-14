@@ -1,13 +1,16 @@
 <div class="header-wrap">
-    <header class="masthead">
-        <h1><a href="{{ "/" | prepend: site.baseurl}}">{{ site.title }}</a></h1>
-        <h3 class="subheading">{{ site.description }}</h3>
-    </header>
     <nav>
         <ul>
             {% for link in site.links %}
             <li><a {% if page.url == link.url or page.layout == link.layout %}class="current"{% endif %} href="{{ link.url | prepend: site.baseurl }}">{{ link.title }}</a></li>
             {% endfor %}
+            <li><a href="http://twitter.com/ashsmithco" target="_blank">Twitter</a></li>
+            <li><a href="http://github.com/ashsmith" target="_blank">GitHub</a></li>
+            <li><a href="mailto:hello@ashsmith.io">Contact</a></li>
         </ul>
     </nav>
+    <header class="masthead">
+        <h1><a href="{{ "/" | prepend: site.baseurl}}">{{ site.title }}</a></h1>
+        <h3 class="subheading">{{ site.description }}</h3>
+    </header>
 </div>

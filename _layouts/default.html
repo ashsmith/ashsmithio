@@ -4,17 +4,13 @@
 <!--[if (IE 8)&!(IEMobile)]><html class="lt-ie9" lang="en"><![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en"><!--<![endif]-->
 {% include head.html %}
-<body id="page">
-    {% include header.html %}
+<body>
+    <div id="page">
+        {{ content }}
 
-    <section role="main">
-        <article role="content">
-            {{ content }}
-        </article>
-    </section>
+        {% include footer.html %}
 
-    {% include footer.html %}
-
-    {% include scripts.html %}
+        {% include scripts.html %}
+    </div>
 </body>
 </html>

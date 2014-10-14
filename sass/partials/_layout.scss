@@ -5,8 +5,10 @@ body {
 .header-wrap {
     overflow: hidden;
 }
-.masthead h1, h3 {
+.masthead h1, .masthead h3 {
     margin: 0;
+    font-style: italic;
+    line-height: 1.3em;
 }
 
 img {
@@ -22,37 +24,60 @@ nav {
     }
     li {
         float: left;
-        width: 33%;
+        width: 25%;
     }
     a {
         display: block;
     }
 }
 
+.post .masthead {
+    font-size: 1.5em;
+}
+
+.post article {
+    border-top: 1px solid #eee;
+    margin-top: 2em;
+
+    h2,h3,h4,h5 {
+        font-size:1.2em;
+        font-family: helvetica, sans-serif;
+    }
+}
+
+.post h1 {
+    font-size: 2em;
+    text-align: center;
+    font-style:italic;
+}
+
 @media only screen and (min-width: 800px) {
-    body {
-        width: 700px;
+    #page {
+        width: 800px;
         margin: 0 auto;
     }
 }
 
 
 @media only screen and (min-width: 700px) {
+    body {
+        background-color: #f4f3f3;
+    }
+
+    #page {
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 1em 3em;
+    }
+
     .masthead {
-        float: left;
         width: 50%;
-        min-height: 5em;
-        h1,h3 {
-            text-align: left;
-        }
+        min-height: 3em;
+        margin: 0 auto;
+        font-size: 2em;
     }
     nav {
-        float:right;
-        width: 50%;
-        min-height: 5em;
+        min-height: 4em;
         margin: 0;
-        ul {
-            margin-top: 1em;
-        }
     }
 }
