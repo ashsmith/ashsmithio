@@ -98,7 +98,7 @@ Each module requires a file called `config.xml` this file lives in `app/code/
                     <meteorify_observerexample_model_observer>
                         <type>singleton</type>
                         <class>Meteorify_Observerexample_Model_Observer</class>
-                        <method>logobs</method>
+                        <method>example</method>
                     </meteorify_observerexample_model_observer>
                 </observers>
             </sales_order_place_before> 
@@ -119,7 +119,7 @@ Now we can create our Observer and place our code inside our method we will crea
 <?php
 class Meteorify_Observerexample_Model_Observer {
 
-    public function send_email($observer) {
+    public function example($observer) {
         //$observer contains data passed from when the event was triggered.
         //You can use this data to manipulate the order data before it's saved.
         //Uncomment the line below to log what is contained here:
