@@ -11,11 +11,11 @@ comments: true
 
 With the developer beta release of Magento 2 coming out just the other day, I decided it was a good time to take a look at how to create a simple module. The goal of this post is to help you (read as: me) understand some of the new concepts/structures in Magento 2.
 
-It's worth noting this is an investigation by myself, and exploring the magento 2 code base. I talk to myself a lot, and probably make false promises like writing future posts (seriously, my last past was 4 months ago). Imagine those comments as mete @TODO docblocks that never get looked at.
+It's worth noting this is an investigation by myself, and exploring the magento 2 code base. I talk to myself a lot, and probably make false promises like writing future posts (seriously, my last past was 4 months ago). Imagine those comments as mere @TODO docblocks that never get looked at.
 
 I apologise if anything is hard to follow. It is a complete and utter brain dump. I have a messy brain. Please call me on it, and I'll do my best to re-write it... or you could suggests edits on github [because, well, you just should ok.](https://github.com/ashsmith/ashsmithio)
 
-This post assumes you have good knowledge of Magento 1.x (and that you can understand me translating the rubbish that comes out of my brain un-polished), most importantly though: You should be comfortable creating a module with controllers and blocks already.
+This post assumes you have good knowledge of Magento 1.x (and that you can understand me translating the rubbish that comes out of my brain unpolished), most importantly though: You should be comfortable creating a module with controllers and blocks already.
 
 ## Basic module with controller, block and view.
 
@@ -101,10 +101,9 @@ Next up, is our frontend router configuration file. Save this to `app/code/Ashsm
 </config> 
 {% endhighlight %}
 
-Ok, so what have done here? To register a router we need to add to this: `<router id="standard">`, and if we wanted an admin router we do this: `<router id="admin">
-`. Simple. Next we define our route. The id attribute is simply an identifier, it should be unique. The frontName attribute is going to be the first part of the URL, in the completes example our URL is /helloworld/index/index/. This maps to Controller/Index/Index.php. The URL structure is as follows: /moduleFrontName/controller/action/param1/param2/param3.
+Ok, so what have done here? To register a router we need to add to this: `<router id="standard">`, and if we wanted an admin router we do this: `<router id="admin">`. Simple. Next we define our route. The id attribute is simply an identifier, it should be unique. The frontName attribute is going to be the first part of the URL, in the completes example our URL is /helloworld/index/index/. This maps to Controller/Index/Index.php. The URL structure is as follows: /moduleFrontName/controller/action/param1/param2/param3.
 
-With our route registered, now we can create our Controller action. This is something else that has changed in Magento 2 in comparison to 1.x in a fairly major way. Now, instead of specifying a controller class, which has multiple `[actionName]Action()` methods, you now have a class for each action, which implements a `execute` method. Heres the code:
+With our route registered, now we can create our Controller action. This is something else that has changed in Magento 2 in comparison to 1.x in a fairly major way. Now, instead of specifying a controller class, which has multiple `[actionName]Action()` methods, you now have a class for each action, which implements a `execute` method. Here is the code:
 
 File name: `app/code/Ashsmith/HelloWorld/Controller/Index/Index.php`
 
