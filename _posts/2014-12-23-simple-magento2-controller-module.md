@@ -9,17 +9,13 @@ share: true
 comments: true
 ---
 
-With the developer beta release of Magento 2 coming out just the other day, I decided it was a good time to take a look at how to create a simple module. The goal of this post is to help you (read as: me) understand some of the new concepts/structures in Magento 2.
+With the developer beta release of Magento 2 coming out just the other day, I decided it was a good time to take a look at how to create a simple module. The goal of this post is to help both you and myself to understand some of the new concepts/structures in Magento 2.
 
-It's worth noting this is an investigation by myself, and exploring the magento 2 code base. I talk to myself a lot, and probably make false promises like writing future posts (seriously, my last past was 4 months ago). Imagine those comments as mere @TODO docblocks that never get looked at.
-
-I apologise if anything is hard to follow. It is a complete and utter brain dump. I have a messy brain. Please call me on it, and I'll do my best to re-write it... or you could suggests edits on github [because, well, you just should ok.](https://github.com/ashsmith/ashsmithio)
-
-This post assumes you have good knowledge of Magento 1.x (and that you can understand me translating the rubbish that comes out of my brain unpolished), most importantly though: You should be comfortable creating a module with controllers and blocks already.
+This post assumes you have good knowledge of Magento 1.x. You should be comfortable creating a module with controllers and blocks already.
 
 ## Basic module with controller, block and view.
 
-Let's start with registering a module, and seeing how it works. I'm not going to do anything fancy, we're literally going to output "Hello World" to the content of the frontend on a custom route.
+Let's start with registering a module, and seeing how it works. I'm not going to do anything fancy, we're just going to output "Hello World" to the content block using a custom frontend route.
 
 ### Code Structure
 
@@ -37,7 +33,7 @@ You will also need the following sub-directories:
 #### Brief overview of a modules structure
 
 ##### Block/
-Blocks, as in Magento 1.x remain the same. Main difference being the class you extend is no longer `Mage_Core_Block_Template` but instead `\Magento\Framework\View\Element\Template`.
+Blocks, as in Magento 1.x remain the same. Main difference being the class you extend is no longer `Mage_Core_Block_Template` but instead `\Magento\Framework\View\Element\Template`. Two differences here, the first is that Magento 2 now uses php namespacing instead of class names based on a modules structure with underscores. Second is that the core Magento framework has been moved into lib/Magento/Framework. We won't dive into this though.
 
 ##### Controller/
 This folder replaces the `controller/` folder. Controllers have changed a fair bit, and we'll cover this in more depth later.
@@ -49,7 +45,7 @@ The module.xml file is for registering the module, and telling Magento what depe
 
 The frontend/routes.xml is where we register our controller and register it with the router for the frontend of the store.
 
-There are more configuration files, and I'd advise you to take a look through some of the core Magento code in app/code/Magento to get a better idea (Customer module is my go-to place). I'll try and cover the other configuration files in a later post.
+There are more configuration files, and I'd advise you to take a look through some of the core Magento code in app/code/Magento to get a better idea (Customer module is my go-to module for seeing how everything works). I'll try and cover the other configuration files in a later post.
 
 ##### view/
 The `view/` folder is entirely new. This is where your layout files and templates are now stored. This is the equivalent to storing them in `base/default` theme. By storing them here it means anything related to that module is kept in one place, installing and uninstalling a module is made easier (when there are no theme specific overrides).
@@ -127,7 +123,7 @@ class Index extends \Magento\Framework\App\Action\Action
         $this->_view->renderLayout();
     }
 }
-
+?>
 {% endhighlight %}
 
 And there it is. That's how we implement a controller action. Let's quickly talk about what is going on inside the execute method.
@@ -173,13 +169,14 @@ class ActionList
 
     ...
 }
+?>
 {% endhighlight %}
 
 What this method returns in the namespaced class it is expecting, and we can see from the parameters it passes a namespace, which when we step through the code using xDebug (requesting the page `/helloworld/index/` we see this `$namespace` is `index`. `$module` is `Ashsmith_HelloWorld`, `$area` = `null`, and `$action` = `index`. 
 
-I will go into Magento 2 routing in a future post though. Let's focus on building this module! (yes, this is me trying to keep myself on track here...)
+I want to cover Magento 2 routing in more depth at a later stage. So we'll leave this here for now.
 
-Ok, so we have created our controller. Let's create a block next, our file will be: `app/code/Ashsmith/HelloWorld/Block/HelloWorld.php`. Now, in this example we're not going implement any methods, so technically speaking this block is completely pointless. But, I'm here to describe how to create a block, not the methods in it (you'll still have access to those methods in your template as usual).
+We have created our controller. Let's create a block next, our file will be: `app/code/Ashsmith/HelloWorld/Block/HelloWorld.php`. Now, in this example we're not going implement any methods, so technically speaking this block is completely pointless. But, it's here to describe how to create a block, not the methods in it (you'll still have access to those methods in your template as usual, through the use of the `$this` variable).
 
 {% highlight php %}
 <?php
@@ -187,12 +184,14 @@ namespace Ashsmith\HelloWorld\Block;
 class HelloWorld extends \Magento\Framework\View\Element\Template
 {
 }
+?>
 {% endhighlight %}
-Easy. Will extend the base template view class, this is the equivalent to `Mage_Core_Block_Template` in 1.x Magento.
+
+This extends the base template view class, this is the equivalent to `Mage_Core_Block_Template` in 1.x Magento.
 
 ##### Layout files & Templates!
 
-Now let's create our layout file and the template. We'll start with layout
+Now let's create our layout configuration file and the template. We'll start with layout
 
 File name: `app/code/Ashsmith/HelloWorld/view/frontend/layout/helloworld_index_index.xml`. Notice the naming convention, its our full route, this is important. On top of this we can create a `default.xml` which would be applied on every route. The customer module has a good example of this in: `app/code/Magento/Customer/view/frontend/layout` 
 
@@ -207,18 +206,35 @@ File name: `app/code/Ashsmith/HelloWorld/view/frontend/layout/helloworld_index_i
 </page>
 {% endhighlight %}
 
-You'll recognise the language used, which means you'll be able to pick up how it works relatively quickly. My current understanding (educated guess, no research done yet, ok... its more of a gut feeling) is that `<body>` refers to the entire page. 
+You'll recognise the language used, which means so you should be able to pick up how it works relatively quickly. `<body>` refers to everything within the `<body>` tag in the rendered HTML page. There is also a `<head>` where you can add blocks to the page such as adding CSS.
 
-What we have done here is added our Block to the `content` container, and set the template to helloworld.phtml. So lets create that file now: `app/code/Ashsmith/HelloWorld/view/frontend/template/helloworld.phtml`.
+What we have done here is added our block to the `content` container, and set the template of our block to helloworld.phtml. So lets create that file now: `app/code/Ashsmith/HelloWorld/view/frontend/template/helloworld.phtml`.
 
 In this file we can just put some simple text in there for now: 
-
 
 {% highlight html %}
     <h1>Hello World!</h1> 
 
 {% endhighlight %}
-And that's it! Easy right!?? :)
+
+And that's it! Our Module is now complete!
+
+Well, not quite. It doesn't actually work! Why? Well, we need to activate manually. At the time of writing the devdocs lacked this information. It is rather simple thought. You just need to add the module to `app/etc/config.php`. In this file is an array of configuration key/value pairs. Find the `modules` key, and add our module name `Ashsmith_HelloWorld` to the end of the array.
+
+{% highlight php %}
+<?php
+return array(
+    ..
+    'modules' => array(
+        ...
+        'Magento_CurrencySymbol' => 1,
+        'Magento_Wishlist' => 1,
+        'Ashsmith_HelloWorld' => 1 # Here is our module!
+    )
+    ...
+    );
+?>
+{% endhighlight %}
 
 Some quick notes:
 
@@ -233,3 +249,7 @@ And a one liner for all your cache clearing needs:
 ## And that's a wrap!
 
 By now you should have a fully functional hello world module. Awesome stuff.
+
+## Update 29th Dec 2014
+
+As requested in the comments, I have added the completed module to my github: [https://github.com/ashsmith/magento2-controller-module](https://github.com/ashsmith/magento2-controller-module)
