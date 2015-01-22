@@ -16,7 +16,6 @@ In this quick tip I&#8217;ll teach you how to override the meta data using Magen
   <reference name="head">
     <action method="setRobots">
       <value>NOINDEX, NOFOLLOW</value>
-      <name>robots</name>
     </action>
   </reference>
 </customer_account_login>
