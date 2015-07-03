@@ -70,6 +70,7 @@ In this quick tip I&#8217;ll teach you how to override the meta data using Magen
 </customer_account_login>
 {% endhighlight %}
 
-To add these to different pages simply change the outer most tag (customer\_account\_login) to the approiate tag. For example if you wanted to override a product page, just change the outer most tag to <kbd><catalog_product_index></kbd>.
+To add these to different pages simply change the outer most tag (customer\_account\_login) to the approiate tag. For example if you wanted to override a product page, just change the outer
+most tag to <kbd>&lt;catalog_product_index&gt;</kbd>.
 
 That it from me, if you have any other quick references like this, let me know in the comments and I&#8217;ll add them to the post! Thanks for reading!

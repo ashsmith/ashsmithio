@@ -19,9 +19,9 @@ Let's start with registering a module, and seeing how it works. I'm not going to
 
 ### Code Structure
 
-The first thing you will notice in Magento 2 is there are no longer any code pools (local, community, and core). You only have `app/code/`. Naming conventions generally remain the same however. So, to start with our module we'll create the following directory: `app/code/Ashsmith/HelloWorld`. 
+The first thing you will notice in Magento 2 is there are no longer any code pools (local, community, and core). You only have `app/code/`. Naming conventions generally remain the same however. So, to start with our module we'll create the following directory: `app/code/Ashsmith/HelloWorld`.
 
-You will also need the following sub-directories: 
+You will also need the following sub-directories:
 
 - `app/code/Ashsmith/HelloWorld/`
 - `app/code/Ashsmith/HelloWorld/Block/`
@@ -39,7 +39,7 @@ Blocks, as in Magento 1.x remain the same. Main difference being the class you e
 This folder replaces the `controller/` folder. Controllers have changed a fair bit, and we'll cover this in more depth later.
 
 ##### etc/
-The `etc/` folder is still the place for module specific configuration, however now configuration for frontend and adminhtml is separated. For example in the module we make below we create two files: `etc/module.xml` and `etc/frontend/routes.xml`, and you would also have a `etc/adminhtml/routes.xml` if you wanted to register routes for the admin too. 
+The `etc/` folder is still the place for module specific configuration, however now configuration for frontend and adminhtml is separated. For example in the module we make below we create two files: `etc/module.xml` and `etc/frontend/routes.xml`, and you would also have a `etc/adminhtml/routes.xml` if you wanted to register routes for the admin too.
 
 The module.xml file is for registering the module, and telling Magento what dependencies the module has. This is a replacement for the app/etc/modules/Namespace_Module.xml file.
 
@@ -49,7 +49,7 @@ There are more configuration files, and I'd advise you to take a look through so
 
 ##### view/
 The `view/` folder is entirely new. This is where your layout files and templates are now stored. This is the equivalent to storing them in `base/default` theme. By storing them here it means anything related to that module is kept in one place, installing and uninstalling a module is made easier (when there are no theme specific overrides).
- 
+
 All the changes like this, and the app/etc/modules/Namespace_Module.xml file being housed all under your modules folder is what I really love about Magento 2. No longer are your files scattered across the entire codebase. Installing and uninstalling modules will be easier.
 
 #### Ok, let's make this module then!
@@ -64,7 +64,7 @@ We'll start with our configuration files.
 {% highlight xml %}
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd"> 
-    <module name="Ashsmith_HelloWorld" schema_version="0.0.1" />  
+    <module name="Ashsmith_HelloWorld" schema_version="0.0.1" setup_version="0.0.1" /> 
 </config>
 
 {% endhighlight %} 
@@ -73,7 +73,7 @@ This registers our module, we have no dependencies so we haven't listed any... h
 
 {% highlight xml %}
 ..
-<module name="Ashsmith_HelloWorld" schema_version="0.0.1"> 
+<module name="Ashsmith_HelloWorld" schema_version="0.0.1" setup_version="0.0.1"> 
     <sequence> 
         <module name="Magento_Eav"/> 
         <module name="Magento_Directory"/> 
@@ -172,7 +172,7 @@ class ActionList
 ?>
 {% endhighlight %}
 
-What this method returns in the namespaced class it is expecting, and we can see from the parameters it passes a namespace, which when we step through the code using xDebug (requesting the page `/helloworld/index/` we see this `$namespace` is `index`. `$module` is `Ashsmith_HelloWorld`, `$area` = `null`, and `$action` = `index`. 
+What this method returns in the namespaced class it is expecting, and we can see from the parameters it passes a namespace, which when we step through the code using xDebug (requesting the page `/helloworld/index/` we see this `$namespace` is `index`. `$module` is `Ashsmith_HelloWorld`, `$area` = `null`, and `$action` = `index`.
 
 I want to cover Magento 2 routing in more depth at a later stage. So we'll leave this here for now.
 
@@ -193,7 +193,7 @@ This extends the base template view class, this is the equivalent to `Mage_Core_
 
 Now let's create our layout configuration file and the template. We'll start with layout
 
-File name: `app/code/Ashsmith/HelloWorld/view/frontend/layout/helloworld_index_index.xml`. Notice the naming convention, its our full route, this is important. On top of this we can create a `default.xml` which would be applied on every route. The customer module has a good example of this in: `app/code/Magento/Customer/view/frontend/layout` 
+File name: `app/code/Ashsmith/HelloWorld/view/frontend/layout/helloworld_index_index.xml`. Notice the naming convention, its our full route, this is important. On top of this we can create a `default.xml` which would be applied on every route. The customer module has a good example of this in: `app/code/Magento/Customer/view/frontend/layout`
 
 
 {% highlight xml %}
@@ -208,9 +208,9 @@ File name: `app/code/Ashsmith/HelloWorld/view/frontend/layout/helloworld_index_i
 
 You'll recognise the language used, which means so you should be able to pick up how it works relatively quickly. `<body>` refers to everything within the `<body>` tag in the rendered HTML page. There is also a `<head>` where you can add blocks to the page such as adding CSS.
 
-What we have done here is added our block to the `content` container, and set the template of our block to helloworld.phtml. So lets create that file now: `app/code/Ashsmith/HelloWorld/view/frontend/template/helloworld.phtml`.
+What we have done here is added our block to the `content` container, and set the template of our block to helloworld.phtml. So lets create that file now: `app/code/Ashsmith/HelloWorld/view/frontend/templates/helloworld.phtml`.
 
-In this file we can just put some simple text in there for now: 
+In this file we can just put some simple text in there for now:
 
 {% highlight html %}
     <h1>Hello World!</h1> 
