@@ -26,7 +26,7 @@ The end extension will be a fairly basic blog, you'll be able create blog posts 
 ## How are we going to build it?
 Test driven of course! I'll cover a light primer on unit testing, and give some handy links for people not familiar with PHPUnit. So each post we'll be adding additional tests, and refactoring if/when appropriate.
 
-1. Basic Module Setup
+1. [Basic Module Setup](/magento2/module-from-scratch-module-part-1-setup/)
 2. Setting up our Models & Resource Models
 3. Migrations & Database Schema!
 4. The Frontend: Controllers, Blocks, layouts & views
