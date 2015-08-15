@@ -110,7 +110,23 @@ namespace Ashsmith\HelloWorld\Controller\Index;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
+        /**
+         * @var \Magento\Framework\View\Result\PageFactory
+         */
+        protected $resultPageFactory;
 
+        /**
+         * @param \Magento\Framework\App\Action\Context $context
+         * @param \Magento\Framework\View\Result\PageFactory resultPageFactory
+         */
+        public function __construct(
+            \Magento\Framework\App\Action\Context $context,
+            \Magento\Framework\View\Result\PageFactory $resultPageFactory
+        )
+        {
+            $this->resultPageFactory = $resultPageFactory;
+            parent::__construct($context);
+        }
     /**
      * Default customer account page
      *
@@ -118,9 +134,7 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        $this->_view->loadLayout();
-        $this->_view->getLayout()->initMessages();
-        $this->_view->renderLayout();
+        return $this->resultPageFactory->create();
     }
 }
 ?>
@@ -128,9 +142,13 @@ class Index extends \Magento\Framework\App\Action\Action
 
 And there it is. That's how we implement a controller action. Let's quickly talk about what is going on inside the execute method.
 
-The first thing you'll notice that is different to Magento 1.x is the instance variable `$this->_view`. Strangely, this currently has a deprecated flag (I'll figure out why sometime). This allows us to load the layout, initialise messages and render the layout. Just like in Magento 1.x, so not much need to dive into that too much.
+Let's start with the `__construct` method we've implemented. The two parameters we expect both dependencies of our controller action. If you need to use the `__construct`, you only need to include `$context` and ensure the parent method is still executed.
 
-##### Quick Side(tracked) note about routing...
+So what is `$context`? Context gives you access to things like: the object manager, the URL model, and more. All very handy stuff! The Context class will handle the DI of those components for you.
+
+Now what on earth is `$resultPageFactory`?! It's a factory object to handle the creation of our result page of course ;). That doesn't really help us much though. This object is all we need to call to render our page.. remember how Magento 1.x you had to do `$this->loadLayout()` and `$this->renderLayout`. Well, now you just need to do: `$this->resultPageFactory->create()`. Awesome!
+
+##### Side note on routing...
 It's important to note that the namespacing is important here. The full class **has** to be `Ashsmith\HelloWorld\Controller\Index\Index`. This is due to way routing is handled. Here's a section from the class `Magento\Framework\App\Router\ActionList`
 
 {% highlight php %}
@@ -176,7 +194,11 @@ What this method returns in the namespaced class it is expecting, and we can see
 
 I want to cover Magento 2 routing in more depth at a later stage. So we'll leave this here for now.
 
-We have created our controller. Let's create a block next, our file will be: `app/code/Ashsmith/HelloWorld/Block/HelloWorld.php`. Now, in this example we're not going implement any methods, so technically speaking this block is completely pointless. But, it's here to describe how to create a block, not the methods in it (you'll still have access to those methods in your template as usual, through the use of the `$this` variable).
+--
+
+##### Creating our block
+
+We have created our controller. Let's create a block next, our file will be: `app/code/Ashsmith/HelloWorld/Block/HelloWorld.php`. Now, in this example we're not going implement any methods, so it's a pointless class really, but if we were to implement some methods, in our template we would have access to them via the `$block` variable, NOT the `$this`. `$this` now refers to the template engine, you can get to your block from it, but `$block` makes this much easier and cleaner.
 
 {% highlight php %}
 <?php
@@ -244,7 +266,7 @@ Some quick notes:
 
 And a one liner for all your cache clearing needs:
 
-        $ rm -rf var/cache/* var/page_cache/* var/generation/*
+        $ bin/magento cache:flush --all
 
 ## And that's a wrap!
 
@@ -253,3 +275,9 @@ By now you should have a fully functional hello world module. Awesome stuff.
 ## Update 29th Dec 2014
 
 As requested in the comments, I have added the completed module to my github: [https://github.com/ashsmith/magento2-controller-module](https://github.com/ashsmith/magento2-controller-module)
+
+## Update 15th Aug 2015
+
+I've neglected updating this post. I've correct a few things with our controller and blocks. :)
+
+The example on GitHub is now composer installable too! Check out the repo linked above to find out more!
