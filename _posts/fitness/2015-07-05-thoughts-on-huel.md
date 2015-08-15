@@ -4,7 +4,7 @@ author: Ash Smith
 layout: post
 permalink: /2015/07/thoughts-on-huel/
 categories:
-  - Fitness
+  - fitness
 share: true
 comments: true
 ---

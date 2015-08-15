@@ -11,7 +11,7 @@ dsq_thread_id:
 dsq_needs_sync:
   - 1
 categories:
-  - Magento Development
+  - magento1
 ---
 In this series about creating a faster Magento store, I will walk you through a number of must-do things that can speed up your Magento stores dramatically. A lot of these tips are easy, and free, a few are technical and require server knowledge and are best carried out by someone who knows their way around a server.  
 This series will go from optimising your server, and getting your initial magento install set up. I highly recommend these changes are made on a separate server, perhaps a VPS/Cloud Server. I personally use Rackspace Cloud Servers to create new servers quickly.

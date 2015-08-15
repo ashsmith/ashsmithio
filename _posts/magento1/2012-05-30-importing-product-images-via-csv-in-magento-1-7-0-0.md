@@ -4,7 +4,8 @@ title: Importing Product Images via CSV in Magento 1.7.0.0
 description: "Sometimes importing images via CSV in Magento is as straightforward as you'd like. This useful post goes over exactly how to do that in Magento with ease."
 comments: true
 share: true
-category: Magento Development
+categories:
+  - magento1
 permalink: /2012/05/importing-product-images-via-csv-in-magento-1-7-0-0/
 ---
 Many users have reported issues when trying to import images using the default Import/Export within Magento. I too have suffered this headache. Luckily, I have figured out a way to bypass any issues by separating out our import files.

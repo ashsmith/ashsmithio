@@ -8,7 +8,7 @@ permalink: /2012/03/tracking-magentos-onepage-checkout-steps-in-google-analytics
 dsq_thread_id:
   - 1243038239
 categories:
-  - Magento Development
+  - magento1
 ---
 Being able to track Checkout Abandonment is crucial when you&#8217;re focused on increasing conversions, with Magento&#8217;s one page checkout by default you can&#8217;t step up goals for Google Analytics to pick out each step, so instead we can use the trackPageview method to track fake pageviews for each step, we can then add these into our Goal steps inside GA.
 

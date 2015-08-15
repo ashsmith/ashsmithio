@@ -5,7 +5,7 @@ layout: post
 share: true
 permalink: /2011/07/quick-tip-remove-paypal-logo-from-catalog-pages-in-magento/
 categories:
-  - Magento Development
+  - magento1
 ---
 When setting your store up one of the first things you&#8217;ll come across is on the catalog pages of your store you&#8217;ll see down the right hand side in the 2columns-right.phtml file is the paypal logo saying you accept paypal. If you are new to Magento this can prove to be rather difficult. Anyway, there are two options to getting rid of the Paypal logo.
 

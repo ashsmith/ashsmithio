@@ -5,7 +5,7 @@ layout: post
 share: true
 permalink: /2012/11/quick-tip-override-magento-meta-data-in-xml-files/
 categories:
-  - Magento Development
+  - magento1
 ---
 In this quick tip I&#8217;ll teach you how to override the meta data using Magento&#8217;s XML layout files. You&#8217;ll be able to adjust any meta tag in the head with ease. For the changes I&#8217;m teaching you to make I recommend you add them to your local.xml file which you may need to create within your theme if it doesn&#8217;t already exist (app/design/frontend/[package]/[theme]/layout/local.xml)
 

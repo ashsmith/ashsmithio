@@ -4,6 +4,8 @@ author: Ash Smith
 layout: post
 share: true
 comments: true
+categories:
+  - magento1
 ---
 
 I always forget how to create custom transactional emails, I thought I'd throw a blog post together to remind myself!
@@ -94,7 +96,7 @@ We have our email template configured, and recognised by Magento. Now it's time 
 {% highlight php %}
 <?php
 
-// This is the template name from your etc/config.xml 
+// This is the template name from your etc/config.xml
 $template_id = '[email_template_name]';
 
 // Who were sending to...
@@ -115,7 +117,7 @@ $sender_name = Mage::getStoreConfig(Mage_Core_Model_Store::XML_PATH_STORE_STORE_
 // I'm using the general store contact here as the sender email.
 $sender_email = Mage::getStoreConfig('trans_email/ident_general/email');
 $email_template->setSenderName($sender_name);
-$email_template->setSenderEmail($sender_email); 
+$email_template->setSenderEmail($sender_email);
 
 //Send the email!
 $email_template->send($email_to, $customer_name, $email_template_variables);

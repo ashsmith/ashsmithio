@@ -9,7 +9,7 @@ permalink: /2013/03/quick-tip-adding-custom-category-attributes-to-magento/
 dsq_thread_id:
   - 1243038583
 categories:
-  - Magento Development
+  - magento1
 ---
 Time and time again I need to create a custom category attribute for a site I&#8217;m working on, and each time I search for a good article covering the topic in depth I fall short, and half written and poorly explained versions of how to do exactly this. I&#8217;ve learnt how to do this over time, and now I&#8217;ll share exactly how to, and also how it works. First of all, I&#8217;ll show you the code for each file, and explain everything afterwards.
 
@@ -22,7 +22,7 @@ First of all let&#8217;s set up our basic module file structure we need for this
     app/code/local/Meteorify/Customcatattrb
     app/code/local/Meteorify/Customcatattrb/etc
     app/code/local/Meteorify/Customcatattrb/sql/customcatattrb_setup
-    
+
 
 Now let&#8217;s create the files, first up is our config.xml, this is the main file within your module which tells Magento which controllers and models to load, plus plenty more.
 
@@ -50,7 +50,7 @@ Save this file to: `app/code/local/Meteorify/Customcatattrb/etc/config.xml`
       </resources>
     </global>
 </config>
-{% endhighlight %}    
+{% endhighlight %}
 
 So what we have done here is defined a few requirements for our module. We tell Magento to load in the setup resources, and which database connection to use. If we wanted, we could define our own class for the setup, extending off of the same class specified above so we can do a few more things to install our attributes. However that is out of scope for this article today.
 
@@ -69,7 +69,7 @@ Save this file to: `app/etc/modules/Meteorify_Customcatattrb.xml`
   </modules>
 </config>
 {% endhighlight %}  
-    
+
 
 As mentioned above, all this file does is let Magento know this module exists, and to load it. We also specify which code pool it belong to (either Community, Core, or Local).
 
@@ -128,18 +128,18 @@ Let&#8217;s start with our `$attribute` variable which contains an array of valu
 `option` = If we have defined our input to be a drop down or mutli-select we can use this to define our different options, see the code below for a complete example:
 
     'option' => array ('value' => array(
-        'optionone'=> array( 
+        'optionone'=> array(
             0 =>'My First Option'),
-        'optiontwo'=> array( 
+        'optiontwo'=> array(
             0 =>'My Second Option'))),
-    
+
 
 ### Using your new attribute
 
 If you want to use this attribute in your template file, you can do so with the following:
 
 {% highlight php %}
-  <?php echo $_category->getBottomDescription() ?> 
+  <?php echo $_category->getBottomDescription() ?>
 {% endhighlight %}
 ### And that's how you create a custom category attribute
 

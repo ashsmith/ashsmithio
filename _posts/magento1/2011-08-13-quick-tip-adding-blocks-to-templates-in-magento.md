@@ -5,7 +5,7 @@ layout: post
 share: true
 permalink: /2011/08/quick-tip-adding-blocks-to-templates-in-magento/
 categories:
-  - Magento Development
+  - magento1
 ---
 Today we&#8217;re going to look at how you can use php to add blocks, both static CMS blocks and blocks that include things like featured products, we can use this line of php in any of our phtml files within the template folder of our themes. Although the same result can be replicated using the XML layout files, this can be used as an alternative way of getting the same result.
 

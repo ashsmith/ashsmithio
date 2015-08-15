@@ -4,7 +4,7 @@ author: Ash Smith
 layout: post
 permalink: /2014/12/simple-magento2-controller-module/
 categories:
-  - Magento Development
+  - magento2
 share: true
 comments: true
 ---

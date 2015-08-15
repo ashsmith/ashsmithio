@@ -5,7 +5,7 @@ layout: post
 share: true
 permalink: /2012/12/making-use-of-observers-in-magento/
 categories:
-  - Magento Development
+  - magento1
 ---
 When developing for Magento, often most peoples first action is to override a particular class or method from the core. They also usually use the same namespaces and copy into the local folder like: `local/Mage/Sales/Model/Orders.php` for example. While this is handy for a lot of things, often people don&#8217;t know, forget about, or don&#8217;t know how to make use of an Observer when that is 9 times out of 10 the better approach.
 
@@ -101,7 +101,7 @@ Each module requires a file called `config.xml` this file lives in `app/code/
                         <method>example</method>
                     </meteorify_observerexample_model_observer>
                 </observers>
-            </sales_order_place_before> 
+            </sales_order_place_before>
         </events>
     </global>
 </config>

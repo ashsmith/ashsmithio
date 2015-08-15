@@ -5,7 +5,7 @@ layout: post
 share: true
 permalink: /2013/04/magento-one-page-checkout-bookmarklet/
 categories:
-  - Magento Development
+  - magento1
 ---
 Ever needed to test a new payment module, or shipping rate? Hate going through the checkout multiple times? Well, I&#8217;ve put together this simple little bookmarklet:
 

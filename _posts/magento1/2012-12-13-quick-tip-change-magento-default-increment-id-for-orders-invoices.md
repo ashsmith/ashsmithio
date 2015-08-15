@@ -5,7 +5,7 @@ layout: post
 share: true
 permalink: /2012/12/quick-tip-change-magento-default-increment-id-for-orders-invoices/
 categories:
-  - Magento Development
+  - magento1
 ---
 Sometimes you will be required to change the default increment ID&#8217;s of orders, invoices, credit memos & shipments. To do this is surprisingly simple, yet cannot be done via the backend Admin area without an extension. Today I&#8217;ll show you how simple it is to change these numbers with some simple SQL queries to run on your database.
 

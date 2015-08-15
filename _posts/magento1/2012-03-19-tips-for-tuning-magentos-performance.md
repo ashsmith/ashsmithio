@@ -5,7 +5,7 @@ layout: post
 share: true
 permalink: /2012/03/tips-for-tuning-magentos-performance/
 categories:
-  - Magento Development
+  - magento1
 ---
 Magento is a fantastic system with a huge range of features, however with that comes a &#8220;slight&#8221; performance issue, whereby all the requests are long and slow and without a completely kick-ass server your site will struggle to load quickly. Luckily, provided you own a VPS or dedicated server there are many things you can do to combat the performance issues you&#8217;ll experience with Magento, which in the long run could save you money and time whilst speeding up your Magento websites dramatically!
 

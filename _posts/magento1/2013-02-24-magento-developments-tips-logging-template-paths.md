@@ -6,7 +6,7 @@ layout: post
 share: true
 permalink: /2013/02/magento-developments-tips-logging-template-paths/
 categories:
-  - Magento Development
+  - magento1
 ---
 Whether you&#8217;re developing a theme, or a new extension for Magento the whole process can be made a lot easier when you know various in&#8217;s and out&#8217;s of Magento. Including some of the in-built development tools ready for you to use.
 
@@ -34,7 +34,7 @@ If you want to customise the output a little, for example save to a different lo
 
 {% highlight php startinline %}
 Mage::log($message, $level = null, $file = '', $forceLog = false)
-{% endhighlight %}    
+{% endhighlight %}
 
 With this, we can change a few settings, most importantly where the log saves to.
 

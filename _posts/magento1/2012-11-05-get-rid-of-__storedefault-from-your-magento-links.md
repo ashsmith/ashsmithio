@@ -5,7 +5,7 @@ layout: post
 share: true
 permalink: /2012/11/get-rid-of-__storedefault-from-your-magento-links/
 categories:
-  - Magento Development
+  - magento1
 ---
 If you&#8217;re like me, you make use of a lot of widget links within Magento, and those Widget links have a pesky habit of adding ?\___store=default to the end of your URLs, which first of all don&#8217;t look nice and it certainly doesn&#8217;t help your optimisation efforts when it comes to SEO and ridding yourself of duplicate content.
 
