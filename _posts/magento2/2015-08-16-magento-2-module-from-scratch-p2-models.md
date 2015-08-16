@@ -606,7 +606,7 @@ In here we have implemented the following methods:
 
 And that's how you create and models & resource models for interacting with a database. Did you notice we didn't have to write a single line of XML? Huzzah! Yup, Magento 2 has done away with that!
 
-Ok! We have covered a lot, in the next post I'll be covering how to create our table through Setup scripts. I'll also be touching on Upgrade scripts too. Until then, let me know in the comments what you think, or any questions.
+Ok! We have covered a lot, in the next post I'll be covering [how to create our table through Setup scripts](/magento2/module-from-scratch-part-3-database-tables). I'll also be touching on Upgrade scripts too. Until then, let me know in the comments what you think, or any questions.
 
 As before, you can install this version of the tutorial via composer with:
 

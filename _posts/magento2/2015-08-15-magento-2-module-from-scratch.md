@@ -25,7 +25,7 @@ The end extension will be a fairly basic blog, you'll be able create blog posts 
 
 1. [Basic Module Setup](/magento2/module-from-scratch-module-part-1-setup/)
 2. [Setting up our Models & Resource Models](/magento2/module-from-scratch-module-part-2-models/)
-3. Migrations & Database Schema!
+3. [Migrations & Database Schema!](/magento2/module-from-scratch-part-3-database-tables)
 4. The Frontend: Controllers, Blocks, layouts & views
 5. The Backend: Controllers, Blocks, UI, layouts and views
 6. Unit testing
