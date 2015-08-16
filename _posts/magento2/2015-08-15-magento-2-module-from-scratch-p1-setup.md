@@ -95,7 +95,7 @@ Don't forget to define your module in `app/etc/config.php`... otherwise it will 
 
 We've now set up our module, along with composer! If you push to a public repo, register it with packagist you will be able to install it really easily!
 
-Next up, I'll cover how to create your models & resource models. We'll be doing our first unit tests too! Are you excited!?
+Next up, I'll cover how to [create your models & resource models in Magento 2](/magento2/module-from-scratch-module-part-2-models/). Exciting!!
 
 You can checkout the progress on the module over on github, so [check it out](https://github.com/ashsmith/magento2-blog-module-tutorial). You can also install this as a composer package to your Magento 2 install. You can that like so:
 

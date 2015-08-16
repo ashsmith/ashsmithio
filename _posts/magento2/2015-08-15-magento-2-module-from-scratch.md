@@ -23,11 +23,9 @@ So, by the end of this small series of blog posts you will be able to do the fol
 ## What are we going to build?
 The end extension will be a fairly basic blog, you'll be able create blog posts from the admin including editing and deleting them. Then from the frontend you will be able to view a list of all the blog posts, and view each blog post individually. I believe this will allow us to cover all the essentials into building a magento extension!
 
-## How are we going to build it?
-Test driven of course! I'll cover a light primer on unit testing, and give some handy links for people not familiar with PHPUnit. So each post we'll be adding additional tests, and refactoring if/when appropriate.
-
 1. [Basic Module Setup](/magento2/module-from-scratch-module-part-1-setup/)
-2. Setting up our Models & Resource Models
+2. [Setting up our Models & Resource Models](/magento2/module-from-scratch-module-part-2-models/)
 3. Migrations & Database Schema!
 4. The Frontend: Controllers, Blocks, layouts & views
 5. The Backend: Controllers, Blocks, UI, layouts and views
+6. Unit testing
