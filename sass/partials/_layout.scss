@@ -68,6 +68,11 @@ nav {
       margin: 1em;
       padding-left: 40px;
     }
+
+    .highlight {
+        font-size: 0.8em; // Decrease code examples font size.
+        line-height: 1.5em;
+    }
 }
 
 .post h1 {
