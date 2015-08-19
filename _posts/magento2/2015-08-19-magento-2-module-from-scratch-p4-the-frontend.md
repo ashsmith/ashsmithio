@@ -465,7 +465,7 @@ You should now see you're on something like: `blog/view/index/id/1/`.
 
 As always, you can install this version of the tutorial via composer with:
 
-    composer require ashsmith/magento2-blog-module-example:0.4.0
+    composer require ashsmith/magento2-blog-module-example:0.4.1
 
 
 ##### What's up next
