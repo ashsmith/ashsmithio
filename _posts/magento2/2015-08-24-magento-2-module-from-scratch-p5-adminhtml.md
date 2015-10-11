@@ -159,7 +159,7 @@ In here we simply register our UI Component!
 
 We've registered our component, so lets create it, again this is just another XML based configuration file. It's fairly beefy, as this controls adding all the components that make up our grid view. Such as columns and mass actions!
 
-`views/adminhtml/ui_components/blog_post_listing.xml`
+`views/adminhtml/ui_component/blog_post_listing.xml`
 {% highlight xml %}
 <?xml version="1.0" encoding="UTF-8"?>
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Ui/etc/ui_configuration.xsd">
