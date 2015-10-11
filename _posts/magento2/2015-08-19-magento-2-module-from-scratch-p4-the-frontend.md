@@ -200,7 +200,7 @@ Create the file `view/frontend/templates/list.phtml`:
 <?php foreach ($block->getPosts() as $post): ?>
     <li class="blog-post-list-item">
         <h3 class="blog-post-item-title">
-            <a href="<?php echo $post->getUrl() ?>"><?php echo $post->getTitle() ?></a>
+            <a href="<?php echo $post->getUrlKey() ?>"><?php echo $post->getTitle() ?></a>
         </h3>
 
         <div class="blog-post-item-content">
