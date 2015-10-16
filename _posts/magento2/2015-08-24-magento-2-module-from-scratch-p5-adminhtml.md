@@ -82,7 +82,7 @@ This follows the same format as our frontend router, with the exception of the `
 
 Now it's time to create our first controller. We'll start with making our grid!
 
-All our admin controllers live within an `Controllers/Adminhtml` directory. Let's create our first: `Controllers/Adminhtml/Post/Index.php`
+All our admin controllers live within an `Controller/Adminhtml` directory. Let's create our first: `Controller/Adminhtml/Post/Index.php`
 
 {% highlight php %}
 <?php
