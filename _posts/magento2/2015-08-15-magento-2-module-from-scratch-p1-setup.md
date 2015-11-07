@@ -32,7 +32,7 @@ Let's setup our basic module structure now:
     registration.php
 
 In the root directory we'll want to create a composer.json file. And it should look something like this:
-
+{% highlight json %}
     {
         "name": "ashsmith/magento2-blog",
         "description": "A simple blog module.",
@@ -55,13 +55,16 @@ In the root directory we'll want to create a composer.json file. And it should l
             ]
         }
     }
+{% endhighlight %}
 
 There are only a few elements to this I want to explain, as some of it may be unfamiliar to you.
-
+{% highlight json %}
     "type": "magento2-module"
+{% endhighlight %}
 
 This defines our repo as a magento2-module, this is so when someone includes your module as a
 dependency on their Magento 2 install, composer will know what to do with it! And that brings us to the next bit
+{% highlight json %}
 
     "extra": {
         "map": [
@@ -71,6 +74,7 @@ dependency on their Magento 2 install, composer will know what to do with it! An
             ]
         ]
     }
+{% endhighlight %}
 
 What this does is creates a map which will tell Composer how to install this module.
 
@@ -80,12 +84,12 @@ That is: everything (*) should go into the folder: `Ashsmith/Blog`. Which would 
 
 
 The first file you'll want to create is the `etc/module.xml`.
-
+{% highlight xml %}
     <?xml version="1.0"?>
     <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
         <module name="Ashsmith_Blog" setup_version="1.0.0" />
     </config>
-
+{% endhighlight %}
 Next up, we need a `registration.php` file in the root of our module. This is picked up by the Magento framework and will handle registering your module with Magento.
 
 {% highlight php %}
@@ -99,7 +103,9 @@ Next up, we need a `registration.php` file in the root of our module. This is pi
 
 And that's it! Our basic module is now setup. If you want to test this without using composer, you can simply symlink your module directory to your Magento 2 install. That way development becomes simpler.
 
+{% highlight bash %}
     ln -s /path/to/module/* /path/to/magento/app/code/Ashsmith/Blog/
+{% endhighlight %}
 
 ## Conclusion
 
