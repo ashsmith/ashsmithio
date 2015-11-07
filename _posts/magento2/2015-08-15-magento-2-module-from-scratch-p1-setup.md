@@ -29,6 +29,7 @@ Let's setup our basic module structure now:
     etc/backend/
     Test/
     view/
+    registration.php
 
 In the root directory we'll want to create a composer.json file. And it should look something like this:
 
@@ -78,18 +79,27 @@ That is: everything (*) should go into the folder: `Ashsmith/Blog`. Which would 
 > If you want to learn more about this, head to Alan Kent's blog! [This is a fantastic post covering Magento 2 & composer](http://alankent.me/2014/08/03/creating-a-magento-2-composer-module/)
 
 
-Next up, let's create our `etc/module.xml` with a tiny bit of configuration.
+The first file you'll want to create is the `etc/module.xml`.
 
     <?xml version="1.0"?>
     <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
         <module name="Ashsmith_Blog" setup_version="1.0.0" />
     </config>
 
+Next up, we need a `registration.php` file in the root of our module. This is picked up by the Magento framework and will handle registering your module with Magento.
+
+{% highlight php %}
+<?php
+\Magento\Framework\Component\ComponentRegistrar::register(
+    \Magento\Framework\Component\ComponentRegistrar::MODULE,
+    'Ashsmith_Blog',
+    __DIR__
+);
+{% endhighlight %}
+
 And that's it! Our basic module is now setup. If you want to test this without using composer, you can simply symlink your module directory to your Magento 2 install. That way development becomes simpler.
 
     ln -s /path/to/module/* /path/to/magento/app/code/Ashsmith/Blog/
-
-Don't forget to define your module in `app/etc/config.php`... otherwise it will not work!
 
 ## Conclusion
 
@@ -97,8 +107,4 @@ We've now set up our module, along with composer! If you push to a public repo, 
 
 Next up, I'll cover how to [create your models & resource models in Magento 2](/magento2/module-from-scratch-module-part-2-models/). Exciting!!
 
-You can checkout the progress on the module over on github, so [check it out](https://github.com/ashsmith/magento2-blog-module-tutorial). You can also install this as a composer package to your Magento 2 install. You can that like so:
-
-    composer require ashsmith/magento2-blog-module-example:0.1.0
-
-This will install the version of the progress we are at in this specific blog post! Each post will have it's own release version, making it easier to follow along.
+You can checkout the progress on the module over on github, so [check it out](https://github.com/ashsmith/magento2-blog-module-tutorial)
