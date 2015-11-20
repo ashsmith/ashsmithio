@@ -9,43 +9,19 @@ share: true
 comments: true
 ---
 
+> Magento 2 has been released! This entire series has been updated to reflect the changes since I originally wrote this post.
+> I install Magento 2 using Composer, I recommend you do to! [Learn how to here](http://devdocs.magento.com/guides/v2.0/install-gde/install-quick-ref.html#installation-part-1-getting-started)
+
 So far in the series we have created our model, resource model and database schema. It's finally time
 to create something which we can see! It's time to setup our controller, blocks, layout and templates!
 
-However, before we do that, we missed our one important resource model, the Collections model! So let's go ahead and create that quickly.
-
-Create a file named: `Model/Resource/Post/Collection.php`
-
-{% highlight php %}
-<?php namespace Ashsmith\Blog\Model\Resource\Post;
-
-class Collection extends \Magento\Framework\Model\Resource\Db\Collection\AbstractCollection
-{
-    /**
-     * Define resource model
-     *
-     * @return void
-     */
-    protected function _construct()
-    {
-        $this->_init('Ashsmith\Blog\Model\Post', 'Ashsmith\Blog\Model\Resource\Post');
-    }
-
-}
-{% endhighlight %}
-
-As per Magento 1.x, this is going to look familiar. Nothing new here really. We initialise our Collection
-with both our model, and resource model.
-
-So, how do we use our resource model in Magento 2? Well, a factory object is generated that handles instantiating our collection. We can inject this factory into our blocks (or wherever we want to use our collection!) and then we can do as we please! We'll cover this later on in the post.
-
-Now we have our collection setup, let's create our controller! You may have already read my blog post on [creating a controller in Magento 2](/2014/12/simple-magento2-controller-module/), so please check that out, and that is where a lot more detail will be kept regarding controllers!
+Let's start with our controller! You may have already read my blog post on [creating a controller in Magento 2](/2014/12/simple-magento2-controller-module/), so please check that out, and that is where a lot more detail will be kept regarding controllers!
 
 Before creating our controller, we need to create a new XML configuration file: `etc/frontend/routes.xml`
 
 {% highlight xml %}
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
         <route id="blog" frontName="blog">
             <module name="Ashsmith_Blog" />
@@ -92,6 +68,7 @@ class Index extends Action
         return $this->resultPageFactory->create();
     }
 }
+
 {% endhighlight %}
 
 Our controller is super light. We just need return an instance of `\Magento\Framework\View\Result\PageFactory`. When we come to creating our controller that will handle
@@ -106,22 +83,22 @@ Let's move onto creating our Block: `Block/PostList.php` (note how it's called P
 namespace Ashsmith\Blog\Block;
 
 use Ashsmith\Blog\Api\Data\PostInterface;
-use Ashsmith\Blog\Model\Resource\Post\Collection as PostCollection;
+use Ashsmith\Blog\Model\ResourceModel\Post\Collection as PostCollection;
 
 class PostList extends \Magento\Framework\View\Element\Template implements
-    \Magento\Framework\Object\IdentityInterface
+    \Magento\Framework\DataObject\IdentityInterface
 {
 
     /**
      * Construct
      *
      * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Ashsmith\Blog\Model\Resource\Post\CollectionFactory $postCollectionFactory,
+     * @param \Ashsmith\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        \Ashsmith\Blog\Model\Resource\Post\CollectionFactory $postCollectionFactory,
+        \Ashsmith\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -129,7 +106,7 @@ class PostList extends \Magento\Framework\View\Element\Template implements
     }
 
     /**
-     * @return \Ashsmith\Blog\Model\Resource\Post\Collection
+     * @return \Ashsmith\Blog\Model\ResourceModel\Post\Collection
      */
     public function getPosts()
     {
@@ -160,6 +137,7 @@ class PostList extends \Magento\Framework\View\Element\Template implements
     }
 
 }
+
 {% endhighlight %}
 
 So first thing, our block extends `\Magento\Framework\View\Element\Template` and implements the `\Magento\Framework\Object\IdentityInterface` interface. The `Template` class can be compared to `Mage_Core_Block_Template`. Next our `IdentityInterface` requires the `getIdentities` method to be implemented. This is an identifier for caching our blocks output!
@@ -173,13 +151,15 @@ Now that we have our block, let's create our layout file, and templates!
 Create the file: `view/frontend/layout/blog_index_index.xml`
 
 {% highlight xml %}
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
             <block class="Ashsmith\Blog\Block\PostList" name="blog.list" template="Ashsmith_Blog::list.phtml" />
         </referenceContainer>
     </body>
 </page>
+
 {% endhighlight %}
 
 We can create a layout file per handle, and in here we can specify which blocks we want, and which template we require to use!
@@ -200,7 +180,7 @@ Create the file `view/frontend/templates/list.phtml`:
 <?php foreach ($block->getPosts() as $post): ?>
     <li class="blog-post-list-item">
         <h3 class="blog-post-item-title">
-            <a href="<?php echo $post->getUrlKey() ?>"><?php echo $post->getTitle() ?></a>
+            <a href="<?php echo $post->getUrl() ?>"><?php echo $post->getTitle() ?></a>
         </h3>
 
         <div class="blog-post-item-content">
@@ -213,6 +193,7 @@ Create the file `view/frontend/templates/list.phtml`:
     </li>
 <?php endforeach; ?>
 </ul>
+
 {% endhighlight %}
 
 Nothing out of the ordinary here. You're probably very familiar with this!
@@ -227,6 +208,89 @@ INSERT INTO `ashsmith_blog_post` (`post_id`, `url_key`, `title`, `content`, `is_
 {% endhighlight %}
 
 Now, clear cache and head to `blog/`. You will see a list of blog posts!
+
+Now that we have our list of blog posts, you'll notice the URL's are nice and friendly (mystore.dev/blog/test-1 for example). So how do tell Magento how to handle those? Well, we can register a custom router. To do this, we create our router: `Controller/Router.php`, then we'll need to edit `etc/frontend/di.xml` within out module to register our custom router.
+
+Create: `Controller/Router.php`
+
+{% highlight php %}
+<?php
+namespace Ashsmith\Blog\Controller;
+
+class Router implements \Magento\Framework\App\RouterInterface
+{
+    /**
+     * @var \Magento\Framework\App\ActionFactory
+     */
+    protected $actionFactory;
+
+    /**
+     * Post factory
+     *
+     * @var \Ashsmith\Blog\Model\PostFactory
+     */
+    protected $_postFactory;
+
+    /**
+     * @param \Magento\Framework\App\ActionFactory $actionFactory
+     * @param \Ashsmith\Blog\Model\PostFactory $postFactory
+     */
+    public function __construct(
+        \Magento\Framework\App\ActionFactory $actionFactory,
+        \Ashsmith\Blog\Model\PostFactory $postFactory
+    ) {
+        $this->actionFactory = $actionFactory;
+        $this->_postFactory = $postFactory;
+    }
+
+    /**
+     * Validate and Match Blog Post and modify request
+     *
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @return bool
+     */
+    public function match(\Magento\Framework\App\RequestInterface $request)
+    {
+        $url_key = trim($request->getPathInfo(), '/blog/');
+        $url_key = rtrim($url_key, '/');
+
+        /** @var \Ashsmith\Blog\Model\Post $post */
+        $post = $this->_postFactory->create();
+        $post_id = $post->checkUrlKey($url_key);
+        if (!$post_id) {
+            return null;
+        }
+
+        $request->setModuleName('blog')->setControllerName('view')->setActionName('index')->setParam('post_id', $post_id);
+        $request->setAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS, $url_key);
+
+        return $this->actionFactory->create('Magento\Framework\App\Action\Forward');
+    }
+}
+
+{% endhighlight %}
+
+We have to follow the `\Magento\Framework\App\RouterInterface` interface, which requires the `match` method, from here we can fetch the URL key of the post from the request path. We do this by stripping out the `/blog/` and any trailing slashes on the end of the request path. Then we can check if it exists, if it doesn't we return null. This will then skip our router and if there are any other routers to be checked it'll carry on until it hits the default 404 page. If there is a match we update the request with our controller/action along with the blog post id. Then we forward the request.
+
+Right, to get this working we need to add our Router into the list of routers, this is done with `etc/frontend/di.xml`.
+
+{% highlight xml %}
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="blog" xsi:type="array">
+                    <item name="class" xsi:type="string">Ashsmith\Blog\Controller\Router</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">70</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>
+
+{% endhighlight %}
 
 Let's create our controller, block, layout and template for viewing a single blog post. We'll fly over this as we've covered a lot of this already.
 
@@ -272,6 +336,7 @@ class Index extends Action
         return $result_page;
     }
 }
+
 {% endhighlight %}
 
 We've taken a slightly different approach to last time and instead of keeping a lot
@@ -281,8 +346,6 @@ Create our helper: `Helper/Post.php`
 {% highlight php %}
 <?php namespace Ashsmith\Blog\Helper;
 
-use Ashsmith\Blog\Api\Data\PostInterface;
-use Ashsmith\Blog\Model\Resource\Post\Collection as PostCollection;
 use Magento\Framework\App\Action\Action;
 
 class Post extends \Magento\Framework\App\Helper\AbstractHelper
@@ -360,6 +423,7 @@ class Post extends \Magento\Framework\App\Helper\AbstractHelper
         return $resultPage;
     }
 }
+
 {% endhighlight %}
 
 Create our Block: `Block/PostView.php`
@@ -367,12 +431,8 @@ Create our Block: `Block/PostView.php`
 <?php
 namespace Ashsmith\Blog\Block;
 
-use Ashsmith\Blog\Api\Data\PostInterface;
-use Ashsmith\Blog\Model\Resource\Post\Collection as PostCollection;
-use Magento\Framework\ObjectManagerInterface;
-
 class PostView extends \Magento\Framework\View\Element\Template implements
-    \Magento\Framework\Object\IdentityInterface
+    \Magento\Framework\DataObject\IdentityInterface
 {
 
     /**
@@ -427,17 +487,20 @@ class PostView extends \Magento\Framework\View\Element\Template implements
     }
 
 }
+
 {% endhighlight %}
 
-Create our layout file: `view/frontend/layout/blog_post_view.xml`
+Create our layout file: `view/frontend/layout/blog_view_index.xml`
 {% highlight xml %}
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
             <block class="Ashsmith\Blog\Block\PostView" name="blog.list" template="Ashsmith_Blog::view.phtml" />
         </referenceContainer>
     </body>
 </page>
+
 {% endhighlight %}
 
 And finally our template file: `view/frontend/templates/view.phtml`
@@ -456,17 +519,12 @@ $post = $block->getPost();
 <div class="blog-post-item-meta">
     <strong><?php echo __('Created at:') ?></strong> <?php echo $post->getCreationTime() ?>
 </div>
+
 {% endhighlight %}
 
 And that's it! Now, clear cache and vist `blog/` again, and click on a blog post title.
-You should now see you're on something like: `blog/view/index/id/1/`.
-
-##### Install with composer:
-
-As always, you can install this version of the tutorial via composer with:
-
-    composer require ashsmith/magento2-blog-module-example:0.4.1
+You should now see you're on something like: `blog/test-1`.
 
 
 ##### What's up next
-In part 6 we'll be creating our admin interface for creating, editing and deleting blog posts!
+In part 5 we'll be creating our [admin interface for creating, editing and deleting blog posts](/magento2/module-from-scratch-part-5-adminhtml)!

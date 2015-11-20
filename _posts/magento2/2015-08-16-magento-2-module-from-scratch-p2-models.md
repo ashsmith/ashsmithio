@@ -9,7 +9,10 @@ share: true
 comments: true
 ---
 
-If you haven't been following along on the series, I highly recommend you read part one, and checkout the module we'll be creating over on [GitHub](https://github.com/ashsmith/magento2-blog-module-tutorial).
+> Magento 2 has been released! This entire series has been updated to reflect the changes since I originally wrote this post.
+> I install Magento 2 using Composer, I recommend you do to! [Learn how to here](http://devdocs.magento.com/guides/v2.0/install-gde/install-quick-ref.html#installation-part-1-getting-started)
+
+If you haven't been following along on the series, I highly recommend you read [part one](/magento2/module-from-scratch-module-part-1-setup/), and checkout the module we'll be creating over on [GitHub](https://github.com/ashsmith/magento2-blog-module-tutorial).
 
 Today's post is going to cover a fair bit, so grab yourself a cuppa. We'll be covering:
 
@@ -174,7 +177,7 @@ This file goes to: `Model/Post.php`
 <?php namespace Ashsmith\Blog\Model;
 
 use Ashsmith\Blog\Api\Data\PostInterface;
-use Magento\Framework\Object\IdentityInterface;
+use Magento\Framework\DataObject\IdentityInterface;
 
 class Post  extends \Magento\Framework\Model\AbstractModel implements PostInterface, IdentityInterface
 {
@@ -210,7 +213,7 @@ class Post  extends \Magento\Framework\Model\AbstractModel implements PostInterf
      */
     protected function _construct()
     {
-        $this->_init('Ashsmith\Blog\Model\Resource\Post');
+        $this->_init('Ashsmith\Blog\Model\ResourceModel\Post');
     }
 
     /**
@@ -396,7 +399,7 @@ class Post  extends \Magento\Framework\Model\AbstractModel implements PostInterf
 {% endhighlight %}
 
 As you can see we have implemented each method from our `PostInterface` interface. You will also notice
-we have implemented a second interface too, `Magento\Framework\Object\IdentityInterface`. This interface
+we have implemented a second interface too, `Magento\Framework\DataObject\IdentityInterface`. This interface
 is used for models which require cache refresh after creation/updating/deletion, and models that render
 information to the frontend. This simply requires us to implement the `getIdentities()` method. Which will return a unique ID for each instance of our model, that is cacheable.
 
@@ -411,16 +414,16 @@ Furthermore, you'll notice some attributes defined at the top of our class:
 - $_cacheTag - a unique identifier for use within caching
 - $_eventPrefix - a prefix for events to be triggered. We'll cover this more later.
 
-Now it's time to create our resource model! This goes in: `Model/Resource/Post.php`
+Now it's time to create our resource model! This goes in: `Model/ResourceModel/Post.php`
 
 {% highlight php %}
 <?php
-namespace Ashsmith\Blog\Model\Resource;
+namespace Ashsmith\Blog\Model\ResourceModel;
 
 /**
  * Blog post mysql resource
  */
-class Post extends \Magento\Framework\Model\Resource\Db\AbstractDb
+class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
 
     /**
@@ -429,21 +432,15 @@ class Post extends \Magento\Framework\Model\Resource\Db\AbstractDb
     protected $_date;
 
     /**
-     * @var \Magento\Framework\Stdlib\DateTime
-     */
-    protected $dateTime;
-
-    /**
      * Construct
      *
-     * @param \Magento\Framework\Model\Resource\Db\Context $context
+     * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
      * @param string|null $resourcePrefix
      */
     public function __construct(
-        \Magento\Framework\Model\Resource\Db\Context $context,
+        \Magento\Framework\Model\ResourceModel\Db\Context $context,
         \Magento\Framework\Stdlib\DateTime\DateTime $date,
-        \Magento\Framework\Stdlib\DateTime $dateTime,
         $resourcePrefix = null
     ) {
         parent::__construct($context, $resourcePrefix);
@@ -539,7 +536,7 @@ class Post extends \Magento\Framework\Model\Resource\Db\AbstractDb
      */
     protected function _getLoadByUrlKeySelect($url_key, $isActive = null)
     {
-        $select = $this->_getReadAdapter()->select()->from(
+        $select = $this->getConnection()->select()->from(
             ['bp' => $this->getMainTable()]
         )->where(
             'bp.url_key = ?',
@@ -587,7 +584,7 @@ class Post extends \Magento\Framework\Model\Resource\Db\AbstractDb
         $select = $this->_getLoadByUrlKeySelect($url_key, 1);
         $select->reset(\Zend_Db_Select::COLUMNS)->columns('bp.post_id')->limit(1);
 
-        return $this->_getReadAdapter()->fetchOne($select);
+        return $this->getConnection()->fetchOne($select);
     }
 }
 {% endhighlight %}
@@ -604,10 +601,34 @@ In here we have implemented the following methods:
 - isValidPostUrlKey, make sure the post url key is actually valid with a simple regex check.
 - checkUrlKey, check if a URL Key exists in the posts table already.
 
-And that's how you create and models & resource models for interacting with a database. Did you notice we didn't have to write a single line of XML? Huzzah! Yup, Magento 2 has done away with that!
+Finally, we need a Collection resource model. The collection model will allow us to filter and fetch a collection of blog posts.
+
+Create a file named: `Model/ResourceModel/Post/Collection.php`
+
+{% highlight php %}
+<?php namespace Ashsmith\Blog\Model\ResourceModel\Post;
+
+class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
+{
+    /**
+     * Define resource model
+     *
+     * @return void
+     */
+    protected function _construct()
+    {
+        $this->_init('Ashsmith\Blog\Model\Post', 'Ashsmith\Blog\Model\ResourceModel\Post');
+    }
+
+}
+{% endhighlight %}
+
+As per Magento 1.x, this is going to look familiar. Nothing new here really. We initialise our Collection with both our model, and resource model.
+
+So, how do we use our resource model in Magento 2? Well, a factory object is generated that handles instantiating our collection. We can inject this factory into our blocks (or wherever we want to use our collection!) and then we can do as we please! I'll cover this in the  post where we [create our controllers, blocks and templates](/magento2/module-from-scratch-part-4-the-frontend).
+
+And that's how you create and models & resource models for interacting with a database. Did you notice we didn't have to write a single line of XML? Huzzah! Yup, Magento 2 has done away with having to register your models and resource models.
 
 Ok! We have covered a lot, in the next post I'll be covering [how to create our table through Setup scripts](/magento2/module-from-scratch-part-3-database-tables). I'll also be touching on Upgrade scripts too. Until then, let me know in the comments what you think, or any questions.
 
-As before, you can install this version of the tutorial via composer with:
-
-    composer require ashsmith/magento2-blog-module-example:0.2.0
+You can view the complete module over on GitHub. [Magento 2 Blog Module](https://github.com/ashsmith/magento2-blog-module-tutorial)

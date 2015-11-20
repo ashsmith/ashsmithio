@@ -9,6 +9,9 @@ share: true
 comments: true
 ---
 
+> Magento 2 has been released! This entire series has been updated to reflect the changes since I originally wrote this post.
+> I install Magento 2 using Composer, I recommend you do to! [Learn how to here](http://devdocs.magento.com/guides/v2.0/install-gde/install-quick-ref.html#installation-part-1-getting-started)
+
 In the last part of the series we cover creating our model & resource model so that we can interact
 with the database. However, we haven't yet created our table! This part of the series will soon fix that!
 
@@ -28,7 +31,7 @@ Let's dive in!
 Remember in `etc/module.xml` we defined the `setup_version`? Well, this is what is used to tell Magento 2
 which version our module is currently at, and will decide if upgrade or setup scripts need to be run.
 
-When you first install your module and run `bin/magento setup:db-schema:upgrade` our Setup script will be ran, and a record inserted into a table called `setup_module`, which is the same as the `core_resource` table from Magento 1.x.
+When you first install your module and run `bin/magento setup:upgrade` our Setup script will be ran, and a record inserted into a table called `setup_module`, which is the same as the `core_resource` table from Magento 1.x.
 
 So let's create our Setup class to install our database!
 
@@ -84,11 +87,13 @@ class InstallSchema implements InstallSchemaInterface
 {% endhighlight %}
 
 The name of this class can be anything you want. You just need to implement the interface `Magento\Framework\Setup\InstallSchemaInterface`. What do you do if you want to create an upgrade
-script? Well, you'd implement `Magento\Framework\Setup\UpgradeSchemaInterface`!
+script? Well, you'd implement `Magento\Framework\Setup\UpgradeSchemaInterface`.
+
+If you need to check the version of your module between upgrades, you will now need to manage that yourself. You can find out more from my [magento.stackexchange.com question on handling upgrade scripts in magento 2](http://magento.stackexchange.com/questions/79201/how-do-you-control-ordering-of-upgrade-setup-scripts-in-magento-2)
 
 Now we can head to the CLI and run the `bin/magento` command to install our database table!
 
-    bin/magento setup:db-schema:upgrade
+    bin/magento setup:upgrade
 
 When you run this you should see something along the lines of:
 
@@ -101,11 +106,8 @@ When you run this you should see something along the lines of:
 
 That shows it has picked up your Schema Setup and ran it successfully!
 
+>*Note:* If you run into any issues, it will be because you have already installed the module from the first part of my series. You will need to go into the `setup_module` table and delete your module from the table. Then re-run the `bin/magento setup:upgrade` command.
 
-**Do you know how we can manage and control which order our upgrade classes would run in? Let me know!**
+[Part 4 covers our frontend controller, blocks and templates](/magento2/module-from-scratch-part-4-the-frontend)
 
-
-
-As before, you can install this version of the tutorial via composer with:
-
-    composer require ashsmith/magento2-blog-module-example:0.3.0
+You can view the complete module over on GitHub. [Magento 2 Blog Module](https://github.com/ashsmith/magento2-blog-module-tutorial)

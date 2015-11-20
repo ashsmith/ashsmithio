@@ -9,6 +9,9 @@ share: true
 comments: true
 ---
 
+> Magento 2 has been released! This entire series has been updated to reflect the changes since I originally wrote this post.
+> I install Magento 2 using Composer, I recommend you do to! [Learn how to here](http://devdocs.magento.com/guides/v2.0/install-gde/install-quick-ref.html#installation-part-1-getting-started)
+
 If you're here, then you are going to be just excited as I am about creating a full blown
 Magento 2 module from scratch! This part of the series I'll be covering how to setup your
 module so that it can be installed via Composer.
@@ -22,13 +25,7 @@ I'll be assuming you have already setup a basic repository, and you are familiar
 ## Module structure
 Let's setup our basic module structure now:
 
-    Block/
-    Controller/
-    etc/
-    etc/frontend/
-    etc/backend/
-    Test/
-    view/
+    etc/module.xml
     registration.php
 
 In the root directory we'll want to create a composer.json file. And it should look something like this:
@@ -86,10 +83,13 @@ That is: everything (*) should go into the folder: `Ashsmith/Blog`. Which would 
 The first file you'll want to create is the `etc/module.xml`.
 {% highlight xml %}
     <?xml version="1.0"?>
-    <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
+    <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
         <module name="Ashsmith_Blog" setup_version="1.0.0" />
     </config>
 {% endhighlight %}
+
+> Noticed the Schema location is a little strange looking? Your IDE won't recongise that, but you can fix that! Here how in PHPStorm: [XML Schema Resolution in PHPStorm](http://alankent.me/2015/10/07/xml-schema-resolution-in-php-storm-with-urns-quick-note/)
+
 Next up, we need a `registration.php` file in the root of our module. This is picked up by the Magento framework and will handle registering your module with Magento.
 
 {% highlight php %}
@@ -101,16 +101,22 @@ Next up, we need a `registration.php` file in the root of our module. This is pi
 );
 {% endhighlight %}
 
-And that's it! Our basic module is now setup. If you want to test this without using composer, you can simply symlink your module directory to your Magento 2 install. That way development becomes simpler.
+Now, with this done our module has is setup, but it won't work within Magento just yet. We will need to enable it, then upgrade the database too. Like so:
 
 {% highlight bash %}
-    ln -s /path/to/module/* /path/to/magento/app/code/Ashsmith/Blog/
+    bin/magento module:status # this will give us the status of each module. It'll show ours as disabled.
+    bin/magento module:enable Ashsmith_Blog # this will enable our module
+    bin/magento setup:upgrade # upgrade the system, essentially this will make sure any setup scripts have been run and the current module version saved to the setup_module table.
+    bin/magento module:status # confirm our module has been enabled!
 {% endhighlight %}
+
+
+If you want to skip over the Composer installation of the module, you can just create the `app/code` directory if it doesn't yet exist, and then copy in your code to the following structure: `app/code/Ashsmith/Blog/`.
 
 ## Conclusion
 
 We've now set up our module, along with composer! If you push to a public repo, register it with packagist you will be able to install it really easily!
 
-Next up, I'll cover how to [create your models & resource models in Magento 2](/magento2/module-from-scratch-module-part-2-models/). Exciting!!
+Next up, I'll cover how to [create your models & resource models in Magento 2](/magento2/module-from-scratch-module-part-2-models/).
 
-You can checkout the progress on the module over on github, so [check it out](https://github.com/ashsmith/magento2-blog-module-tutorial)
+You can view the complete module over on GitHub. [Magento 2 Blog Module](https://github.com/ashsmith/magento2-blog-module-tutorial)

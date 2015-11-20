@@ -9,6 +9,9 @@ share: true
 comments: true
 ---
 
+> Magento 2 has been released! This entire series has been updated to reflect the changes since I originally wrote this post.
+> I install Magento 2 using Composer, I recommend you do to! [Learn how to here](http://devdocs.magento.com/guides/v2.0/install-gde/install-quick-ref.html#installation-part-1-getting-started)
+
 _This is part 5 of my ['Magento 2 Module From Scratch'](/magento2/module-from-scratch-introduction/) series. I'd recommend you catch up with the rest first._
 
 Today I'm covering the admin area section of our module. In here, we add links to the main menu, create our grid using the UI Components in Magento 2, create mass actions, and the ability to edit each post!
@@ -19,12 +22,13 @@ First things first, we want to add our blog admin pages to the 'Content' menu. W
 
 {% highlight xml %}
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
         <add id="Ashsmith_Blog::blog_content" title="Blog" module="Ashsmith_Blog" sortOrder="50" parent="Magento_Backend::content" resource="Ashsmith_Blog::blog_content" />
         <add id="Ashsmith_Blog::post" title="Posts" module="Ashsmith_Blog" sortOrder="0" parent="Ashsmith_Blog::blog_content" action="blog/post" resource="Ashsmith_Blog::post"/>
     </menu>
 </config>
+
 {% endhighlight %}
 
 So this is dead simple. within the `<menu>` node we instruct magento to add two new items. First, is simply a heading, the next is our main item which will link to the blog posts grid! I wanted to nest the blog under it's own section in case I decide to add Categories, tags or other common blog features in the future!
@@ -45,7 +49,7 @@ Great, we have our menu items. Next, let's define some ACL rules so that admins 
 
 {% highlight xml %}
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Acl/etc/acl.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
@@ -61,6 +65,7 @@ Great, we have our menu items. Next, let's define some ACL rules so that admins 
         </resources>
     </acl>
 </config>
+
 {% endhighlight %}
 
 The ACL may feel familiar to that of Magento 1.x. Because our blog belongs under the `Magento_Backend::content` in our menu, we need to embed our resources within there. Then using the same resource identifiers we used in our menu.xml we can define the access. That will handle displaying/hiding the links within the menu based on the users access rights. Finally, we have our save and delete resources. We'll be making use of these in our controllers and block to change how the page looks for certain users.
@@ -69,13 +74,14 @@ So we now have our menu, and ACL configured. Let's move onwards by defining our 
 
 {% highlight xml %}
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="admin">
         <route id="blog" frontName="blog">
             <module name="Ashsmith_Blog" before="Magento_Backend" />
         </route>
     </router>
 </config>
+
 {% endhighlight %}
 
 This follows the same format as our frontend router, with the exception of the `router` node's `id` attribute being set to `admin`. We also specify that our module is put before the `Magento_Backend` module.
@@ -129,6 +135,7 @@ class Index extends \Magento\Backend\App\Action
         return $resultPage;
     }
 }
+
 {% endhighlight %}
 
 Much like a standard controller actions, but instead of extending `\Magento\Framework\App\Action\Action` we now extend `\Magento\Backend\App\Action`. On top of this we have set a constant named `ADMIN_RESOURCE` this is what we defined in our ACL for whether or not a user is allowed access to this page.
@@ -141,13 +148,7 @@ In here we simply register our UI Component!
 
 {% highlight xml %}
 <?xml version="1.0"?>
-<!--
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="styles"/>
     <body>
         <referenceContainer name="content">
@@ -155,6 +156,7 @@ In here we simply register our UI Component!
         </referenceContainer>
     </body>
 </page>
+
 {% endhighlight %}
 
 We've registered our component, so lets create it, again this is just another XML based configuration file. It's fairly beefy, as this controls adding all the components that make up our grid view. Such as columns and mass actions!
@@ -162,7 +164,13 @@ We've registered our component, so lets create it, again this is just another XM
 `views/adminhtml/ui_component/blog_post_listing.xml`
 {% highlight xml %}
 <?xml version="1.0" encoding="UTF-8"?>
-<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Ui/etc/ui_configuration.xsd">
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">blog_post_listing.blog_post_listing_data_source</item>
@@ -474,51 +482,50 @@ We've registered our component, so lets create it, again this is just another XM
                 </item>
             </item>
         </argument>
-        <column name="ids" class="Magento\Ui\Component\MassAction\Columns\Column">
+
+        <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/multiselect</item>
-                </item>
                 <item name="config" xsi:type="array">
-                    <item name="draggable" xsi:type="boolean">false</item>
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">55</item>
                     <item name="indexField" xsi:type="string">post_id</item>
-                    <item name="controlVisibility" xsi:type="boolean">false</item>
                 </item>
             </argument>
-        </column>
+        </selectionsColumn>
+
         <column name="post_id">
             <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
-                </item>
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="filter" xsi:type="string">textRange</item>
                     <item name="sorting" xsi:type="string">asc</item>
-                    <item name="align" xsi:type="string">left</item>
                     <item name="label" xsi:type="string" translate="true">ID</item>
                 </item>
             </argument>
         </column>
         <column name="title">
             <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
-                </item>
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="align" xsi:type="string">left</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
                     <item name="label" xsi:type="string" translate="true">Title</item>
                 </item>
             </argument>
         </column>
         <column name="url_key">
             <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
-                </item>
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="align" xsi:type="string">left</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
                     <item name="label" xsi:type="string" translate="true">URL Key</item>
                 </item>
             </argument>
@@ -526,57 +533,47 @@ We've registered our component, so lets create it, again this is just another XM
         <column name="is_active">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Ashsmith\Blog\Model\Post\Source\IsActive</item>
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
-                </item>
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="editor" xsi:type="string">select</item>
                     <item name="dataType" xsi:type="string">select</item>
-                    <item name="align" xsi:type="string">left</item>
                     <item name="label" xsi:type="string" translate="true">Status</item>
                 </item>
             </argument>
         </column>
-        <column name="creation_time">
+        <column name="creation_time" class="Magento\Ui\Component\Listing\Columns\Date">
             <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
-                </item>
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
-                    <item name="align" xsi:type="string">left</item>
                     <item name="label" xsi:type="string" translate="true">Created</item>
                 </item>
             </argument>
         </column>
-        <column name="update_time">
+        <column name="update_time" class="Magento\Ui\Component\Listing\Columns\Date">
             <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
-                </item>
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
-                    <item name="align" xsi:type="string">left</item>
                     <item name="label" xsi:type="string" translate="true">Modified</item>
                 </item>
             </argument>
         </column>
-        <column name="actions" class="Ashsmith\Blog\Ui\Component\Listing\Column\PostActions">
+        <actionsColumn name="actions" class="Ashsmith\Blog\Ui\Component\Listing\Column\PostActions">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="draggable" xsi:type="boolean">false</item>
-                    <item name="dataType" xsi:type="string">actions</item>
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">107</item>
                     <item name="indexField" xsi:type="string">post_id</item>
-                    <item name="blockVisibility" xsi:type="boolean">true</item>
-                    <item name="align" xsi:type="string">left</item>
-                    <item name="label" xsi:type="string" translate="true">Action</item>
-                    <item name="data_type" xsi:type="string">actions</item>
-                    <item name="filterable" xsi:type="boolean">false</item>
-                    <item name="sortable" xsi:type="boolean">false</item>
                 </item>
             </argument>
-        </column>
+        </actionsColumn>
     </columns>
 </listing>
+
 {% endhighlight %}
 
 Let's quickly cover what we've done here:
@@ -596,7 +593,7 @@ exist. Don't worry though, this is where Dependency Injection comes in. We'll se
 
 {% highlight xml %}
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Ashsmith\Blog\Api\Data\PostInterface" type="Ashsmith\Blog\Model\Post" />
     <virtualType name="BlogGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
         <arguments>
@@ -612,7 +609,21 @@ exist. Don't worry though, this is where Dependency Injection comes in. We'll se
             <argument name="filterPool" xsi:type="object" shared="false">BlogGirdFilterPool</argument>
         </arguments>
     </virtualType>
+    <virtualType name="Ashsmith\Blog\Model\ResourceModel\Post\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ashsmith_blog_post</argument>
+            <argument name="resourceModel" xsi:type="string">Ashsmith\Blog\Model\ResourceModel\Post</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_post_listing_data_source" xsi:type="string">Ashsmith\Blog\Model\ResourceModel\Post\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
+
 {% endhighlight %}
 
 In our `di.xml` we have made 3 declarations. The first is the `<preference>` node, this essentially when `Ashsmith\Blog\Api\Data\PostInterface` is a dependency, use `Ashsmith\Blog\Model\Post`. This is essentially how we can implement our own logic into core Magento.. just implementing the interfaces and then using our `di.xml` to switch out the class. Simple! After that we define two virtual types. These are just aliases to other classes, both UI Components on which we need to customise the arguments passed (we provide `PostGridDataProvider` with our resource collection for example)
@@ -660,6 +671,7 @@ class IsActive implements \Magento\Framework\Data\OptionSourceInterface
         return $options;
     }
 }
+
 {% endhighlight %}
 
 The last class we're missing is the one we defined for our 'actions' column. This is another source for available actions to do to a single blog post
@@ -714,9 +726,9 @@ class PostActions extends Column
      * Prepare Data Source
      *
      * @param array $dataSource
-     * @return void
+     * @return array
      */
-    public function prepareDataSource(array & $dataSource)
+    public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
@@ -737,8 +749,11 @@ class PostActions extends Column
                 }
             }
         }
+
+        return $dataSource;
     }
 }
+
 {% endhighlight %}
 
 Now we have all our files required to make the grid page work, you should now be able to clear cache and access the grid page! Huzzah!
@@ -766,7 +781,7 @@ class MassDelete extends \Magento\Backend\App\Action
      *
      * @var string
      */
-    protected $collection = 'Ashsmith\Blog\Model\Resource\Post\Collection';
+    protected $collection = 'Ashsmith\Blog\Model\ResourceModel\Post\Collection';
 
     /**
      * Page model
@@ -880,6 +895,7 @@ class MassDelete extends \Magento\Backend\App\Action
         $this->messageManager->addSuccess(__('A total of %1 record(s) have been deleted.', $count));
     }
 }
+
 {% endhighlight %}
 
 
@@ -891,7 +907,7 @@ That's our delete action done. Now we need to create the enable and disable acti
 <?php
 namespace Ashsmith\Blog\Controller\Adminhtml;
 
-use Magento\Framework\Model\Resource\Db\Collection\AbstractCollection;
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 use Magento\Framework\Controller\ResultFactory;
 
 /**
@@ -914,7 +930,7 @@ class AbstractMassStatus extends \Magento\Backend\App\Action
      *
      * @var string
      */
-    protected $collection = 'Magento\Framework\Model\Resource\Db\Collection\AbstractCollection';
+    protected $collection = 'Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection';
 
     /**
      * Model
@@ -1021,6 +1037,7 @@ class AbstractMassStatus extends \Magento\Backend\App\Action
         }
     }
 }
+
 {% endhighlight %}
 
 Next up, our enable mass action: `Controller/Adminhtml/Post/MassEnable.php`
@@ -1046,7 +1063,7 @@ class MassEnable extends AbstractMassStatus
      *
      * @var string
      */
-    protected $collection = 'Ashsmith\Blog\Model\Resource\Post\Collection';
+    protected $collection = 'Ashsmith\Blog\Model\ResourceModel\Post\Collection';
 
     /**
      * Post model
@@ -1062,6 +1079,7 @@ class MassEnable extends AbstractMassStatus
      */
     protected $status = true;
 }
+
 {% endhighlight %}
 
 And finally the mass delete: `Controller/Adminhtml/Post/MassDisable.php`
@@ -1087,17 +1105,17 @@ class MassDisable extends AbstractMassStatus
      *
      * @var string
      */
-    protected $collection = 'Ashsmith\Blog\Model\Resource\Post\Collection';
+    protected $collection = 'Ashsmith\Blog\Model\ResourceModel\Post\Collection';
 
     /**
-     * Post model
+     * Page model
      *
      * @var string
      */
     protected $model = 'Ashsmith\Blog\Model\Post';
 
     /**
-     * Post disable status
+     * Page disable status
      *
      * @var boolean
      */
@@ -1154,6 +1172,7 @@ class NewAction extends \Magento\Backend\App\Action
         return $resultForward->forward('edit');
     }
 }
+
 {% endhighlight %}
 
 All we do here is simply forward the request onto the edit controller!
@@ -1261,6 +1280,7 @@ class Edit extends \Magento\Backend\App\Action
         return $resultPage;
     }
 }
+
 {% endhighlight %}
 
 Before rendering the page, we attempt to load a record, and also check if any form data was previously submitted. If it was, we'll set the data on our model, then finally the model is added to the registry.
@@ -1271,13 +1291,7 @@ Now that we have our edit page, let's create our layout file, and blocks that wi
 
 {% highlight xml %}
 <?xml version="1.0"?>
-<!--
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="editor"/>
     <body>
         <referenceContainer name="content">
@@ -1389,9 +1403,10 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
      */
     protected function _getSaveAndContinueUrl()
     {
-        return $this->getUrl('blog/*/save', ['_current' => true, 'back' => 'edit', 'active_tab' => '{{tab_id}}']);
+        return $this->getUrl('blog/*/save', ['_current' => true, 'back' => 'edit', 'active_tab' => '']);
     }
 }
+
 {% endhighlight %}
 
 And the form block too: `Block/Adminhtml/Post/Edit/Form.php`
@@ -1520,6 +1535,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         return parent::_prepareForm();
     }
 }
+
 {% endhighlight %}
 
 And there we have it! We're just missing the ability to save our blog posts now! So let's setup our final controller:
@@ -1600,6 +1616,7 @@ class Save extends \Magento\Backend\App\Action
         return $resultRedirect->setPath('*/*/');
     }
 }
+
 {% endhighlight %}
 
 ### And that's it!
@@ -1607,7 +1624,3 @@ class Save extends \Magento\Backend\App\Action
 Clear cache, and you'll now have a fully functional Magento 2 module!
 
 The final addition to the series will be adding unit tests to everything we have created. Check back soon!
-
-As always, you can checkout this version of the tutorial from composer:
-
-    composer require ashsmith/magento2-blog-module-example:0.5.0
