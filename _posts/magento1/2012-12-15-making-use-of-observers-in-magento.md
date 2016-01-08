@@ -140,6 +140,6 @@ I&#8217;ve put the completed module onto my github profile, so go ahead and chec
 
 If you have any questions, or any tips and tricks please feel free to post a comment below!
 
- [1]: http://www.nicksays.co.uk/magento_events_cheat_sheet/
+ [1]: https://www.nicksays.co.uk/magento-events-cheat-sheet-1-9/
  [2]: http://www.nicksays.co.uk/
  [3]: https://github.com/ashsmith/Observer-Example-Magento
