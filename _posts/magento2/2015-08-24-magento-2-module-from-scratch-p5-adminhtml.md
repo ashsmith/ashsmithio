@@ -99,7 +99,6 @@ use Magento\Framework\View\Result\PageFactory;
 
 class Index extends \Magento\Backend\App\Action
 {
-    const ADMIN_RESOURCE = 'Ashsmith_Blog::post';
 
     /**
      * @var PageFactory
@@ -134,6 +133,18 @@ class Index extends \Magento\Backend\App\Action
 
         return $resultPage;
     }
+
+    /**
+     * Is the user allowed to view the blog post grid.
+     *
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Ashsmith_Blog::post');
+    }
+
+
 }
 
 {% endhighlight %}
@@ -396,31 +407,40 @@ We've registered our component, so lets create it, again this is just another XM
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="selectProvider" xsi:type="string">blog_post_listing.blog_post_listing.blog_post_columns.ids</item>
-                    <item name="displayArea" xsi:type="string">bottom</item>
-                    <item name="actions" xsi:type="array">
-                        <item name="delete" xsi:type="array">
-                            <item name="type" xsi:type="string">delete</item>
-                            <item name="label" xsi:type="string" translate="true">Delete</item>
-                            <item name="url" xsi:type="string">blog/post/massDelete</item>
-                            <item name="confirm" xsi:type="array">
-                                <item name="title" xsi:type="string" translate="true">Delete items</item>
-                                <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
-                            </item>
-                        </item>
-                        <item name="disable" xsi:type="array">
-                            <item name="type" xsi:type="string">disable</item>
-                            <item name="label" xsi:type="string" translate="true">Disable</item>
-                            <item name="url" xsi:type="string">blog/post/massDisable</item>
-                        </item>
-                        <item name="enable" xsi:type="array">
-                            <item name="type" xsi:type="string">enable</item>
-                            <item name="label" xsi:type="string" translate="true">Enable</item>
-                            <item name="url" xsi:type="string">blog/post/massEnable</item>
-                        </item>
-                    </item>
                     <item name="indexField" xsi:type="string">post_id</item>
                 </item>
             </argument>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="blog/post/massDelete"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete items</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="disable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">disable</item>
+                        <item name="label" xsi:type="string" translate="true">Disable</item>
+                        <item name="url" xsi:type="url" path="blog/post/massDisable"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="enable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">enable</item>
+                        <item name="label" xsi:type="string" translate="true">Enable</item>
+                        <item name="url" xsi:type="url" path="blog/post/massEnable"/>
+                    </item>
+                </argument>
+            </action>
         </massaction>
         <paging name="listing_paging">
             <argument name="data" xsi:type="array">
@@ -766,186 +786,38 @@ Next up, let's create our mass actions. So, we have already defined those as: De
 <?php
 namespace Ashsmith\Blog\Controller\Adminhtml\Post;
 
-/**
- * Class MassDelete
- */
-class MassDelete extends \Magento\Backend\App\Action
-{
-    /**
-     * Field id
-     */
-    const ID_FIELD = 'post_id';
-
-    /**
-     * Resource collection
-     *
-     * @var string
-     */
-    protected $collection = 'Ashsmith\Blog\Model\ResourceModel\Post\Collection';
-
-    /**
-     * Page model
-     *
-     * @var string
-     */
-    protected $model = 'Ashsmith\Blog\Model\Post';
-    /**
-     * Execute action
-     *
-     * @return \Magento\Backend\Model\View\Result\Redirect
-     * @throws \Magento\Framework\Exception\LocalizedException|\Exception
-     */
-    public function execute()
-    {
-        $selected = $this->getRequest()->getParam('selected');
-        $excluded = $this->getRequest()->getParam('excluded');
-
-        try {
-            if (isset($excluded)) {
-                if (!empty($excluded)) {
-                    $this->excludedDelete($excluded);
-                } else {
-                    $this->deleteAll();
-                }
-            } elseif (!empty($selected)) {
-                $this->selectedDelete($selected);
-            } else {
-                $this->messageManager->addError(__('Please select item(s).'));
-            }
-        } catch (\Exception $e) {
-            $this->messageManager->addError($e->getMessage());
-        }
-
-        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
-        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-        return $resultRedirect->setPath(static::REDIRECT_URL);
-    }
-
-    /**
-     * Delete all
-     *
-     * @return void
-     * @throws \Exception
-     */
-    protected function deleteAll()
-    {
-        /** @var AbstractCollection $collection */
-        $collection = $this->_objectManager->get($this->collection);
-        $this->setSuccessMessage($this->delete($collection));
-    }
-
-    /**
-     * Delete all but the not selected
-     *
-     * @param array $excluded
-     * @return void
-     * @throws \Exception
-     */
-    protected function excludedDelete(array $excluded)
-    {
-        /** @var AbstractCollection $collection */
-        $collection = $this->_objectManager->get($this->collection);
-        $collection->addFieldToFilter(static::ID_FIELD, ['nin' => $excluded]);
-        $this->setSuccessMessage($this->delete($collection));
-    }
-
-    /**
-     * Delete selected items
-     *
-     * @param array $selected
-     * @return void
-     * @throws \Exception
-     */
-    protected function selectedDelete(array $selected)
-    {
-        /** @var AbstractCollection $collection */
-        $collection = $this->_objectManager->get($this->collection);
-        $collection->addFieldToFilter(static::ID_FIELD, ['in' => $selected]);
-        $this->setSuccessMessage($this->delete($collection));
-    }
-
-    /**
-     * Delete collection items
-     *
-     * @param AbstractCollection $collection
-     * @return int
-     */
-    protected function delete(AbstractCollection $collection)
-    {
-        $count = 0;
-        foreach ($collection->getAllIds() as $id) {
-            /** @var \Magento\Framework\Model\AbstractModel $model */
-            $model = $this->_objectManager->get($this->model);
-            $model->load($id);
-            $model->delete();
-            ++$count;
-        }
-
-        return $count;
-    }
-
-    /**
-     * Set error messages
-     *
-     * @param int $count
-     * @return void
-     */
-    protected function setSuccessMessage($count)
-    {
-        $this->messageManager->addSuccess(__('A total of %1 record(s) have been deleted.', $count));
-    }
-}
-
-{% endhighlight %}
-
-
-That's our delete action done. Now we need to create the enable and disable actions. First, we'll create as these actions will share a lot of functionality. In fact, the only thing to change between them will be a protected attribute `$status`.
-
-`Controller/Adminhtml/AbstractMassStatus.php`
-
-{% highlight php %}
-<?php
-namespace Ashsmith\Blog\Controller\Adminhtml;
-
-use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Magento\Backend\App\Action\Context;
+use Magento\Ui\Component\MassAction\Filter;
+use Ashsmith\Blog\Model\ResourceModel\Post\CollectionFactory;
 use Magento\Framework\Controller\ResultFactory;
 
 /**
- * Class AbstractMassStatus
+ * Class MassDisable
  */
-class AbstractMassStatus extends \Magento\Backend\App\Action
+class MassDelete  extends \Magento\Backend\App\Action
 {
     /**
-     * Field id
+     * @var Filter
      */
-    const ID_FIELD = 'entity_id';
+    protected $filter;
 
     /**
-     * Redirect url
+     * @var CollectionFactory
      */
-    const REDIRECT_URL = '*/*/';
-
-    /**
-     * Resource collection
-     *
-     * @var string
-     */
-    protected $collection = 'Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection';
-
-    /**
-     * Model
-     *
-     * @var string
-     */
-    protected $model = 'Magento\Framework\Model\AbstractModel';
+    protected $collectionFactory;
 
 
     /**
-     * Item status
-     *
-     * @var bool
+     * @param Context $context
+     * @param Filter $filter
+     * @param CollectionFactory $collectionFactory
      */
-    protected $status = true;
+    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory)
+    {
+        $this->filter = $filter;
+        $this->collectionFactory = $collectionFactory;
+        parent::__construct($context);
+    }
     /**
      * Execute action
      *
@@ -954,132 +826,84 @@ class AbstractMassStatus extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-        $selected = $this->getRequest()->getParam('selected');
-        $excluded = $this->getRequest()->getParam('excluded');
-        try {
-            if (isset($excluded)) {
-                if (!empty($excluded)) {
-                    $this->excludedSetStatus($excluded);
-                } else {
-                    $this->setStatusAll();
-                }
-            } elseif (!empty($selected)) {
-                $this->selectedSetStatus($selected);
-            } else {
-                $this->messageManager->addError(__('Please select item(s).'));
-            }
-        } catch (\Exception $e) {
-            $this->messageManager->addError($e->getMessage());
+        $collection = $this->filter->getCollection($this->collectionFactory->create());
+        $collectionSize = $collection->getSize();
+
+        foreach ($collection as $item) {
+            $item->delete();
         }
+
+        $this->messageManager->addSuccess(__('A total of %1 record(s) have been deleted.', $collectionSize));
 
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-        return $resultRedirect->setPath(static::REDIRECT_URL);
-    }
-
-    /**
-     * Set status to all
-     *
-     * @return void
-     * @throws \Exception
-     */
-    protected function setStatusAll()
-    {
-        /** @var AbstractCollection $collection */
-        $collection = $this->_objectManager->get($this->collection);
-        $this->setStatus($collection);
-    }
-
-    /**
-     * Set status to all but the not selected
-     *
-     * @param array $excluded
-     * @return void
-     * @throws \Exception
-     */
-    protected function excludedSetStatus(array $excluded)
-    {
-        /** @var AbstractCollection $collection */
-        $collection = $this->_objectManager->get($this->collection);
-        $collection->addFieldToFilter(static::ID_FIELD, ['nin' => $excluded]);
-        $this->setStatus($collection);
-    }
-
-    /**
-     * Set status to selected items
-     *
-     * @param array $selected
-     * @return void
-     * @throws \Exception
-     */
-    protected function selectedSetStatus(array $selected)
-    {
-        /** @var AbstractCollection $collection */
-        $collection = $this->_objectManager->get($this->collection);
-        $collection->addFieldToFilter(static::ID_FIELD, ['in' => $selected]);
-        $this->setStatus($collection);
-    }
-
-    /**
-     * Set status to collection items
-     *
-     * @param AbstractCollection $collection
-     * @return void
-     */
-    protected function setStatus(AbstractCollection $collection)
-    {
-        foreach ($collection->getAllIds() as $id) {
-            /** @var \Magento\Framework\Model\AbstractModel $model */
-            $model = $this->_objectManager->get($this->model);
-            $model->load($id);
-            $model->setIsActive($this->status);
-            $model->save();
-        }
+        return $resultRedirect->setPath('*/*/');
     }
 }
 
 {% endhighlight %}
 
-Next up, our enable mass action: `Controller/Adminhtml/Post/MassEnable.php`
+
+That's our delete action done. Next up, our enable mass action: `Controller/Adminhtml/Post/MassEnable.php`
 
 {% highlight php %}
 <?php
 namespace Ashsmith\Blog\Controller\Adminhtml\Post;
 
-use Ashsmith\Blog\Controller\Adminhtml\AbstractMassStatus;
+use Magento\Backend\App\Action\Context;
+use Magento\Ui\Component\MassAction\Filter;
+use Ashsmith\Blog\Model\ResourceModel\Post\CollectionFactory;
+use Magento\Framework\Controller\ResultFactory;
 
 /**
- * Class MassEnable
+ * Class MassDisable
  */
-class MassEnable extends AbstractMassStatus
+class MassEnable extends \Magento\Backend\App\Action
 {
     /**
-     * Field id
+     * @var Filter
      */
-    const ID_FIELD = 'post_id';
+    protected $filter;
 
     /**
-     * Resource collection
-     *
-     * @var string
+     * @var CollectionFactory
      */
-    protected $collection = 'Ashsmith\Blog\Model\ResourceModel\Post\Collection';
+    protected $collectionFactory;
+
 
     /**
-     * Post model
-     *
-     * @var string
+     * @param Context $context
+     * @param Filter $filter
+     * @param CollectionFactory $collectionFactory
      */
-    protected $model = 'Ashsmith\Blog\Model\Post';
-
+    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory)
+    {
+        $this->filter = $filter;
+        $this->collectionFactory = $collectionFactory;
+        parent::__construct($context);
+    }
     /**
-     * Post enable status
+     * Execute action
      *
-     * @var boolean
+     * @return \Magento\Backend\Model\View\Result\Redirect
+     * @throws \Magento\Framework\Exception\LocalizedException|\Exception
      */
-    protected $status = true;
+    public function execute()
+    {
+        $collection = $this->filter->getCollection($this->collectionFactory->create());
+
+        foreach ($collection as $item) {
+            $item->setIsActive(true);
+            $item->save();
+        }
+
+        $this->messageManager->addSuccess(__('A total of %1 record(s) have been enabled.', $collection->getSize()));
+
+        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+        return $resultRedirect->setPath('*/*/');
+    }
 }
-
 {% endhighlight %}
 
 And finally the mass delete: `Controller/Adminhtml/Post/MassDisable.php`
@@ -1088,44 +912,65 @@ And finally the mass delete: `Controller/Adminhtml/Post/MassDisable.php`
 <?php
 namespace Ashsmith\Blog\Controller\Adminhtml\Post;
 
-use Ashsmith\Blog\Controller\Adminhtml\AbstractMassStatus;
+use Magento\Backend\App\Action\Context;
+use Magento\Ui\Component\MassAction\Filter;
+use Ashsmith\Blog\Model\ResourceModel\Post\CollectionFactory;
+use Magento\Framework\Controller\ResultFactory;
 
 /**
  * Class MassDisable
  */
-class MassDisable extends AbstractMassStatus
+class MassDisable  extends \Magento\Backend\App\Action
 {
     /**
-     * Field id
+     * @var Filter
      */
-    const ID_FIELD = 'post_id';
+    protected $filter;
 
     /**
-     * Resource collection
-     *
-     * @var string
+     * @var CollectionFactory
      */
-    protected $collection = 'Ashsmith\Blog\Model\ResourceModel\Post\Collection';
+    protected $collectionFactory;
+
 
     /**
-     * Page model
-     *
-     * @var string
+     * @param Context $context
+     * @param Filter $filter
+     * @param CollectionFactory $collectionFactory
      */
-    protected $model = 'Ashsmith\Blog\Model\Post';
-
+    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory)
+    {
+        $this->filter = $filter;
+        $this->collectionFactory = $collectionFactory;
+        parent::__construct($context);
+    }
     /**
-     * Page disable status
+     * Execute action
      *
-     * @var boolean
+     * @return \Magento\Backend\Model\View\Result\Redirect
+     * @throws \Magento\Framework\Exception\LocalizedException|\Exception
      */
-    protected $status = false;
+    public function execute()
+    {
+        $collection = $this->filter->getCollection($this->collectionFactory->create());
+
+        foreach ($collection as $item) {
+            $item->setIsActive(false);
+            $item->save();
+        }
+
+        $this->messageManager->addSuccess(__('A total of %1 record(s) have been disabled.', $collection->getSize()));
+
+        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+        return $resultRedirect->setPath('*/*/');
+    }
 }
 
 {% endhighlight %}
 
 
-Now that we can delete, enable and disable posts it's probably about time we made the ability to edit and create new posts! For this we need 3 more controllers: new, edit and save!
+Now that we can delete, enable and disable posts with Mass Actions, it's probably about time we made the ability to edit and create new posts! For this we need 3 more controllers: new, edit, save, and delete!
 
 Let's start with the New action: `Controller/Adminhtml/Post/NewAction.php`
 
@@ -1285,7 +1130,57 @@ class Edit extends \Magento\Backend\App\Action
 
 Before rendering the page, we attempt to load a record, and also check if any form data was previously submitted. If it was, we'll set the data on our model, then finally the model is added to the registry.
 
-Now that we have our edit page, let's create our layout file, and blocks that will make up the page and display a form for us!
+Let's create the delete action next:
+
+{% highlight php %}
+<?php
+namespace Ashsmith\Blog\Controller\Adminhtml\Post;
+
+use Magento\Backend\App\Action;
+use Magento\TestFramework\ErrorLog\Logger;
+
+class Delete extends \Magento\Backend\App\Action
+{
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Ashsmith_Blog::delete');
+    }
+
+    /**
+     * Delete action
+     *
+     * @return \Magento\Framework\Controller\ResultInterface
+     */
+    public function execute()
+    {
+        $id = $this->getRequest()->getParam('post_id');
+        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+        $resultRedirect = $this->resultRedirectFactory->create();
+        if ($id) {
+            try {
+                $model = $this->_objectManager->create('Ashsmith\Blog\Model\Post');
+                $model->load($id);
+                $model->delete();
+                $this->messageManager->addSuccess(__('The post has been deleted.'));
+                return $resultRedirect->setPath('*/*/');
+            } catch (\Exception $e) {
+                $this->messageManager->addError($e->getMessage());
+                return $resultRedirect->setPath('*/*/edit', ['post_id' => $id]);
+            }
+        }
+        $this->messageManager->addError(__('We can\'t find a post to delete.'));
+        return $resultRedirect->setPath('*/*/');
+    }
+}
+
+{% endhighlight %}
+
+
+Now that we have our controllers setup, let's create our layout file, and blocks that will make up the page and display a form for us!
 
 `view/adminhtml/layout/blog_post_edit.xml`
 

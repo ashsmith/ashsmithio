@@ -517,12 +517,15 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         $select = parent::_getLoadSelect($field, $value, $object);
 
-        $select->where(
-            'is_active = ?',
-            1
-        )->limit(
-            1
-        );
+        if ($object->getStoreId()) {
+
+            $select->where(
+                'is_active = ?',
+                1
+            )->limit(
+                1
+            );
+        }
 
         return $select;
     }
@@ -610,6 +613,11 @@ Create a file named: `Model/ResourceModel/Post/Collection.php`
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
+    /**
+     * @var string
+     */
+    protected $_idFieldName = 'post_id';
+
     /**
      * Define resource model
      *

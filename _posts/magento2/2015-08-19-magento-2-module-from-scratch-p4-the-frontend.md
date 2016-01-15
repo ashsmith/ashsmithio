@@ -88,6 +88,10 @@ use Ashsmith\Blog\Model\ResourceModel\Post\Collection as PostCollection;
 class PostList extends \Magento\Framework\View\Element\Template implements
     \Magento\Framework\DataObject\IdentityInterface
 {
+    /**
+     * @var \Ashsmith\Blog\Model\ResourceModel\Post\CollectionFactory
+     */
+    protected $_postCollectionFactory;
 
     /**
      * Construct
@@ -117,6 +121,7 @@ class PostList extends \Magento\Framework\View\Element\Template implements
         if (!$this->hasData('posts')) {
             $posts = $this->_postCollectionFactory
                 ->create()
+                ->addFilter('is_active', 1)
                 ->addOrder(
                     PostInterface::CREATION_TIME,
                     PostCollection::SORT_ORDER_DESC
@@ -137,7 +142,6 @@ class PostList extends \Magento\Framework\View\Element\Template implements
     }
 
 }
-
 {% endhighlight %}
 
 So first thing, our block extends `\Magento\Framework\View\Element\Template` and implements the `\Magento\Framework\Object\IdentityInterface` interface. The `Template` class can be compared to `Mage_Core_Block_Template`. Next our `IdentityInterface` requires the `getIdentities` method to be implemented. This is an identifier for caching our blocks output!

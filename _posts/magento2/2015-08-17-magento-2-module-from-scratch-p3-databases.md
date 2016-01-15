@@ -108,6 +108,6 @@ That shows it has picked up your Schema Setup and ran it successfully!
 
 >*Note:* If you run into any issues, it will be because you have already installed the module from the first part of my series. You will need to go into the `setup_module` table and delete your module from the table. Then re-run the `bin/magento setup:upgrade` command.
 
-[Part 4 covers our frontend controller, blocks and templates](/magento2/module-from-scratch-part-4-the-frontend)
+[Part 4 covers: frontend controllers, blocks and templates](/magento2/module-from-scratch-part-4-the-frontend)
 
 You can view the complete module over on GitHub. [Magento 2 Blog Module](https://github.com/ashsmith/magento2-blog-module-tutorial)
