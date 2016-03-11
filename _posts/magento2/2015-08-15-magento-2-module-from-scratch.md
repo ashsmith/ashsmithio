@@ -28,4 +28,4 @@ The end extension will be a fairly basic blog, you'll be able create blog posts 
 3. [Migrations & Database Schema!](/magento2/module-from-scratch-part-3-database-tables)
 4. [The Frontend: Controllers, Blocks, layouts & views](/magento2/module-from-scratch-part-4-the-frontend)
 5. [The Backend: Controllers, Blocks, UI, layouts and views](/magento2/module-from-scratch-part-5-adminhtml/)
-6. Unit testing
+6. [Unit testing](/magento2/module-from-scratch-part-6-unit-testing)
