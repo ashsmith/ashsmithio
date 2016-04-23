@@ -6,7 +6,7 @@ layout: post
 share: true
 permalink: /2012/12/a-look-at-uk-online-payment-providers/
 categories:
-  - Payment Providers
+  - dev
 ---
 Finding the right UK payment provider is tricky business. You need to way up the options, you&#8217;ll want one that is easy to integrate  but also has the best pricing, plus other features such as reporting, ability to take telephone or mail order payments. In this article I&#8217;ll go over the top providers in the UK.
 
@@ -17,7 +17,7 @@ I have written up about a number of services, and will continue to add to this
 *   [Paypal][1]
 *   [GoCardless][2]
 *   [Paymill][3]
-*   [&#8220;Traditional&#8221; payment providers][4] 
+*   [&#8220;Traditional&#8221; payment providers][4]
     *   [Sage Pay][5]
     *   [World Pay][6]
     *   [Authorize.net][7]
@@ -79,7 +79,7 @@ Paymill is a new up and coming payment provider different to that of those that 
 You know they&#8217;re developer focused by offering an example of how simple it is to create a payment directly on the homepage! Here is the PHP example:
 
 {% highlight php %}
-<?php 
+<?php
 $params = array(
     'amount'      => '4200',  // e.g. "4200" for 42.00 EUR
     'currency'    => 'EUR',   // ISO 4217

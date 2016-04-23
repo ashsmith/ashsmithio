@@ -5,6 +5,8 @@ author: Ash Smith
 layout: post
 share: true
 permalink: /2013/03/11-must-read-e-commerce-blogs/
+categories:
+    - dev
 ---
 We all love to stay as up to date and relevant as we possibly can. Sometimes this incredibly hard because of the shear amount of information there is to learn! However, these 11 blogs come from me and I swear by them and their content. They are fantastic resources for learning the latest trends in marketing & SEO, and E-commerce! So, prioritise these!
 

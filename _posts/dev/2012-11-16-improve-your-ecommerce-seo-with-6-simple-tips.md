@@ -5,7 +5,7 @@ layout: post
 share: true
 permalink: /2012/11/improve-your-ecommerce-seo-with-6-simple-tips/
 categories:
-  - SEO
+  - dev
 ---
 Search engine traffic is often a vital lifeline for the large majority of e-commerce stores on the web, and with algorithms changing all the time it&#8217;s a forever changing game. I&#8217;ve pulled together six simple steps you can apply to your stores today to improve your search engine optimisation and these tips will potentially last a lifetime.
 

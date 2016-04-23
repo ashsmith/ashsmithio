@@ -4,7 +4,7 @@ author: Ash Smith
 layout: post
 share: true
 categories:
-  - General
+    - dev
 ---
 I love working in terminal, I'm either SSH'd into a server, working with git or making file/directory changes. To be more efficent at these things though, I've created some lovely aliases that I live by.
 
@@ -35,7 +35,7 @@ This alias is only a temporary, once you have closed your terminal that session 
 
 The chances are, you're using a `bash` terminal, however if like me you use `zsh` then the instructions below are actually a little different.
 
-To save your awesome aliases, you need to create a `.bash_profile` (or a `.zprofile` for `zsh` users) in your home directory. 
+To save your awesome aliases, you need to create a `.bash_profile` (or a `.zprofile` for `zsh` users) in your home directory.
 
 {% highlight bash %}
 vi ~/.bash_profile
@@ -94,7 +94,7 @@ When I'm working on an application, I'll refer to my `php_error.log` A LOT. So I
 {% highlight bash %}
 alias phplog="tail -n 5 /Applications/MAMP/logs/php_error.log"
 {% endhighlight %}
-        
+
 ##### What are yours?
 
 I've shown you mine, now you gotta show me yours. Post them below, or mention me on twitter [@ashsmithco](http://twitter.com/ashsmithco).

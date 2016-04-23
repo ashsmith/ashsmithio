@@ -6,7 +6,7 @@ layout: post
 share: true
 permalink: /2013/03/stock-reporting-101/
 categories:
-  - E-commerce
+    - dev
 ---
 Today we&#8217;re going to cover some basic stock reporting. If your business doesn&#8217;t have basic stock reports in place, this guide is for you. I will tell you the three basic reports you need in place. We will be looking at a stock take report, a stock consumption report, and finally a run rate report on your stock.
 

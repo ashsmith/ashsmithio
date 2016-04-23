@@ -4,7 +4,7 @@ author: Ash Smith
 layout: post
 share: true
 categories:
-    - General
+    - dev
 ---
 Ever struggled with the idea of deploying a site, with the correct user permissions? I've been struggling with this one for a while. My solution up until recently was to simple use the `root` user, a terrible security practice I know.
 

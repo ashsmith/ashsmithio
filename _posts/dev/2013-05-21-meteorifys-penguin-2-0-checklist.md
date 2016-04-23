@@ -5,7 +5,7 @@ layout: post
 share: true
 permalink: /2013/05/meteorifys-penguin-2-0-checklist/
 categories:
-  - SEO
+    - dev
 ---
 Google have announced that penguin 2.0, another big update to Google&#8217;s algorithm, is just around the corner. In fact, it is a matter of weeks away! So, I have put together a quick checklist to use against your sites to make sure they are are Penguin ready!
 

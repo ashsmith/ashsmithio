@@ -4,6 +4,8 @@ author: Ash Smith
 layout: post
 share: true
 comments: true
+categories:
+    - dev
 ---
 
 Lately I've been thinking about how I can track, and collect more information from the readers of this blog. In an attempt to do that I have decided to start tracking when a reader submits a new comment. Luckily, with disqus and the latest version of Google Analytics this is dead simple to set-up. Allow me to show you!

@@ -4,6 +4,8 @@ author: Ash Smith
 layout: post
 share: true
 comments: true
+categories:
+    - dev
 ---
 
 Over the past few days I have been playing around with the performance of my blog. In this post I'll outline what I did the enhance the speed, and performance. Hopefully from this post you'll be able to take what I did and apply it to your own sites.
