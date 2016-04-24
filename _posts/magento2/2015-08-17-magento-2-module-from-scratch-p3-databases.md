@@ -5,6 +5,7 @@ layout: post
 permalink: /magento2/module-from-scratch-part-3-database-tables
 categories:
   - magento2
+  - popular
 share: true
 comments: true
 ---

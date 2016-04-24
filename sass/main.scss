@@ -1,18 +1,18 @@
 @import "partials/normalize";
 
-// Variables
+// Partials
 @import "partials/variables";
-
-// Basic Typography
 @import "partials/typography";
-
-// The layout
 @import "partials/layout";
+@import "partials/header";
+@import "partials/footer";
+@import "partials/buttons";
+@import "partials/forms";
 
 // Pages
-
 @import "pages/home";
 @import "pages/posts";
+@import "pages/blog";
 
 // Syntax highlighting :)
 @import "partials/syntax";

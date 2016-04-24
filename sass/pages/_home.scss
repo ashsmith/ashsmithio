@@ -1,59 +1,37 @@
-.intro {
-    width: 75%;
-    text-align: center;
-    margin: 2em auto;
-    font-style: italic;
-    font-weight: normal;
+.intro-text {
+    font-weight: 200;
+    font-size: 2.5em;
+    .intro-highlight {
+        color: $primary-colour;
+    }
+
+}
+
+.intro-cta {
+    width: 100%;
+}
+
+@media screen and (min-width: 48em) {
+    .intro-cta {
+        width: 22rem;
+    }
+}
+
+.posts-block {
+    margin: 3em 0;
 }
 
 .posts {
     margin: 0;
     padding: 0;
-    li {
-        list-style: none;
-        border-bottom: 1px solid $light-grey;
-        position: relative;
-        padding: 0 1em;
-        &:first-child {
-            border-top: 1px solid $light-grey;
-        }
-        a {
-            display: block;
-            padding: 0.8em 0;
-        }
-        a:hover {
-            text-decoration: none;
-        }
-        .post-date {
-            display: none;
-        }
-
-        &:nth-child(odd) {
-            background-color: #eee;
-        }
-
-        &:hover {
-            background-color: #f4f4f4;
-        }
+    list-style: none;
+    .post-item {
+        display: block;
     }
 }
 
-@media only screen and (min-width: 35em){
-    .home p {
-        margin: 0 20%;
-    }
-}
-
-@media only screen and (min-width: 800px) {
-    .posts li span.post-date {
-        display: inline;
-        float: right;
-        position: absolute;
-        right: 1em;
-        top: 0.8125em;
-        z-index: 1;
-    }
-    .posts a {
-        z-index: 10;
-    }
+.post-link {
+    margin: 1em 0;
+    display: block;
+    line-height: 2em;
 }

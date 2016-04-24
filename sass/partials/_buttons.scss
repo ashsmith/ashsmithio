@@ -1,0 +1,46 @@
+.button {
+    text-decoration: none;
+    display: block;
+    line-height: 1em;
+    text-align: center;
+    width: 100%;
+}
+
+.button-primary {
+    background-color: $primary-colour;
+    color: white;
+
+    &:hover,
+    &:focus {
+        background-color: darken($primary-colour, 10%);
+        color: white;
+    }
+}
+
+.button-large {
+    font-size: 1.7em;
+    padding: 1rem 2rem;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.button-medium {
+    font-size: 1.2em;
+    padding: 0.5rem;
+    line-height: 1em;
+    text-align: center;
+}
+
+.button-outline {
+    border: 1px solid $primary-colour;
+    color: $primary-colour;
+    &:hover,
+    &:focus {
+        border-color: darken($primary-colour, 10%);
+        color: darken($primary-colour, 10%);
+    }
+}
+
+input[type=submit].button, button.button {
+    border: 0;
+}

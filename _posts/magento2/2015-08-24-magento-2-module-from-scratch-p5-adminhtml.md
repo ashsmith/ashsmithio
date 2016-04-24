@@ -5,6 +5,7 @@ layout: post
 permalink: /magento2/module-from-scratch-part-5-adminhtml
 categories:
   - magento2
+  - popular
 share: true
 comments: true
 ---

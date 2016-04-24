@@ -5,6 +5,7 @@ layout: post
 permalink: /magento2/module-from-scratch-part-6-unit-testing
 categories:
   - magento2
+  - popular
 share: true
 comments: true
 ---

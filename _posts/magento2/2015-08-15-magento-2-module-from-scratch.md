@@ -5,6 +5,7 @@ layout: post
 permalink: /magento2/module-from-scratch-introduction
 categories:
   - magento2
+  - popular
 share: true
 comments: true
 ---
