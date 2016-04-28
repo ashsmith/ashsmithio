@@ -1,8 +1,11 @@
-.treehouse-promo {
-    border: 1px solid #ddd;
-    border-left: none;
-    border-right: none;
-    background-color: #efefef;
-    padding: 0.6em;
-    margin: 1em 0;
+.hire-me {
+    margin: 3em auto;
+    width: 90%;
+    border: 1px solid $light-grey;
+    border-width: 1px 0;
+}
+
+.hire-me-button {
+    width: 80%;
+    margin: 2em auto;
 }

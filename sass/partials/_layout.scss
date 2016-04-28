@@ -1,113 +1,38 @@
-// Mobile first...
-body {
-    margin: 1em;
+* {
+    box-sizing: border-box;
 }
-.header-wrap {
-    overflow: hidden;
-}
-.masthead h1, .masthead h3 {
-    margin: 0;
-    font-style: italic;
-    line-height: 1.3em;
+.wrapper {
+    margin: 0 2em;
 }
 
-img {
-    max-width: 100%;
-}
-
-nav {
-    overflow: hidden;
-    margin: 2em 0;
-    ul {
-        margin: 0;
-        padding: 0;
-    }
-    li {
-        float: left;
-        width: 25%;
-    }
-    a {
-        display: block;
-    }
-}
-
-.post .masthead {
-    font-size: 1.5em;
-}
-
-.post article {
-    border-top: 1px solid #eee;
-    margin-top: 2em;
-
-    h1 {
-      font-size: 1.7em;
-    }
-
-    h2 {
-      font-size: 1.6em;
-    }
-
-    h3 {
-      font-size: 1.5em;
-    }
-
-    h4 {
-      font-size: 1.4em;
-    }
-
-    h5 {
-      font-size: 1.3em;
-    }
-
-    h2,h3,h4,h5 {
-        font-family: helvetica, sans-serif;
-    }
-    blockquote {
-      color: #888;
-      border-left: 2px solid #888;
-      margin: 1em;
-      padding-left: 40px;
-    }
-
-    .highlight {
-        font-size: 0.8em; // Decrease code examples font size.
-        line-height: 1.5em;
-    }
-}
-
-.post h1 {
-    font-size: 2em;
-    text-align: center;
-    font-style:italic;
-}
-
-@media only screen and (min-width: 800px) {
-    #page {
-        width: 800px;
+@media screen and (min-width: 48em) {
+    .wrapper {
+        width: 48em;
         margin: 0 auto;
     }
-}
 
-
-@media only screen and (min-width: 700px) {
-    body {
-        background-color: #f4f3f3;
+    .row {
+        overflow:hidden;
+        clear: both;
+        margin: 1em 0;
     }
 
-    #page {
-        background-color: white;
-        border: 1px solid #ccc;
-        padding: 1em 3em;
-    }
-
-    .masthead {
+    .grid-half {
         width: 50%;
-        min-height: 3em;
-        margin: 0 auto;
-        font-size: 2em;
+        float: left;
+        padding: 0 2em;
     }
-    nav {
-        min-height: 4em;
-        margin: 0;
+
+    .grid-half:first-child {
+        border-right: 1px solid $light-grey;
     }
+}
+
+.col-80 {
+    width: 80%;
+}
+
+
+.centered {
+    margin: 0 auto;
 }

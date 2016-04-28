@@ -1,60 +1,48 @@
 body {
-    line-height: 1.7;
-    color: $main-color;
+    font-family: $primary-font;
 }
-h1,h2,h3,h4,h5,h6 {
-    font-family: Georgia, serif;
+
+.light-text {
+    font-weight: 200;
 }
+
+h1, h2, h3, h4, h5 {
+    text-align: center;
+    font-weight:600;
+}
+
 h1 {
-    font-size: 1.75em;
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.3em;
+}
+
+h4 {
+    font-size: 1.25em;
+}
+
+h5 {
+    font-size: 1.1em;
 }
 
 a {
-    color: $link-color;
+    color: $body-text;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+        color: black;
+    }
 }
 
-.subheading {
-    font-size: .875em;
-}
-
-.masthead {
+.leading-text {
+    font-weight: 200;
+    font-size: 1.2em;
+    line-height: 2em;
     text-align: center;
-    h1 a {
-        color: $main-color;
-        text-decoration: none;
-        &:visited {
-            color: $main-color;
-            text-decoration: none;
-        }
-    }
-    .subheading {
-        font-weight: normal;
-        font-style:normal;
-        font-size:.6em;
-        font-family: Verdana, sans-serif;
-    }
-}
-
-nav {
-    a {
-        text-align: center;
-        text-decoration: none;
-        color: $main-color;
-        border-bottom: 3px solid $light-grey;
-        &:hover {
-            border-color: #999;
-        }
-    }
-    .current {
-        border-color: $link-color;
-    }
-}
-
-footer {
-    margin-top: 2em;
-    font-size: 0.8em;
-    text-align: center;
-    p {
-        margin: 0;
-    }
 }

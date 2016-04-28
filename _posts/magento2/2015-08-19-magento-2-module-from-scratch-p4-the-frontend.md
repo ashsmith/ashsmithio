@@ -5,6 +5,7 @@ layout: post
 permalink: /magento2/module-from-scratch-part-4-the-frontend
 categories:
   - magento2
+  - popular
 share: true
 comments: true
 ---

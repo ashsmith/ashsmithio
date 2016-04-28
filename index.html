@@ -2,20 +2,43 @@
 layout: default
 ---
 
-{% include header.html %}
 <section role="main">
-    <article role="content">
-        <h2 class="intro">
-        Hello! I'm a <strong>PHP &amp; Certified Magento Developer</strong> living in Bath, 
-        working @ <a href="https://www.meanbee.com/">Meanbee</a>
+    <div class="intro block-section">
+        <h2 class="intro-text">
+        Hello! I'm Ash.<br />
+        An experienced <span class="intro-highlight">Magento Developer</span>,<br />
+        from Bath, United Kingdom
         </h2>
-        <ul class="posts">
-        {% for post in site.posts %}
-            <li>
-                <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-            </li>
-        {% endfor %}
-        </ul>
-    </article>
+
+        <a href="/contact/" class="button button-large button-primary intro-cta">Get in touch</a>
+
+    </div>
+
+    <div class="posts-block row">
+
+        <div class="posts-recent grid-half">
+            <h4>Recent Blog Posts</h4>
+            <ul class="posts">
+            {% for post in site.posts limit:4 %}
+                <li class="post-item">
+                    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <div class="posts-popular grid-half">
+            <h4>Popular Blog Posts</h4>
+            <ul class="posts">
+            {% assign popular_posts = site.categories.popular | reverse %}
+            {% for post in popular_posts limit:4%}
+                <li class="post-item">
+                    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
 </section>

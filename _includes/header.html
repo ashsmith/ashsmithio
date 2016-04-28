@@ -1,16 +1,15 @@
-<div class="header-wrap">
-    <nav>
-        <ul>
-            {% for link in site.links %}
-            <li><a {% if page.url == link.url or page.layout == link.layout %}class="current"{% endif %} href="{{ link.url | prepend: site.baseurl }}">{{ link.title }}</a></li>
-            {% endfor %}
-            <li><a href="http://twitter.com/ashsmithco" target="_blank">Twitter</a></li>
-            <li><a href="http://github.com/ashsmith" target="_blank">GitHub</a></li>
-            <li><a href="mailto:hello@ashsmith.io">Contact</a></li>
+<header class="header">
+    <div class="logo-block">
+        <a href="/" class="logo">Ash Smith</a>
+    </div>
+    <nav role="navigation">
+        <ul class="nav">
+            <li class="nav-item"><a href="/" class="nav-item-link">Home</a></li>
+            <li class="nav-item"><a href="/blog/" class="nav-item-link">Blog</a></li>
+            <li class="nav-item"><a href="/about/" class="nav-item-link">About</a></li>
+            <li class="nav-item"><a href="http://twitter.com/ashsmithco" class="nav-item-link">Twitter</a></li>
+            <li class="nav-item"><a href="https://github.com/ashsmith" class="nav-item-link">GitHub</a></li>
+            <li class="nav-item"><a href="/contact/" class="nav-item-link button button-primary">Contact</a></li>
         </ul>
     </nav>
-    <header class="masthead">
-        <h1><a href="{{ "/" | prepend: site.baseurl}}">{{ site.title }}</a></h1>
-        <h3 class="subheading">{{ site.description }}</h3>
-    </header>
-</div>
+</header>

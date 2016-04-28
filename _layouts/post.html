@@ -2,8 +2,6 @@
 layout: default
 ---
 <div class="post">
-    {% include header.html %}
-
     <section role="main">
         <article role="content">
             <h1 class="entry-title">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %}</h1>
@@ -17,12 +15,10 @@ layout: default
 
             {{ content }}
 
-            <div class="treehouse-promo">
-              <p>Questions? Post a comment!</p>
-              <p>Enjoyed the post? Share it!</p>
-              <p>Something wrong? <a href="https://github.com/ashsmith/ashsmithio">Submit an Issue/Pull Request</a></p>
+            <div class="hire-me">
+                <p class="leading-text">Looking for a Magento 2 Developer to help you with your project?</p>
+                <a href="/contact/" class="button button-medium button-primary hire-me-button">Get in touch</a>
             </div>
-
             {% if page.comments %}
             <div id="disqus_thread"></div><!-- /#disqus_thread -->
             {% endif %}
