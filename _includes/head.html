@@ -33,7 +33,7 @@
     {% if site.owner.google_plus %}<link rel="author" href="{{ site.owner.google_plus }}?rel=author">{% endif %}
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{{ "/css/main.min.css" | prepend: site.baseurl }}">
+    <link rel="stylesheet" href="{{ "/css/main.min.css" | prepend: site.baseurl }}?{{ site.time | date: '%s' }}">
 
     <!-- Icons -->
     <!-- 16x16 -->
