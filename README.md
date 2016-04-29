@@ -3,19 +3,19 @@
 ## Requirements:
 
 - Jekyll
-- Grunt
+- Gulp
 - Sass
 
 ## Get running:
 
 Get dependencies:
-    
+
     npm install
 
 Generate the CSS with:
 
-    grunt sass
+    gulp sass:watch
 
 Run the site locally:
-    
+
     jekyll serve
