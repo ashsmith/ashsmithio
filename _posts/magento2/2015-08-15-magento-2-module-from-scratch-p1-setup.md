@@ -26,8 +26,10 @@ I'll be assuming you have already setup a basic repository, and you are familiar
 ## Module structure
 Let's setup our basic module structure now:
 
+{% highlight bash %}
     etc/module.xml
     registration.php
+{% endhighlight %}
 
 In the root directory we'll want to create a composer.json file. And it should look something like this:
 {% highlight json %}

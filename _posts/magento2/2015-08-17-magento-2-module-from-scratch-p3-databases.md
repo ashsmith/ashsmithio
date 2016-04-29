@@ -94,16 +94,20 @@ If you need to check the version of your module between upgrades, you will now n
 
 Now we can head to the CLI and run the `bin/magento` command to install our database table!
 
-    bin/magento setup:upgrade
+{% highlight bash %}
+bin/magento setup:upgrade
+{% endhighlight%}
 
 When you run this you should see something along the lines of:
 
+{% highlight bash %}
     $ bin/magento setup:db-schema:upgrade
     Schema creation/updates:
     Module 'Ashsmith_Blog':
     Installing schema..
     Module 'Magento_Store':
     ...
+{% endhighlight %}
 
 That shows it has picked up your Schema Setup and ran it successfully!
 

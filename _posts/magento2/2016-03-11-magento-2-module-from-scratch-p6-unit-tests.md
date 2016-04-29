@@ -21,17 +21,23 @@ To get started we can refer to the [documentation provided](http://devdocs.magen
 
 You can see that we can use `bin/magento` to run our unit tests:
 
-    bin/magento dev:tests:run [--all] <test>
+{% highlight bash %}
+bin/magento dev:tests:run [--all] <test>
+{% endhighlight %}
 
 With this we can run the entire test suite (yeah, it takes a very long time), or we can specify a test suite we'd like to run, such as just the unit tests (which also takes a very long time):
 
-    bin/magento dev:tests:run unit
+{% highlight bash %}
+bin/magento dev:tests:run unit
+{% endhighlight %}
 
 For me, I prefer to use phpunit directly, this way you can apply a filter to only run your tests. Which is useful for when you are regularly running tests as you are working on a feature.
 
 To use phpunit directly, you need head to the test directory: `[magento2-root]/dev/tests/unit`, and run the phpunit command:
 
-    phpunit
+{% highlight bash %}
+phpunit
+{% endhighlight %}
 
 This will run all unit tests within Magento, as defined in the `dev/tests/unitphpunit.xml.dist`.
 

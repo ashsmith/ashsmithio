@@ -30,6 +30,7 @@ The logic for sending emails is handled directly in the Post controller action: 
 The notable code is here:
 
 {% highlight php %}
+<?php
 $transport = $this->_transportBuilder
     ->setTemplateIdentifier($this->scopeConfig->getValue(self::XML_PATH_EMAIL_TEMPLATE, $storeScope))
     ->setTemplateOptions(
