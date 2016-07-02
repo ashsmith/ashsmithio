@@ -1,5 +1,6 @@
 ---
 title: "Magento 2 module from scratch - Part 6: Unit Testing"
+description: "Magento 2 & unit testing come hand in hand. Here's a developer guide on unit tests in Magento 2."
 author: Ash Smith
 layout: post
 permalink: /magento2/module-from-scratch-part-6-unit-testing

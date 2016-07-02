@@ -1,5 +1,6 @@
 ---
 title: 'Transactional Emails in Magento 2'
+description: "An overview of how transactional emails work in Magento 2"
 author: Ash Smith
 layout: post
 permalink: /magento2/transactional-emails-in-magento-2/

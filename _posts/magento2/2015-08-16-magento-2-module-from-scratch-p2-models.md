@@ -1,5 +1,6 @@
 ---
 title: 'Magento 2 module from scratch - Part 2: Models & Resource Models'
+description: "A developers guide to setting up Models & Resource Models in Magento 2."
 author: Ash Smith
 layout: post
 permalink: /magento2/module-from-scratch-module-part-2-models

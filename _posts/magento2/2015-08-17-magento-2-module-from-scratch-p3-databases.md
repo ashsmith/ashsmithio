@@ -1,5 +1,6 @@
 ---
 title: 'Magento 2 module from scratch - Part 3: Setup classes & databases'
+description: "A developers guide to create database tables in Magento 2."
 author: Ash Smith
 layout: post
 permalink: /magento2/module-from-scratch-part-3-database-tables

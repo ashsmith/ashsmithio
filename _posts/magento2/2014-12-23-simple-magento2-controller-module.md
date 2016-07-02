@@ -1,5 +1,6 @@
 ---
 title: 'Simple Magento 2 Controller Module'
+description: "Developers guide to creating controllers in Magento 2."
 author: Ash Smith
 layout: post
 permalink: /2014/12/simple-magento2-controller-module/

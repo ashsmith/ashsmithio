@@ -1,5 +1,6 @@
 ---
 title: 'Magento 2 module from scratch - Introduction'
+description: "Magento 2 developer guide to creating a blog module from scratch"
 author: Ash Smith
 layout: post
 permalink: /magento2/module-from-scratch-introduction

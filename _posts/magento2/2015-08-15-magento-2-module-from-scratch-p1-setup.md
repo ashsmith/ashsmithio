@@ -1,5 +1,6 @@
 ---
 title: 'Magento 2 module from scratch - Part 1: Module Setup'
+description: "Developer guide to setting up your first Magento 2 module"
 author: Ash Smith
 layout: post
 permalink: /magento2/module-from-scratch-module-part-1-setup
