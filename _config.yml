@@ -20,4 +20,4 @@ links:
 markdown: kramdown
 highlighter: pygments
 permalink: pretty
-exclude: [ node_modules, sass, Gemfile, Gruntfile.js, package.json, README.md]
+exclude: [ node_modules, sass, Gemfile, Glupfile.js, package.json, README.md]
