@@ -1,6 +1,7 @@
 .header {
     overflow: hidden;
     border-bottom: 1px solid $light-grey;
+    width: 100%;
 }
 
 .logo {
@@ -17,7 +18,7 @@
     }
 }
 
-@media screen and (min-width: 48em) {
+@media screen and (min-width: $large-breakpoint) {
     .logo-block {
         float: left;
     }
@@ -29,7 +30,7 @@
     padding: 0;
     overflow: hidden;
 }
-@media screen and (min-width: 48em) {
+@media screen and (min-width: $large-breakpoint) {
     .nav {
         float: right;
     }

@@ -1,6 +1,10 @@
+h2.intro-text {
+    line-height: 1.5em;
+}
 .intro-text {
     font-weight: 200;
     font-size: 2.5em;
+    text-align: center;
     .intro-highlight {
         color: $primary-colour;
     }
@@ -11,7 +15,7 @@
     width: 100%;
 }
 
-@media screen and (min-width: 48em) {
+@media screen and (min-width: $large-breakpoint) {
     .intro-cta {
         width: 22rem;
     }

@@ -5,9 +5,9 @@
     margin: 0 2em;
 }
 
-@media screen and (min-width: 48em) {
+@media screen and (min-width: $large-breakpoint) {
     .wrapper {
-        width: 48em;
+        width: $large-breakpoint;
         margin: 0 auto;
     }
 
