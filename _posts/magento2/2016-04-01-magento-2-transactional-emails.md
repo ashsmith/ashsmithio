@@ -46,7 +46,7 @@ $transport = $this->_transportBuilder
     ->setReplyTo($post['email'])
     ->getTransport();
 
-    $transport->sendMessage();
+$transport->sendMessage();
 {% endhighlight %}
 
 In our constructor the `$_transportBuilder` property is the following class: `\Magento\Framework\Mail\Template\TransportBuilder`, and the `$_scopeConfig` must implement: `\Magento\Framework\App\Config\ScopeConfigInterface`.
@@ -62,7 +62,7 @@ This example is a lot more complicated, as there are a range of classes used. I'
 - `Magento\Sales\Model\EmailSenderHandler` - This handles sending emails on cron for Orders, Invoices, Shipments or Creditmemos.
 - `Magento\Sales\Model\Email\SenderBuilder` - Sends an email, and can send copies.
 - `Magento\Sales\Model\Email\Sender` - Prepares and invokes `SenderBuilder`
-- `Magento\Sales\Model\Email\Sender\OrderSender` - Inherits from `Sender,`` but adds the public method `send`. This excepts an `Order` object, based on configuration it will either send the email immediately, or it'll allow the cron to pick up the sending.
+- `Magento\Sales\Model\Email\Sender\OrderSender` - Inherits from `Sender,` but adds the public method `send`. This excepts an `Order` object, based on configuration it will either send the email immediately, or it'll allow the cron to pick up the sending.
 - `Magento\Sales\Observer\Virtual\SendEmails` - Invokes `EmailSenderHandler`.
 
 ## Replacing email transport method
