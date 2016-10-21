@@ -8,16 +8,10 @@ google_analytics: UA-10830573-3
 disqus_shortname: meteorify
 google_verify: "aFObGx6hPm-RcrM66qK0yFp-u1GSCHyHXAgt4dWRIzM"
 
-links:
-    - title: Home
-      url: /
-    # - title: About
-    #   url: /about/
-    # - title: Contact
-    #   url: /contact/
-
 # Build settings
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 permalink: pretty
-exclude: [ node_modules, sass, Gemfile, Glupfile.js, package.json, README.md]
+exclude: [ node_modules, sass, Gemfile, Gemfile.lock, Gulpfile.js, package.json, README.md, Dockerfile, docker-compose.yml, nginx.conf]
+gems:
+  - jekyll-gist
