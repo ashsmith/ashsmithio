@@ -13,7 +13,7 @@ Today we&#8217;re going to look at how you can use php to add blocks, both stati
 
 This first example shows you how to load CMS Blocks into your template files, if you&#8217;re building a template that will be used by other people, it would be best to not use this, since adding CMS Blocks means the static cms block needs to exist in the installation of the Magento site. Unless you have clear instructions, and you consider it the only way, then by all means use it at free will.
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
     echo $this->getLayout()->createBlock('cms/block')->setBlockId('contacts_text')->toHtml();
 ?>
@@ -23,7 +23,7 @@ This first example shows you how to load CMS Blocks into your template files, if
 
 This second example here shows you how to add any other block type with a specified template, this example below grabs the related products list. This example would be perfectly acceptable to use in a template that will be redistributed. However like I mentioned before you could in actual fact include this in your layout structure (XML files) rather than using it directly in your template files (phtml files)
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
     echo $this->getLayout()->createBlock('catalog/product_list_related')->setTemplate('catalog/product/list/related.phtml')->toHtml();
 ?>

@@ -32,7 +32,7 @@ This article does presume you&#8217;re using a CentOS based server, and it&#8217
 
 For the best performance results, use a dedicated server. VPS&#8217;s are great, but they do share resources and I don&#8217;t like relying on them heavily. If you expect your sites to take on a lot of traffic, go for a dedicated server, if not a VPS will be great, and very low cost too.
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 yum install mysql mysql-server
@@ -42,7 +42,7 @@ yum install mysql mysql-server
 
 As you run through the installation process for mysql note there is no root password by default. Read each step carefully. I highly recommend you set a root password, and all options should be set to yes for the optimal setup.
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 yum install nginx
 /etc/init.d/nginx start
 yum --enablerepo=remi install php-fpm php-mysql php-pdo php-common php-mcrypt php-gd php-curl php-soap
@@ -53,7 +53,7 @@ When you open up php.ini, find `cgi.fix_pathinfo` and set the value to `0`
 
 Next up we need to create our virtual host in Nginx so our site can be accessed from the web! to do this simply enter:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 vi /etc/nginx/conf.d/magentosite.conf
 {% endhighlight %}
 
@@ -129,7 +129,7 @@ Next we want to configure php-fpm to work nicely with Nginx, to do this simply o
 
 Now start php-fpm:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 service php-fpm start
 {% endhighlight %}
 
@@ -137,7 +137,7 @@ If you want to quickly test your changes before adding your magento installation
 
 Then finally restart nginx by doing service nginx restart. You can then navigate to your site followed by :8080 (e.g. http://example.com:8080/) you should now see details about your php configuration. Perfect! If you receive a 500 error, try changing the ownership of your files and folders for the root site to the nginx user. Like so:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 chown -R nginx:nginx /var/www/mysite
 {% endhighlight %}
 
@@ -146,14 +146,14 @@ Great, so you have your site working on port 8080! Now let&#8217;s get varnish i
 To install varnish simply run:
 
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 sudo yum install varnish
 {% endhighlight %}
 
 Great, now we have that installed let&#8217;s get Varnish running on port 80. This is so when we first request a page it will go through to Varnish cache first, check if a cached version exists and return that, if no cache exists it&#8217;ll pass the request to nginx, which in turn will then cache that and return it to the user.
 
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 vi /etc/sysconfig/varnish
 {% endhighlight %}
 
@@ -162,7 +162,7 @@ Now find `VARNISH_LISTEN_PORT=6081` and change it to port 80, save and close.
 Next up we want to update the default configuration for our server. We need to check what version of Varnish we have installed, as this will dictate which configuration file we need to load in. You can run the following command to find out your version:
 
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 sudo varnishd -V
 {% endhighlight %}
 
@@ -170,7 +170,7 @@ My version was 2.1.5, so I can use the first set of code below. I have both of t
 
 We&#8217;ll want to place this configuration in the following file:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 etc/varnish/default.vcl
 {% endhighlight %}
 
@@ -184,7 +184,7 @@ etc/varnish/default.vcl
 
 Now we can fire up Varnish:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 service varnish start
 {% endhighlight %}
 
@@ -197,7 +197,7 @@ Then when logged into the Magento admin head over to System > Configuration > Ad
 
 You can also make sure everything is set to run on startup with these simple commands:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 chkconfig --levels 235 mysqld on
 chkconfig --levels 235 nginx on
 chkconfig --levels 235 php-fpm on

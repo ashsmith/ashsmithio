@@ -27,13 +27,13 @@ I'll be assuming you have already setup a basic repository, and you are familiar
 ## Module structure
 Let's setup our basic module structure now:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
     etc/module.xml
     registration.php
 {% endhighlight %}
 
 In the root directory we'll want to create a composer.json file. And it should look something like this:
-{% highlight json %}
+{% highlight json linenos=table %}
     {
         "name": "ashsmith/magento2-blog",
         "description": "A simple blog module.",
@@ -59,13 +59,13 @@ In the root directory we'll want to create a composer.json file. And it should l
 {% endhighlight %}
 
 There are only a few elements to this I want to explain, as some of it may be unfamiliar to you.
-{% highlight json %}
+{% highlight json linenos=table %}
     "type": "magento2-module"
 {% endhighlight %}
 
 This defines our repo as a magento2-module, this is so when someone includes your module as a
 dependency on their Magento 2 install, composer will know what to do with it! And that brings us to the next bit
-{% highlight json %}
+{% highlight json linenos=table %}
 
     "extra": {
         "map": [
@@ -85,7 +85,7 @@ That is: everything (*) should go into the folder: `Ashsmith/Blog`. Which would 
 
 
 The first file you'll want to create is the `etc/module.xml`.
-{% highlight xml %}
+{% highlight xml linenos=table %}
     <?xml version="1.0"?>
     <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
         <module name="Ashsmith_Blog" setup_version="1.0.0" />
@@ -96,7 +96,7 @@ The first file you'll want to create is the `etc/module.xml`.
 
 Next up, we need a `registration.php` file in the root of our module. This is picked up by the Magento framework and will handle registering your module with Magento.
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
@@ -107,7 +107,7 @@ Next up, we need a `registration.php` file in the root of our module. This is pi
 
 Now, with this done our module has is setup, but it won't work within Magento just yet. We will need to enable it, then upgrade the database too. Like so:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
     bin/magento module:status # this will give us the status of each module. It'll show ours as disabled.
     bin/magento module:enable Ashsmith_Blog # this will enable our module
     bin/magento setup:upgrade # upgrade the system, essentially this will make sure any setup scripts have been run and the current module version saved to the setup_module table.

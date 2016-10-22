@@ -11,7 +11,7 @@ In this quick tip I&#8217;ll teach you how to override the meta data using Magen
 
 ### Overriding Robots Meta Tag:
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <customer_account_login>
   <reference name="head">
     <action method="setRobots">
@@ -23,7 +23,7 @@ In this quick tip I&#8217;ll teach you how to override the meta data using Magen
 
 ### Overriding the Page Title:
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <customer_account_login>
   <reference name="head">
     <action method="setTitle" translate="title">
@@ -35,7 +35,7 @@ In this quick tip I&#8217;ll teach you how to override the meta data using Magen
 
 ### Overriding the Meta Description:
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <customer_account_login>
   <reference name="head">
     <action method="setDescription" translate="title">
@@ -47,7 +47,7 @@ In this quick tip I&#8217;ll teach you how to override the meta data using Magen
 
 ### Overriding the Meta Keywords:
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <customer_account_login>
   <reference name="head">
     <action method="setKeywords" translate="title">
@@ -59,7 +59,7 @@ In this quick tip I&#8217;ll teach you how to override the meta data using Magen
 
 ### Add Rel Canonical
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <customer_account_login>
   <reference name="head">
     <action method="addLinkRel" translate="title">

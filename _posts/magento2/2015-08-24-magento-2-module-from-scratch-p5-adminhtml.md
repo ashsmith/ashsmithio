@@ -22,7 +22,7 @@ I won't be going into a huge amount of depth, but you'll be able to follow along
 
 First things first, we want to add our blog admin pages to the 'Content' menu. We can do this by creating the file: `etc/adminhtml/menu.xml`
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
@@ -49,7 +49,7 @@ Great, we have our menu items. Next, let's define some ACL rules so that admins 
 
 `etc/acl.xml`
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
     <acl>
@@ -74,7 +74,7 @@ The ACL may feel familiar to that of Magento 1.x. Because our blog belongs under
 
 So we now have our menu, and ACL configured. Let's move onwards by defining our admin routes. As we have already specified a path for our menu link we'll need to use that same convention within our routes configuration. Start by creating: `etc/adminhtml/routes.xml`
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="admin">
@@ -92,7 +92,7 @@ Now it's time to create our first controller. We'll start with making our grid!
 
 All our admin controllers live within an `Controller/Adminhtml` directory. Let's create our first: `Controller/Adminhtml/Post/Index.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Controller\Adminhtml\Post;
 
@@ -159,7 +159,7 @@ Before we dive in with our UI Components, we'll need to create our layout file: 
 
 In here we simply register our UI Component!
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="styles"/>
@@ -175,7 +175,7 @@ In here we simply register our UI Component!
 We've registered our component, so lets create it, again this is just another XML based configuration file. It's fairly beefy, as this controls adding all the components that make up our grid view. Such as columns and mass actions!
 
 `views/adminhtml/ui_component/blog_post_listing.xml`
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
@@ -613,7 +613,7 @@ In here we have used 3 custom classes.
 Under our `<dataSource>` node we defined the class: `PostGridDataProvider`. However, this doesn't
 exist. Don't worry though, this is where Dependency Injection comes in. We'll setup a virtual type, which is an alias to our resource collection. So let's create our DI configuration file: `etc/di.xml`
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Ashsmith\Blog\Api\Data\PostInterface" type="Ashsmith\Blog\Model\Post" />
@@ -654,7 +654,7 @@ The next missing class was define on our last column `is_active` we defined a cu
 
 `Model/Post/Source/IsActive.php`:
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Model\Post\Source;
 
@@ -700,7 +700,7 @@ The last class we're missing is the one we defined for our 'actions' column. Thi
 
 `Ui/Component/Listing/Column/PostActions.php`:
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Ui\Component\Listing\Column;
 
@@ -784,7 +784,7 @@ Next up, let's create our mass actions. So, we have already defined those as: De
 
 `Controller/Adminhtml/Post/MassDelete.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Controller\Adminhtml\Post;
 
@@ -848,7 +848,7 @@ class MassDelete  extends \Magento\Backend\App\Action
 
 That's our delete action done. Next up, our enable mass action: `Controller/Adminhtml/Post/MassEnable.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Controller\Adminhtml\Post;
 
@@ -910,7 +910,7 @@ class MassEnable extends \Magento\Backend\App\Action
 
 And finally the mass delete: `Controller/Adminhtml/Post/MassDisable.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Controller\Adminhtml\Post;
 
@@ -976,7 +976,7 @@ Now that we can delete, enable and disable posts with Mass Actions, it's probabl
 
 Let's start with the New action: `Controller/Adminhtml/Post/NewAction.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Controller\Adminhtml\Post;
 
@@ -1026,7 +1026,7 @@ All we do here is simply forward the request onto the edit controller!
 
 Let's create our edit action: `Controller/Adminhtml/Post/Edit.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Controller\Adminhtml\Post;
 
@@ -1134,7 +1134,7 @@ Before rendering the page, we attempt to load a record, and also check if any fo
 
 Let's create the delete action next:
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Controller\Adminhtml\Post;
 
@@ -1186,7 +1186,7 @@ Now that we have our controllers setup, let's create our layout file, and blocks
 
 `view/adminhtml/layout/blog_post_edit.xml`
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="editor"/>
@@ -1201,7 +1201,7 @@ Now that we have our controllers setup, let's create our layout file, and blocks
 Now we need to create our corresponding blocks!
 
 `Block/Adminhtml/Post/Edit.php`
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Block\Adminhtml\Post;
 
@@ -1308,7 +1308,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
 
 And the form block too: `Block/Adminhtml/Post/Edit/Form.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Block\Adminhtml\Post\Edit;
 
@@ -1439,7 +1439,7 @@ And there we have it! We're just missing the ability to save our blog posts now!
 
 `Controller/Adminhtml/Post/Save.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Controller\Adminhtml\Post;
 

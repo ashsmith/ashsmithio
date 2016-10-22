@@ -14,7 +14,7 @@ By default, these users do not possess the ability to be used as actual users yo
 
 If you're an nginx user like myself, you'll see something like this in the formentioned file:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 nginx:x:497:496:Nginx web server:/var/lib/nginx:/sbin/nologin
 {% endhighlight %}
 
@@ -34,7 +34,7 @@ Fantastic, now we have this user setup. Now we can change the password for this 
 
 To generate an SSH key for the nginx user run the following command:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 sudo -Hu nginx ssh-keygen -t rsa
 {% endhighlight %}
 

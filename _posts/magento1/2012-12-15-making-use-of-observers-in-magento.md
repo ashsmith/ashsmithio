@@ -27,7 +27,7 @@ Mage::dispatchEvent('event_name', array('data' => $data));
 
 With that we can simply do a search in all of our files to return all the events. You can run this command on Linux/Mac:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 grep -r "dispatchEvent(" /path/to/magento/install/
 {% endhighlight %}
 
@@ -47,7 +47,7 @@ Before we get started, my example below uses the `sales_order_place_before` ev
 
 We need to create a file called `Meteorify_Observerexample.xml` in `app/etc/modules`.
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <config>
     <modules>
@@ -65,7 +65,7 @@ This file allows Magento to recongise the modules existence and is where we can 
 
 We need to create the folders where our modules code will live. To do this create the following directories:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 mkdir app/code/local/Meteorify/
 mkdir app/code/local/Meteorify/Observerexample/
 mkdir app/code/local/Meteorify/Observerexample/etc
@@ -78,7 +78,7 @@ Quick explaination of the module folder structure. `Meteorify` represents the 
 
 Each module requires a file called `config.xml` this file lives in `app/code/local/Meteorify/Observerexample/etc`
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <config>
     <modules>
@@ -115,7 +115,7 @@ The main code I&#8217;d like to highlight here is contained between the `<event
 
 Now we can create our Observer and place our code inside our method we will create. To do this create a file named `Observer.php` in `app/code/local/Meteorify/Observerexample/Model` and place the following code:
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 class Meteorify_Observerexample_Model_Observer {
 

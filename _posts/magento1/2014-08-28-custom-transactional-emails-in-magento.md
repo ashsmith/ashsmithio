@@ -13,7 +13,7 @@ I always forget how to create custom transactional emails, I thought I'd throw a
 ## Step 1) Adding your template to `etc/config.xml` to register the email template.
 
 First of all, assuming you already have a basic module setup, add this into `app/code/[codePool]/[Namespace]/[Module]/etc/config.xml`
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <config>
     ...
     <global>
@@ -36,7 +36,7 @@ First of all, assuming you already have a basic module setup, add this into `app
 
 Awesome, we now have the email template setup, next up we'll need to create the email template itself. This file needs to be saved in `app/locale/[your_locale_or_en_US]/template/email/[email_template_filename].html`. The locale code is important, this allows you to create the email in multiple languages, the default locale in Magento is en_US, so saving there is a good place if you're not sure.
 
-{% highlight html %}
+{% highlight html linenos=table %}
 <!--@subject This is the subject line of the email! @-->
 <div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">
   <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
@@ -93,7 +93,7 @@ Since these templates don't support PHP directly, we can use this form accessing
 
 We have our email template configured, and recognised by Magento. Now it's time to put it all together and send the email!
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 
 // This is the template name from your etc/config.xml

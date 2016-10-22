@@ -45,7 +45,7 @@ Before we build our interface, let's decide on how the blog post table will look
 
 Ok, knowing this we can now create our interface. In our project we want to create a new file called: `Api/Data/PostInterface.php`, and inside it we want the following:
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Api\Data;
 
@@ -175,7 +175,7 @@ It also outlines all the methods we must implement! So, let's create our Model!
 
 This file goes to: `Model/Post.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php namespace Ashsmith\Blog\Model;
 
 use Ashsmith\Blog\Api\Data\PostInterface;
@@ -418,7 +418,7 @@ Furthermore, you'll notice some attributes defined at the top of our class:
 
 Now it's time to create our resource model! This goes in: `Model/ResourceModel/Post.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Model\ResourceModel;
 
@@ -610,7 +610,7 @@ Finally, we need a Collection resource model. The collection model will allow us
 
 Create a file named: `Model/ResourceModel/Post/Collection.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php namespace Ashsmith\Blog\Model\ResourceModel\Post;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection

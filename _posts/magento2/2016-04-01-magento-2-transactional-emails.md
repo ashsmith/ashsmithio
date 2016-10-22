@@ -4,8 +4,7 @@ description: "An overview of how transactional emails work in Magento 2"
 author: Ash Smith
 layout: post
 permalink: /magento2/transactional-emails-in-magento-2/
-categories:
-  - Magento Development
+categories: magento2
 share: true
 comments: true
 ---
@@ -30,7 +29,7 @@ The logic for sending emails is handled directly in the Post controller action: 
 
 The notable code is here:
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 $transport = $this->_transportBuilder
     ->setTemplateIdentifier($this->scopeConfig->getValue(self::XML_PATH_EMAIL_TEMPLATE, $storeScope))
@@ -75,7 +74,7 @@ To do this, we simply need to implement the following interface: `Magento\Framew
 
 Then in your `di.xml` you will need to specify the preference:
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Magento\Framework\Mail\TransportInterface" type="[YOUR CLASS GOES HERE]" />

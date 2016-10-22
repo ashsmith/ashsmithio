@@ -28,7 +28,7 @@ Now let&#8217;s create the files, first up is our config.xml, this is the main f
 
 Save this file to: `app/code/local/Meteorify/Customcatattrb/etc/config.xml`
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <config>
   <modules>
@@ -58,7 +58,7 @@ Next up, let&#8217;s create yet another XML file, this time it&#8217;s our file 
 
 Save this file to: `app/etc/modules/Meteorify_Customcatattrb.xml`
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <config>
   <modules>
@@ -138,7 +138,7 @@ Let&#8217;s start with our `$attribute` variable which contains an array of valu
 
 If you want to use this attribute in your template file, you can do so with the following:
 
-{% highlight php %}
+{% highlight php linenos=table %}
   <?php echo $_category->getBottomDescription() ?>
 {% endhighlight %}
 ### And that's how you create a custom category attribute

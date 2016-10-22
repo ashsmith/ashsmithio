@@ -21,7 +21,7 @@ Let's start with our controller! You may have already read my blog post on [crea
 
 Before creating our controller, we need to create a new XML configuration file: `etc/frontend/routes.xml`
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
@@ -40,7 +40,7 @@ So, let's go ahead and create our blog index, this is how we'll list our latest 
 
 Create a file called: `Controller/Index/Index.php`. This will map to: `/blog/` `/blog/index` and `/blog/index/index`.
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Controller\Index;
 
@@ -80,7 +80,7 @@ So, that's all we need from our blog/index/index controller!
 
 Let's move onto creating our Block: `Block/PostList.php` (note how it's called PostList, we can't use List, it's a reserved word in PHP).
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Block;
 
@@ -156,7 +156,7 @@ Now that we have our block, let's create our layout file, and templates!
 
 Create the file: `view/frontend/layout/blog_index_index.xml`
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
@@ -178,7 +178,7 @@ Let's move onto our actual template:
 
 Create the file `view/frontend/templates/list.phtml`:
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php /** @var $block \Ashsmith\Blog\Block\PostList */ ?>
 <h1><?php echo __('Latest Blog Posts') ?></h1>
 <ul class="blog-post-list">
@@ -208,7 +208,7 @@ The main thing to note is that `$this` is not your block anymore, it's actually 
 have access to another variable though: `$block`. That is your block!
 
 Now, as you don't actually have any blog posts yet. You will want to put some into the database manually or the time being!
-{% highlight sql %}
+{% highlight sql linenos=table %}
 INSERT INTO `ashsmith_blog_post` (`post_id`, `url_key`, `title`, `content`, `is_active`, `creation_time`, `update_time`) VALUES (NULL, 'test-1', 'test title 1', 'testing content 1', 1, '2015-08-17 22:59:00', '2015-07-17 22:59:00');
 INSERT INTO `ashsmith_blog_post` (`post_id`, `url_key`, `title`, `content`, `is_active`, `creation_time`, `update_time`) VALUES (NULL, 'test-2', 'test title 2', 'testing content 2', 1, '2015-08-17 22:59:00', '2015-07-17 22:59:00');
 {% endhighlight %}
@@ -219,7 +219,7 @@ Now that we have our list of blog posts, you'll notice the URL's are nice and fr
 
 Create: `Controller/Router.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Controller;
 
@@ -280,7 +280,7 @@ We have to follow the `\Magento\Framework\App\RouterInterface` interface, which 
 
 Right, to get this working we need to add our Router into the list of routers, this is done with `etc/frontend/di.xml`.
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Framework\App\RouterList">
@@ -302,7 +302,7 @@ Let's create our controller, block, layout and template for viewing a single blo
 
 File: `Controller/View/Index.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Controller\View;
 
@@ -349,7 +349,7 @@ We've taken a slightly different approach to last time and instead of keeping a 
 of the logic within our controller we have moved it out to a helper method.
 
 Create our helper: `Helper/Post.php`
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php namespace Ashsmith\Blog\Helper;
 
 use Magento\Framework\App\Action\Action;
@@ -433,7 +433,7 @@ class Post extends \Magento\Framework\App\Helper\AbstractHelper
 {% endhighlight %}
 
 Create our Block: `Block/PostView.php`
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\Blog\Block;
 
@@ -497,7 +497,7 @@ class PostView extends \Magento\Framework\View\Element\Template implements
 {% endhighlight %}
 
 Create our layout file: `view/frontend/layout/blog_view_index.xml`
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
@@ -510,7 +510,7 @@ Create our layout file: `view/frontend/layout/blog_view_index.xml`
 {% endhighlight %}
 
 And finally our template file: `view/frontend/templates/view.phtml`
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 /** @var $block \Ashsmith\Blog\Block\PostView */
 /** @var $post \Ashsmith\Blog\Model\Post */

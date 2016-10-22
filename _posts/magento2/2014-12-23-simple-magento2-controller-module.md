@@ -62,7 +62,7 @@ We'll start with our configuration files.
 `app/code/Ashsmith/HelloWorld/etc/module.xml`
 
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd"> 
     <module name="Ashsmith_HelloWorld" schema_version="0.0.1" setup_version="0.0.1" /> 
@@ -72,7 +72,7 @@ We'll start with our configuration files.
 This registers our module, we have no dependencies so we haven't listed any... however if your module does have a dependency then we simply change the `<module>` part of our module.xml file to look like this:
 
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 ..
 <module name="Ashsmith_HelloWorld" schema_version="0.0.1" setup_version="0.0.1"> 
     <sequence> 
@@ -88,7 +88,7 @@ Dead easy, right?
 Next up, is our frontend router configuration file. Save this to `app/code/Ashsmith/HelloWorld/etc/frontend/routes.xml`
 
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd"> 
     <router id="standard"> 
         <route id="helloworld" frontName="helloworld"> 
@@ -105,7 +105,7 @@ With our route registered, now we can create our Controller action. This is some
 File name: `app/code/Ashsmith/HelloWorld/Controller/Index/Index.php`
 
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\HelloWorld\Controller\Index;
 
@@ -152,7 +152,7 @@ Now what on earth is `$resultPageFactory`?! It's a factory object to handle the 
 ##### Side note on routing...
 It's important to note that the namespacing is important here. The full class **has** to be `Ashsmith\HelloWorld\Controller\Index\Index`. This is due to way routing is handled. Here's a section from the class `Magento\Framework\App\Router\ActionList`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 /**
  *
@@ -201,7 +201,7 @@ I want to cover Magento 2 routing in more depth at a later stage. So we'll leave
 
 We have created our controller. Let's create a block next, our file will be: `app/code/Ashsmith/HelloWorld/Block/HelloWorld.php`. Now, in this example we're not going implement any methods, so it's a pointless class really, but if we were to implement some methods, in our template we would have access to them via the `$block` variable, NOT the `$this`. `$this` now refers to the template engine, you can get to your block from it, but `$block` makes this much easier and cleaner.
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 namespace Ashsmith\HelloWorld\Block;
 class HelloWorld extends \Magento\Framework\View\Element\Template
@@ -219,7 +219,7 @@ Now let's create our layout configuration file and the template. We'll start wit
 File name: `app/code/Ashsmith/HelloWorld/view/frontend/layout/helloworld_index_index.xml`. Notice the naming convention, its our full route, this is important. On top of this we can create a `default.xml` which would be applied on every route. The customer module has a good example of this in: `app/code/Magento/Customer/view/frontend/layout`
 
 
-{% highlight xml %}
+{% highlight xml linenos=table %}
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
@@ -235,7 +235,7 @@ What we have done here is added our block to the `content` container, and set th
 
 In this file we can just put some simple text in there for now:
 
-{% highlight html %}
+{% highlight html linenos=table %}
     <h1>Hello World!</h1> 
 
 {% endhighlight %}
@@ -244,7 +244,7 @@ And that's it! Our Module is now complete!
 
 Well, not quite. It doesn't actually work! Why? Well, we need to activate manually. At the time of writing the devdocs lacked this information. It is rather simple thought. You just need to add the module to `app/etc/config.php`. In this file is an array of configuration key/value pairs. Find the `modules` key, and add our module name `Ashsmith_HelloWorld` to the end of the array.
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 return array(
     ..

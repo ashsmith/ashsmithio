@@ -39,7 +39,7 @@ So let's create our Setup class to install our database!
 
 Create a file called: `Setup/InstallSchema.php`
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php namespace Ashsmith\Blog\Setup;
 
 use Magento\Framework\Setup\InstallSchemaInterface;
@@ -95,13 +95,13 @@ If you need to check the version of your module between upgrades, you will now n
 
 Now we can head to the CLI and run the `bin/magento` command to install our database table!
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 bin/magento setup:upgrade
 {% endhighlight%}
 
 When you run this you should see something along the lines of:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
     $ bin/magento setup:db-schema:upgrade
     Schema creation/updates:
     Module 'Ashsmith_Blog':

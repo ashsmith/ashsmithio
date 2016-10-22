@@ -78,7 +78,7 @@ Paymill is a new up and coming payment provider different to that of those that 
 
 You know they&#8217;re developer focused by offering an example of how simple it is to create a payment directly on the homepage! Here is the PHP example:
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php
 $params = array(
     'amount'      => '4200',  // e.g. "4200" for 42.00 EUR

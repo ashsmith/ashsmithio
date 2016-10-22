@@ -22,13 +22,13 @@ To get started we can refer to the [documentation provided](http://devdocs.magen
 
 You can see that we can use `bin/magento` to run our unit tests:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 bin/magento dev:tests:run [--all] <test>
 {% endhighlight %}
 
 With this we can run the entire test suite (yeah, it takes a very long time), or we can specify a test suite we'd like to run, such as just the unit tests (which also takes a very long time):
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 bin/magento dev:tests:run unit
 {% endhighlight %}
 
@@ -36,7 +36,7 @@ For me, I prefer to use phpunit directly, this way you can apply a filter to onl
 
 To use phpunit directly, you need head to the test directory: `[magento2-root]/dev/tests/unit`, and run the phpunit command:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 phpunit
 {% endhighlight %}
 
@@ -52,21 +52,21 @@ To get started create: `Test/Unit/Block/PostViewTest.php`.
 
 The naming convention used here is important as this will effect which tests are loaded. So be sure to always store your unit tests within the `Test/Unit` directory.
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php namespace Ashsmith\Blog\Test\Unit\Block;
 
 class PostViewTest extends \PHPUnit_Framework_TestCase {
 
     public function testGetIdentities()
     {
-	       $this->assertTrue(false);
+        $this->assertTrue(false);
     }
 }
 {% endhighlight %}
 
 This is our first unit test, and it will not pass. Let's see how this runs:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 phpunit --filter PostViewTest
 PHPUnit 4.1.0 by Sebastian Bergmann.
 
@@ -91,7 +91,7 @@ Tests: 1, Assertions: 1, Failures: 1.
 
 It worked! Let's fix this test up, and actually test something:
 
-{% highlight php %}
+{% highlight php linenos=table %}
 <?php namespace Ashsmith\Blog\Test\Unit\Block;
 
 class PostViewTest extends \PHPUnit_Framework_TestCase {
@@ -155,7 +155,7 @@ Now we have two properties on our test class, `$this->block` and `$this->post`. 
 
 We can run our test again and see that it passes successfully:
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 phpunit --filter PostViewTest
 PHPUnit 4.1.0 by Sebastian Bergmann.
 
