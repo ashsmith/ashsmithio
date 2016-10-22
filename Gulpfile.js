@@ -1,7 +1,15 @@
 'use strict';
 
-var gulp = require('gulp'),
-    sass = require('gulp-sass');
+var
+    gulp         = require('gulp'),
+    sass         = require('gulp-sass'),
+    autoprefixer = require('gulp-autoprefixer'),
+    pixrem       = require('gulp-pixrem'),
+    concat       = require('gulp-concat'),
+    uglify       = require('gulp-uglify'),
+    browserSync  = require('browser-sync'),
+    del          = require('del'),
+    reload       = browserSync.reload;
 
 var PATHS = {
     sass: {
@@ -10,17 +18,32 @@ var PATHS = {
     }
 }
 
+gulp.task('browser-sync', function() {
+    browserSync.init(['_site/**/*'], {
+        server: {
+            baseDir: './_site'
+        }
+    });
+});
+
 // Compile scss to public/css.
 gulp.task('sass', function () {
     return gulp.src(PATHS.sass.src + '/**/*.scss')
-        .pipe(sass().on('error', sass.logError))
+        .pipe(sass({
+            outputStyle: 'compressed'
+        }).on('error', sass.logError))
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
+        .pipe(pixrem())
         .pipe(gulp.dest(PATHS.sass.dest));
 });
 
 // Listen/Watch for changes for on the fly compiling.
-gulp.task('sass:watch', function () {
-    return gulp.watch(PATHS.sass.src + '/**/*.scss', ['sass']);
+gulp.task('watch', function () {
+    gulp.watch(PATHS.sass.src + '/**/*.scss', ['sass']);
 });
 
 gulp.task("build", ['sass']);
-gulp.task("default", ['sass:watch']); // Compile on the fly by default.
+gulp.task("default", ['watch']); // Compile on the fly by default.

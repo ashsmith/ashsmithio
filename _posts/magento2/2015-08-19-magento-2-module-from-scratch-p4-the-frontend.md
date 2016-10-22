@@ -1,5 +1,5 @@
 ---
-title: 'Magento 2 module from scratch - Part 4: Frontend Controllers, Blocks and Templates'
+title: 'Magento 2 module from scratch - Part 4: Frontend'
 description: "Creating Controllers, Blocks and Templates in Magento 2, a developers guide."
 author: Ash Smith
 layout: post
@@ -7,6 +7,9 @@ permalink: /magento2/module-from-scratch-part-4-the-frontend/
 categories:
   - magento2
   - popular
+collections:
+  - "Magento 2 From Scratch"
+  - "Magentoooo"
 share: true
 comments: true
 ---
@@ -23,7 +26,8 @@ Before creating our controller, we need to create a new XML configuration file: 
 
 {% highlight xml linenos=table %}
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
         <route id="blog" frontName="blog">
             <module name="Ashsmith_Blog" />
@@ -158,7 +162,8 @@ Create the file: `view/frontend/layout/blog_index_index.xml`
 
 {% highlight xml linenos=table %}
 <?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
             <block class="Ashsmith\Blog\Block\PostList" name="blog.list" template="Ashsmith_Blog::list.phtml" />
@@ -209,8 +214,14 @@ have access to another variable though: `$block`. That is your block!
 
 Now, as you don't actually have any blog posts yet. You will want to put some into the database manually or the time being!
 {% highlight sql linenos=table %}
-INSERT INTO `ashsmith_blog_post` (`post_id`, `url_key`, `title`, `content`, `is_active`, `creation_time`, `update_time`) VALUES (NULL, 'test-1', 'test title 1', 'testing content 1', 1, '2015-08-17 22:59:00', '2015-07-17 22:59:00');
-INSERT INTO `ashsmith_blog_post` (`post_id`, `url_key`, `title`, `content`, `is_active`, `creation_time`, `update_time`) VALUES (NULL, 'test-2', 'test title 2', 'testing content 2', 1, '2015-08-17 22:59:00', '2015-07-17 22:59:00');
+INSERT INTO `ashsmith_blog_post`
+    (`post_id`, `url_key`, `title`, `content`, `is_active`, `creation_time`, `update_time`)
+    VALUES
+    (NULL, 'test-1', 'test title 1', 'testing content 1', 1, '2015-08-17 22:59:00', '2015-07-17 22:59:00');
+INSERT INTO `ashsmith_blog_post`
+    (`post_id`, `url_key`, `title`, `content`, `is_active`, `creation_time`, `update_time`)
+    VALUES
+    (NULL, 'test-2', 'test title 2', 'testing content 2', 1, '2015-08-17 22:59:00', '2015-07-17 22:59:00');
 {% endhighlight %}
 
 Now, clear cache and head to `blog/`. You will see a list of blog posts!
@@ -267,7 +278,10 @@ class Router implements \Magento\Framework\App\RouterInterface
             return null;
         }
 
-        $request->setModuleName('blog')->setControllerName('view')->setActionName('index')->setParam('post_id', $post_id);
+        $request->setModuleName('blog')
+            ->setControllerName('view')
+            ->setActionName('index')
+            ->setParam('post_id', $post_id);
         $request->setAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS, $url_key);
 
         return $this->actionFactory->create('Magento\Framework\App\Action\Forward');
@@ -282,7 +296,8 @@ Right, to get this working we need to add our Router into the list of routers, t
 
 {% highlight xml linenos=table %}
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Framework\App\RouterList">
         <arguments>
             <argument name="routerList" xsi:type="array">
@@ -499,7 +514,8 @@ class PostView extends \Magento\Framework\View\Element\Template implements
 Create our layout file: `view/frontend/layout/blog_view_index.xml`
 {% highlight xml linenos=table %}
 <?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
             <block class="Ashsmith\Blog\Block\PostView" name="blog.list" template="Ashsmith_Blog::view.phtml" />

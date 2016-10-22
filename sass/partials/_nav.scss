@@ -1,0 +1,126 @@
+$nav-background: #444444;
+.aside {
+    background-color: $nav-background;
+    a {
+        color: white;
+    }
+}
+
+.header {
+    padding: $vertical-height/2 0;
+    @include respond-to("large") {
+        padding: $vertical-height*2 0 0;
+    }
+}
+
+.icon-menu {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-left: 30px;
+    outline: 1px solid red;
+}
+
+.logo-heading {
+    margin: 0;
+
+    .logo {
+        text-decoration: none;
+        color: white;
+        &:visited {
+            color: white;
+        }
+    }
+}
+.oneliner-block {
+    margin: 0;
+    padding-top: 0;
+    color: white;
+}
+.oneliner-blocker, .logo, .logo:visited, .categories-heading {
+    color:white;
+}
+
+// Social....
+.social-block {
+    @include respond-to("large") {
+        padding-top: $vertical-height * 2;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    .social-link {
+        display: inline-block;
+        margin-right: 9px;
+    }
+
+    .social-link-item {
+        width: 26px;
+        height: 26px;
+        line-height: 26px;
+        display: block;
+        overflow: hidden;
+    }
+}
+
+.categories-heading {
+    padding: 0 $vertical-height * 2;
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.categories, .cta-block {
+    padding: $vertical-height * 2 0 0;
+}
+
+.button-contact {
+    display: block;
+    text-align: center;
+    line-height: $vertical-height * 4;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: $primary-color;
+}
+
+.categories-items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.categories-item {
+    border-bottom: 1px solid #3F3F3F;
+    box-shadow: 0px 1px 0px 0px rgba(80,80,80,0.50);
+}
+
+.categories-item-link, .categories-item-link:visited {
+    padding-left: $vertical-height * 2;
+    text-decoration: none;
+    font-weight: 300;
+    line-height: $vertical-height * 2;
+    display: block;
+    &:hover {
+        background-color: #515151;
+    }
+}
+
+.show-menu {
+    position: absolute;
+    top: 4em;
+    @media screen and (min-width: 608px) {
+        top: 3em;
+    }
+    left:0;
+    bottom: 0;
+    width: 20 * $vertical-height;
+    display: block;
+    background-color: $nav-background;
+    @include respond-to("large") {
+        position: inherit;
+    }
+}

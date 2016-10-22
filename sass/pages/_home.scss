@@ -1,41 +1,33 @@
-h2.intro-text {
-    line-height: 1.5em;
-}
 .intro-text {
-    font-weight: 200;
+    // text-align: center;
+    font-weight: 300;
     font-size: 2.5em;
-    text-align: center;
-    .intro-highlight {
-        color: $primary-colour;
+}
+
+
+.about-block {
+    display: flex;
+
+    .about-image {
+        padding: $vertical-height;
+        img {
+            max-width: 100%;
+            border-radius: $vertical-height;
+        }
     }
 
-}
-
-.intro-cta {
-    width: 100%;
-}
-
-@media screen and (min-width: $large-breakpoint) {
-    .intro-cta {
-        width: 22rem;
+    .about-text {
+        max-width: 1400px;
+        padding: $vertical-height;
+        p {
+            margin-bottom: 0;
+        }
     }
-}
-
-.posts-block {
-    margin: 3em 0;
-}
-
-.posts {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    .post-item {
-        display: block;
+    .about-heading {
+        margin: 0;
     }
 }
 
 .post-link {
-    margin: 1em 0;
-    display: block;
-    line-height: 2em;
+    line-height: 1.7rem;
 }

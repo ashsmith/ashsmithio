@@ -6,9 +6,13 @@
 {% include head.html %}
 <body>
     <div class="wrapper">
+        <aside class="aside">
         {% include header.html %}
+        </aside>
 
+        <section class="main" role="main">
         {{ content }}
+        </section>
 
         {% include footer.html %}
 

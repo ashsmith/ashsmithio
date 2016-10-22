@@ -14,8 +14,12 @@ Get dependencies:
 
 Generate the CSS with:
 
-    gulp sass:watch
+    gulp
+
+Run browser sync:
+
+    gulp browser-sync
 
 Run the site locally:
 
-    jekyll serve
+    jekyll serve --incremental

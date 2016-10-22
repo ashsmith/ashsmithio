@@ -1,6 +1,23 @@
-$light-grey: #EDEDED;
-$dark-grey: #666;
-$primary-colour: #FF7435;
-$body-text: #666;
-$primary-font: 'Open Sans', sans-serif;
-$large-breakpoint: 52em;
+$default-font-size: 16px;
+$default-font: "Open Sans";
+$default-font-family: $default-font, sans-serif;
+$primary-color: #008CB2;
+
+$vertical-height: 15px;
+
+// Breakpoints
+@mixin respond-to($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        $value: map-get($breakpoints, $breakpoint);
+
+        @media only screen and (min-width: $value) {
+            @content;
+        }
+    }
+
+    @warn "Unknown #{$breakpoint} in $breakpoints";
+}
+
+$breakpoints: (
+    "large": 68em
+);

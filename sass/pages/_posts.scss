@@ -1,11 +1,49 @@
-.hire-me {
-    margin: 3em auto;
-    width: 90%;
-    border: 1px solid $light-grey;
-    border-width: 1px 0;
+blockquote {
+    background-color: lighten($primary-color, 60%);
+    padding: $vertical-height;
+    .main .post > & {
+        margin: 0;
+        padding: $vertical-height;
+        @include respond-to("large") {
+            padding: $vertical-height $vertical-height $vertical-height $vertical-height*4;
+            margin: $vertical-height 0;
+
+        }
+    }
 }
 
-.hire-me-button {
-    width: 80%;
-    margin: 2em auto;
+.main .hire-me {
+    margin: $vertical-height*4 0 0 0;
+    padding: $vertical-height;
+    background-color: lighten($primary-color, 60);
+    text-align: center;
+
+    p {
+        margin: 0;
+    }
+
+    .hire-me-button {
+        display: block;
+        margin: $vertical-height auto 0;
+        text-decoration: none;
+        background-color: $primary-color;
+        font-size: 1.5em;
+        font-weight: 300;
+        color: white;
+        padding: $vertical-height;
+        @include respond-to("large") {
+            width: 50%;
+        }
+    }
+
+}
+
+.main .show-comments-button {
+    display: block;
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+    margin: $vertical-height 0;
+    padding: $vertical-height;
+    background-color: #f1f1f1;
 }

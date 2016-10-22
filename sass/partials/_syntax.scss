@@ -1,12 +1,46 @@
-
 .highlight {
     background-color: #F5F5F5;
     padding: 0 15px;
-    overflow: hidden;
-    border-left: 5px solid $primary-colour;
+    font-size: 12px;
+    line-height: 1.5em;
+    -webkit-text-size-adjust: 100%;
 
-    font-size: 70%;
-    line-height: 1.75em;
+
+    .main & {
+        margin: 0;
+        padding: 0;
+        max-width: auto;
+    }
+
+
+    & > pre {
+        margin: 0;
+        overflow-x: scroll;
+    }
+
+    .gutter, .code {
+        padding: $vertical-height 0;
+    }
+
+    .gutter.gl {
+        background-color: #dadada;
+        color: #808080;
+    }
+    .lineno {
+        margin: 0;
+        text-align: center;
+        padding: 0 ($vertical-height * 3)/2;
+    }
+    .code {
+        margin-left: $vertical-height;
+        width: 100%;
+
+    }
+
+    .code pre {
+        margin-left: $vertical-height;
+
+    }
 
     .c { color: #999988; font-style: italic } /* Comment */
     .err { color: #a61717; background-color: #e3d2d2 } /* Error */
@@ -68,7 +102,15 @@
     .vi { color: #008080 } /* Name.Variable.Instance */
     .il { color: #009999 } /* Literal.Number.Integer.Long */
 }
-
+.gl {
+    /* Stop line numbers being visually selected */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 // Highlight inline-code blocks!
 p > code, li > code {
     background-color: #F5F5F5;

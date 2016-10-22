@@ -1,19 +1,16 @@
 ---
-layout: default
+title: Magento 2.x Posts
+layout: category
 ---
-
-<section role="main">
-    <article role="content">
-        <h2 class="intro">
-        Magento 2 Awesomeness. Enjoy.
-        </h2>
-        <ul class="posts">
-        {% for post in site.categories.magento2 %}
-            <li>
-                <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-            </li>
-        {% endfor %}
-        </ul>
-    </article>
-</section>
+<ul class="posts">
+{% if site.categories.magento2.size > 0 %}
+    {% for post in site.categories.magento2 %}
+        <li>
+            <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+        </li>
+    {% endfor %}
+{% else %}
+Sorry, there are no posts!
+{% endif%}
+</ul>

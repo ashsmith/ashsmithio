@@ -1,18 +1,13 @@
-@import "partials/normalize";
-
-// Partials
 @import "partials/variables";
+
 @import "partials/typography";
 @import "partials/layout";
-@import "partials/header";
-@import "partials/footer";
-@import "partials/buttons";
-@import "partials/forms";
+@import "partials/nav";
+@import "partials/icons";
+
+// Syntax highlighting :)
+@import "partials/syntax";
 
 // Pages
 @import "pages/home";
 @import "pages/posts";
-@import "pages/blog";
-
-// Syntax highlighting :)
-@import "partials/syntax";

@@ -3,33 +3,29 @@ layout: default
 title: "Ash Smith - Magento Certified Developer, UK"
 description: "Certified Magento Developer, providing Magento development services in the UK."
 ---
-
-<section role="main">
+<article class="content">
     <div class="intro block-section">
         <h2 class="intro-text">
-        Hello! I'm Ash.<br />
+        Hi there! I'm Ash.<br />
         An experienced <span class="intro-highlight">Magento Developer</span>,<br />
         from Bath, United Kingdom
         </h2>
-
-        <a href="/contact/" class="button button-large button-primary intro-cta">Get in touch</a>
-
     </div>
 
-    <div class="posts-block row">
-
-        <div class="posts-recent grid-half">
-            <h4>Recent Blog Posts</h4>
-            <ul class="posts">
-            {% for post in site.posts limit:4 %}
-                <li class="post-item">
-                    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                </li>
-            {% endfor %}
-            </ul>
+    <div class="about-block">
+        <div class="about-image">
+            <img src="/images/profile-pic.jpg" />
         </div>
+        <div class="about-text">
+            <h4 class="about-heading">About me</h4>
+            <p>I'm a Magento Developer working at <a href="https://www.meanbee.com/">Meanbee</a>.
+                With over 7 years worth of Magento experience and 8 in e-commerce, I can bring a lot to the table.
+                From understanding your business requirements to delivering high-quality, well-tested code.</p>
+        </div>
+    </div>
 
-        <div class="posts-popular grid-half">
+    <div class="posts-block">
+        <div class="posts-popular">
             <h4>Popular Blog Posts</h4>
             <ul class="posts">
             {% assign popular_posts = site.categories.popular | reverse %}
@@ -40,7 +36,15 @@ description: "Certified Magento Developer, providing Magento development service
             {% endfor %}
             </ul>
         </div>
-
+        <div class="posts-recent">
+            <h4>Recent Blog Posts</h4>
+            <ul class="posts">
+            {% for post in site.posts limit:4 %}
+                <li class="post-item">
+                    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
     </div>
-
-</section>
+</div>
