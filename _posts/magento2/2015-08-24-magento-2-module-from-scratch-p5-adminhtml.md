@@ -3,7 +3,7 @@ title: 'Magento 2 module from scratch - Part 5: Adminhtml'
 description: "Developing the admin area of our Magento 2 Blog module"
 author: Ash Smith
 layout: post
-permalink: /magento2/module-from-scratch-part-5-adminhtml
+permalink: /magento2/module-from-scratch-part-5-adminhtml/
 categories:
   - magento2
   - popular

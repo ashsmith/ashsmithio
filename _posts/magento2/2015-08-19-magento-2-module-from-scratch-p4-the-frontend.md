@@ -3,7 +3,7 @@ title: 'Magento 2 module from scratch - Part 4: Frontend Controllers, Blocks and
 description: "Creating Controllers, Blocks and Templates in Magento 2, a developers guide."
 author: Ash Smith
 layout: post
-permalink: /magento2/module-from-scratch-part-4-the-frontend
+permalink: /magento2/module-from-scratch-part-4-the-frontend/
 categories:
   - magento2
   - popular

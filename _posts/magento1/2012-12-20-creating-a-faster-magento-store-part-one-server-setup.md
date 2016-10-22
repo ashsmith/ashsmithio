@@ -13,7 +13,7 @@ dsq_needs_sync:
 categories:
   - magento1
 ---
-In this series about creating a faster Magento store, I will walk you through a number of must-do things that can speed up your Magento stores dramatically. A lot of these tips are easy, and free, a few are technical and require server knowledge and are best carried out by someone who knows their way around a server.  
+In this series about creating a faster Magento store, I will walk you through a number of must-do things that can speed up your Magento stores dramatically. A lot of these tips are easy, and free, a few are technical and require server knowledge and are best carried out by someone who knows their way around a server.
 This series will go from optimising your server, and getting your initial magento install set up. I highly recommend these changes are made on a separate server, perhaps a VPS/Cloud Server. I personally use Rackspace Cloud Servers to create new servers quickly.
 
 ### What are we going to do?
@@ -59,7 +59,7 @@ vi /etc/nginx/conf.d/magentosite.conf
 
 Then modify the details below to match your needs:
 
-{% highlight nginx%}
+{% highlight nginx linenos=table %}
 server {
     listen      8080;
     server_name www.magentosite.co.uk;
@@ -190,7 +190,7 @@ service varnish start
 
 Now if you access your site again but without the port :8080 you should see your entire site working perfectly!
 
-From here you can set up your database, and install magento. Once that is done, install the following plugin:  
+From here you can set up your database, and install magento. Once that is done, install the following plugin:
 [PageCache powered by Varnish][1] this will allow you to clear the Varnish cache from within the Admin and auto-clear after saving categories/products or CMS pages. Very handy indeed.
 
 Then when logged into the Magento admin head over to System > Configuration > Advanced > System. You&#8217;ll notice a new section labeled &#8220;PageCache powered by Varnish settings&#8221; Enable the module, set the varnish port to 80, and you may also want to set the purge settings to yes, these will enable auto-purging when categories/products or CMS pages are edited. Very handy for getting your changes live before the cache expires on it&#8217;s own.
