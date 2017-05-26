@@ -15,7 +15,8 @@ pipeline {
                     echo "Uploading files to S3"
                     sh '''
                         set +x
-                        aws s3 sync _site/* s3://$AWS_S3_BUCKET/
+                        cd _site
+                        aws s3 sync . s3://$AWS_S3_BUCKET/
                     '''
                 }
 
