@@ -1,9 +1,7 @@
-ashsmithio:
-  image: ashsmith/ashsmithio
-  ports:
-    - 80
-    - 443
-  environment:
-    - VIRTUAL_HOST=ashsmith.io,www.ashsmith.io,www.ashsmith.co,ashsmith.co,www.meteorify.com,meteorify.com
-    - CERT_NAME=ashsmith.io
-    - HTTPS_METHOD=noredirect
+version: "2"
+
+services:
+    build_server:
+      build: docker/build_server
+      volumes:
+        - ./:/usr/src/app
