@@ -129,7 +129,7 @@ class Meteorify_Observerexample_Model_Observer {
     }
 
 }
-?>
+
 {% endhighlight %}
 
 ### Easy as that.
