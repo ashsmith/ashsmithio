@@ -12,6 +12,6 @@ google_verify: "aFObGx6hPm-RcrM66qK0yFp-u1GSCHyHXAgt4dWRIzM"
 markdown: kramdown
 highlighter: rouge
 permalink: pretty
-exclude: [ node_modules, sass, Gemfile, Gemfile.lock, Gulpfile.js, package.json, README.md, Dockerfile, docker-compose.yml, nginx.conf]
+exclude: [ node_modules, sass, Gemfile, Gemfile.lock, Gulpfile.js, package.json, README.md, docker-compose.yml, nginx.conf, docker, Jenkinsfile, build.sh]
 gems:
   - jekyll-gist

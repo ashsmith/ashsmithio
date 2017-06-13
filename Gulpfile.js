@@ -1,5 +1,5 @@
 'use strict';
-
+const { gulpSassError } = require('gulp-sass-error');
 var
     gulp         = require('gulp'),
     sass         = require('gulp-sass'),
@@ -9,7 +9,8 @@ var
     uglify       = require('gulp-uglify'),
     browserSync  = require('browser-sync'),
     del          = require('del'),
-    reload       = browserSync.reload;
+    reload       = browserSync.reload,
+    throwError = true;
 
 var PATHS = {
     sass: {
@@ -31,7 +32,7 @@ gulp.task('sass', function () {
     return gulp.src(PATHS.sass.src + '/**/*.scss')
         .pipe(sass({
             outputStyle: 'compressed'
-        }).on('error', sass.logError))
+        }).on('error', gulpSassError(throwError)))
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false

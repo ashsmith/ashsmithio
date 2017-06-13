@@ -138,7 +138,6 @@ class Index extends \Magento\Framework\App\Action\Action
         return $this->resultPageFactory->create();
     }
 }
-?>
 {% endhighlight %}
 
 And there it is. That's how we implement a controller action. Let's quickly talk about what is going on inside the execute method.
@@ -188,7 +187,6 @@ class ActionList
 
     ...
 }
-?>
 {% endhighlight %}
 
 What this method returns in the namespaced class it is expecting, and we can see from the parameters it passes a namespace, which when we step through the code using xDebug (requesting the page `/helloworld/index/` we see this `$namespace` is `index`. `$module` is `Ashsmith_HelloWorld`, `$area` = `null`, and `$action` = `index`.
@@ -207,7 +205,6 @@ namespace Ashsmith\HelloWorld\Block;
 class HelloWorld extends \Magento\Framework\View\Element\Template
 {
 }
-?>
 {% endhighlight %}
 
 This extends the base template view class, this is the equivalent to `Mage_Core_Block_Template` in 1.x Magento.
@@ -256,7 +253,6 @@ return array(
     )
     ...
     );
-?>
 {% endhighlight %}
 
 Some quick notes:
