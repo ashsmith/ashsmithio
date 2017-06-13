@@ -24,7 +24,7 @@ pipeline {
                     echo "Invalidating CloudFront..."
                     sh '''
                         set +x
-                        aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION --paths /*
+                        aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION --paths '/*'
                     '''
                 }
             }
