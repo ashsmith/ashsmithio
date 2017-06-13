@@ -4,12 +4,15 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Building site'
                 sh 'docker-compose build build_server'
                 sh 'docker-compose run build_server'
             }
         }
-        stage('Deploy') {
+        stage('Deploy: Production') {
+            when {
+                branch 'master'
+            }
             steps {
                 withCredentials([string(credentialsId: 'AWS_S3_BUCKET', variable: 'AWS_S3_BUCKET')]) {
                     echo "Uploading files to S3"
@@ -29,5 +32,23 @@ pipeline {
                 }
             }
         }
+        stage('Deploy: Staging') {
+                    when {
+                        branch 'develop'
+                    }
+                    steps {
+                        withCredentials([
+                            string(credentialsId: 'STAGING_AWS_S3_BUCKET', variable: 'AWS_S3_BUCKET'),
+                            string(credentialsId: 'STAGING_AWS_S3_REGION', variable: 'AWS_S3_REGION')
+                        ]) {
+                            echo "Uploading files to S3"
+                            sh '''
+                                set +x
+                                cd _site
+                                aws s3 sync --region $AWS_S3_REGION . s3://$AWS_S3_BUCKET/
+                            '''
+                        }
+                    }
+                }
     }
 }
