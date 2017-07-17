@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+
+  pre_build:
+    commands:
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
+  build:
+    commands:
+      - docker run -v $CODEBUILD_SRC_DIR:/usr/src/app 052610294463.dkr.ecr.eu-west-1.amazonaws.com/ashsmithio
+  post_build:
+    commands:
+      - aws s3 sync --region $AWS_S3_REGION . s3://$AWS_S3_BUCKET/
+      - aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION --paths '/*'
