@@ -1,0 +1,35 @@
+service: serverless-build-ashsmithio-15
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: trigger
+  region: eu-west-1
+  versionFunctions: false
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - codebuild:*
+      Resource: '*'
+
+  environment: ${file(./env.yml):defaults}
+
+functions:
+  start-build:
+    handler: handler.start_build
+    events:
+      - http:
+          path: trigger-build
+          method: POST
+
+resources:
+  Outputs:
+    TriggerEndpoint:
+      Value:
+        Fn::Join:
+          - ""
+          -
+            - https://
+            - Ref: "ApiGatewayRestApi"
+            - .execute-api.eu-west-1.amazonaws.com/${self:provider.stage}/trigger-build/
