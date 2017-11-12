@@ -176,7 +176,7 @@ Documentation is the big one though, and it will be more time consuming than any
 
 I want to do my part. I find myself working with UI Components regularly, and in theory taking the time to write up what I've learnt isn't too big of a task (provided I don't over-commit and under deliver!). I already have plans for a deeper dive into Admin UI Component, along with some practical frontend component changes/implementations. 
 
-Finally, we need to keep the conversation going. I'm on [twitter](https://twitter.com/ashsmithco), there's the comments below this post, and my inbox welcomes you too (use the <a href="https://www.urbandictionary.com/define.php?term=gurt">gurt</a> big contact me link below this post).
+Finally, we need to keep the conversation going. I'm on [twitter](https://twitter.com/ashsmithco), there's the comments below this post, and my inbox welcomes you too (use the <a href="https://www.urbandictionary.com/define.php?term=gert">gert</a> big contact me link below this post).
 
 PS, keep an eye out for videos from [MageTitans MCR](https://twitter.com/MageTitans) there were two fantastic talks touching on UI Components which will help you out massively. For me, [Maria Kern](https://twitter.com/maja_kern)'s talk mentioned a few useful Chrome extensions such as [MageSpecialist DevTools](https://chrome.google.com/webstore/detail/magespecialist-devtools-f/odbnbnenehdodpnebgldhhmicbnlmapj) which will give you information on UI Components. I honestly can't wait to try this out on Monday (it's actually got me hyped up about working on UI Components funnily enough).
 
