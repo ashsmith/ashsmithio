@@ -1,4 +1,4 @@
-FROM ruby:2.3
+FROM ruby:2.3.4
 
 #RUN apt-get install curl python-software-properties -y
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
