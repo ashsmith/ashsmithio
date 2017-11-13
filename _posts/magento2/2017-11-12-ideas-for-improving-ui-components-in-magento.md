@@ -9,16 +9,21 @@ share: true
 comments: true
 ---
 
-After attending [MageTitans MCR](https://twitter.com/MageTitans) it was abundantly clear that UI Components are a huge pain point for a lot of people! I feel the same way, and to be honest it makes me feel like a bad developer when I struggle to do (supposedly) straight forward things. Hearing the same from other developers, even from the mouths of prolific speakers, it made me realise we need to do something. I left MageTitans feeling a lot better knowing I wasn't the only one, but I also left motivated to try and do something about it. This left me with a long train journey back down to the [land of cider](https://www.youtube.com/watch?v=lzGkB6YO9Yc) with a lot to think about.
+After attending [MageTitans MCR](https://twitter.com/MageTitans) it was abundantly clear that UI Components are a huge pain point for a lot of people! I feel the same way, and to be honest it makes me feel like a bad developer when I struggle to do (supposedly) straight forward things and it ends up taking hours, or even days to achieve. 
 
-The problem of UI Components boils down to a two things for me personally.
+Hearing the same from other developers made me realise we need to do something. I left MageTitans feeling a lot better knowing I wasn't the only one, but I also left motivated to try and figure out what could be done about it. This left me with a long train journey back down to the [land of cider](https://www.youtube.com/watch?v=lzGkB6YO9Yc) with a lot to think about.
 
-1. XML Fatigue. XML is great, but when you need to figure out the exact point in the xml tree to modify a small part of a component it is incredibly difficult. child after child  after child. It's rough, it's hard to read and takes time to wrap our little minds around.
-2. Documentation. This last one hit me recently whilst working on some admin components. I was using existing components to build the functionality I needed, but there was ZERO _useful_ docs that explained and offered sampled usage. This component I constructed took me several _long_ days.
+In regards to trying to fix the problem, I believe it comes down to three core issues:
 
-Perhaps you have other issues too, such as knowing how to manipulate and inject your own data from the backend. Let me know, and we can figure out some solutions.
+**XML Fatigue**. XML is great, but when you need to modify insanely large node trees, you'll find yourself making silly mistakes or just getting lost.
 
-I believe if we can tackle these two issues we can resolve most of the frustration around Magento. Below, I'm going to break down each item a little more, and describe why it isn't working, and what we can do to resolve it. This could be a community effort, and some of this would/could be implemented by Magento themselves. Either way, we're all in it together right?
+**Documentation**. There is a lack of practical examples, and sample usage of components. I have to dig through the core, and figure out on my own how to render a simplified version of a component (i.e. stripping out parents/children).
+
+**Dev tools**. There isn't any dev tools to make the debugging of UI Components any easier, that are provided out of the box with Magento. The community efforts are great though, and I'll touch on those later. But, not everyone knows about them.
+
+Most problems comes from the above, and subpar documentation is the biggest issue of them all.
+
+I believe if we can tackle these three issues we can resolve most of the frustration around Magento's UI Components. Below, I'm going to break down each item a little more, and describe why it isn't working, and what we can do to resolve it.
 
 
 ### XML Fatigue
@@ -149,39 +154,87 @@ I don't want to sound like I'm hating on XML, it's great, but when you're faced 
 
 ### Documentation (or lack thereof)
 
-Good documentation is critical for Magento's adoption by developers. I don't work with frameworks where documentation sucks, at least not for long, because how the heck will I ever figure it out? I want to be productive, and use the platform to solve mine (or my clients) problems. Magento's history makes this difficult though (it shouldn't, but it has effected this), back in the early days (some 10 years ago now), there were no docs, there were no docs for OSCommerce either, and I'm sure it was the same for other frameworks. The community got together as Magento (and OSCommerce) solved the problem of ecommerce, and we figured it out, through StackExchange, blogs, and forums. Problem is, these days, in my eyes every framework worth its weight has good documentation. Without documentation you won't get adoption, and without that you'll die (not you personally, the platform!).
+Good documentation is critical for Magento's adoption by new developers. I don't work with frameworks where documentation sucks, at least not for long, because how the heck will I ever figure it out? So why would someone new to the framework stick with Magento? They wouldn't, they'd sooner turn to alternatives that either have the docs (Shopify perhaps), or they'll turn to familiar solutions like WooCommerce (because of WordPress).
 
-The Magento community solves this problem itself most of the time, and places like StackExchange are now our go-to resources a lot of time, along with everyone who contributes a technical blog post here and there (even if they are almost 9 months apart. Sorry). When in actual fact, so much of its content should be provided in an official format, and leave StackExchange for specific use cases. I shouldn't have to turn to stackexchange to implement an Event Observer for example, or asking how add or reorder a field to checkout
+Further to this, frameworks/CMS's should make developers productive. We're here to provide solutions to our customers needs, and we shouldn't need to bend over backwards and spend days figuring out how stuff works, especially when it's stuff we're expected to work with regularly.
 
-With this said, DevDocs has become an amazing resource, and the team behind it have done a great job (along with the community contributors!). I don't want to take anything away from that. They went from no real documentation, to having a ton. It's a fantastic step forward. Magento a huge platform, it's complex, this is taking time. I understand. But we still have a way to go before I personally will use it as my number one, go to resource.
+I don't want to rant too long, we all understand the importance of good documentation, good examples include: React, Laravel, Symfony, VueJS. They all have solid docs where I can quickly reference and do what needs to be done.
 
-For example, Laravel's documentation is my go-to for anything framework specific. Then if it turns out I need a little more hand holding on specific details than their docs provide then I turn to Google (which lands me on StackOverflow 90% of the time). Right now though, I google first. I maybe check the DevDocs every so often.
+As it stands, I don't visit DevDocs that often, and when I do it rarely provides me with the answer I needed.
 
-Coming back to UI Components, the most useful thing in the world for me is solid docs. Failing the above suggestions for XML, we need solid documentation with practical examples to fall back on.
+Coming back to UI Components. Components are re-usable and therefore they need solid documentation. Imagine a world where we could go onto any UI Component in the docs and see practical usage right there on the page. That would be amazing.
 
-As it stands documentation for existing UI Components is limited to describing the options available on a given component. Which, I have to say, it may as well not be there, because that every time I landed on the page has been useless. I end up having to read core code in order to understand it, and we've already been over the problem of XML fatigue, I'm slowly going more insane each time I do that.
+The Magento Community as a whole does a great job when it comes to blog posts, and answering questions on StackExchange etc. Which is fantastic. However, developers need a single source of truth.
 
-Need an example a good vs bad docs: [Bookmarks UI Component Docs](http://devdocs.magento.com/guides/v2.2/ui_comp_guide/components/ui-bookmarks.html) vs [VueJS List Rendering Docs](https://vuejs.org/v2/guide/list.html)
+As it stands documentation for existing UI Components is limited to describing the options available on a given component. Which, I have to say, it may as well not be there, because that every time I landed on the page has been useless. 
+
+I end up turning to the core code in order to understand the component I actually need, and well, we've already been over the problem of XML fatigue.
+
+Need an example a good vs bad docs? [Bookmarks UI Component Docs](http://devdocs.magento.com/guides/v2.2/ui_comp_guide/components/ui-bookmarks.html) vs [VueJS List Rendering Docs](https://vuejs.org/v2/guide/list.html)
 
 We need practical usage examples, not a table of it's options.
+
+### Developer tooling
+
+When I dev tools, I actually mean a toolkit that is provided out of the box. 
+
+If we had something similar to the template hints functionality that would enable us to quickly figure out what template, which JS file, and any other useful context, then I'd be incredibly happy.
+
+Alternatively, a JS debugging tool that is added to the page when we enable it via the command line would be great too. It just needs to be a nice wrapper around using pure Knockout, and the uiRegistry and a sprinkle of jQuery in order to help us get useful information out quickly. Consider the following:
+
+{% highlight js linenos=table %}
+> uiDebugger.get(jQuery('#someKnockoutComponentElement'))
+{
+    name: 'myknockoutcomponent'
+    componentClass: 'Magento_Checkout/js/view/address/checkbox',
+    template: 'Magento_Checkout/address/checkbox',
+    config: { ... }
+    parent: 'parentname',
+    children: [ ... ]
+}
+{% endhighlight %}
+
+That right there would saves us from using pure Knockout to get context, and then dig through the uiRegistry to gather additional information. In more advanced instances you You could provide useful functions to return that pure data, such as `getRawKnockoutContext()` or `getRawUIRegistryContext()`.
+
+If you're looking for something to use today:
+
+- [KnockoutJS Chrome extension](https://chrome.google.com/webstore/detail/knockoutjs-context-debugg/oddcpmchholgcjgjdnfjmildmlielhof?hl=en)
+- [MageSpecialist DevTools Chrome Extension](https://chrome.google.com/webstore/detail/magespecialist-devtools-f/odbnbnenehdodpnebgldhhmicbnlmapj) - Thanks to [Maria Kern](https://twitter.com/maja_kern)'s talk at MageTitans for pointing this one out!
+
+The KnockoutJS debugger is great, but it'll be limited in regards to Magento's UI Components in terms of useful information. The MageSpecialist DevTools extension on the other hand provides a huge amount of context in much easier to use format.
+
+We do have some documentation already on using the KnockoutJS extension, and also a little on taking advantage of uiRegistry. But organisation of the docs makes it tricky to figure out how it works.
+
+Example from dev docs below, there was no context on how/where the registry name came from (it comes from having to use the KnockoutJS context...)
+
+{% highlight js linenos=table %}
+// Admin > Products > Catalog > Add Product
+var fieldName = registry.get('product_form.product_form.product-details.container_name.name');
+{% endhighlight %}
 
 
 ## What happens next?
 
-I intend on suggesting my XML changes to Magento, and in part this post serves to hear the communities feedback, but the full discussion probably should happen on GitHub or on the forums, that's way an official proposal could be discussed and put forward, then PR's can go from there. I see them as non-breaking changes, so I can't see why it would be a bad idea. If you have an opinion on this, please reach out. I'd love to hear your thoughts and find the best solution.
+I intend on suggesting my XML changes to Magento, I also want your feedback. Maybe it's just me who thinks that `alias`, `referenceAlias`, and utilising layout handle updates more is a good idea. Maybe there's stuff I haven't thought of.
 
-I realise this alias option doesn't offer something that can be used today, and it'll be yet another thing we'd have to wait for (I also hate hearing "Oh yeah but 2.x fixes that"). In the meantime, we have documentation to fix, and further deep dive blog posts to write in order to help make UI Components seem like a not-so frightening task. Providing a central well-organised place for UI Component documentation should be the most actionable item.
+The full technical discussion probably should happen on GitHub or on the forums, that's way an official proposal could be discussed and put forward, then PR's can go from there. 
 
-Documentation is the big one though, and it will be more time consuming than anything else. There's a reason its not documented well enough at the end of the day.
+I see them as non-breaking changes, so I can't see why it would be a bad idea. If you have an opinion on this, please reach out. I'd love to hear your thoughts and find the best solution.
 
-I want to do my part. I find myself working with UI Components regularly, and in theory taking the time to write up what I've learnt isn't too big of a task (provided I don't over-commit and under deliver!). I already have plans for a deeper dive into Admin UI Component, along with some practical frontend component changes/implementations. 
+I realise this alias option doesn't offer something that can be used today, and it'll be yet another thing we'd have to wait for (I also hate hearing "Oh yeah but 2.x fixes that"). 
+
+In the meantime, we have documentation to fix, and further deep dive blog posts to write in order to help make UI Components seem like a not-so frightening task. Providing a central well-organised place for UI Component documentation should be the most actionable item though.
+
+I want to do my part. I find myself working with UI Components regularly, and I'd like to write up what I've learnt (provided I don't over-commit and under deliver!). I already have plans for a deeper dive into Admin UI Components, along with some practical frontend component changes/implementation examples. Perhaps some of this could be ported over to the devdocs.
 
 Finally, we need to keep the conversation going. I'm on [twitter](https://twitter.com/ashsmithco), there's the comments below this post, and my inbox welcomes you too (use the <a href="https://www.urbandictionary.com/define.php?term=gert">gert</a> big contact me link below this post).
 
-PS, keep an eye out for videos from [MageTitans MCR](https://twitter.com/MageTitans) there were two fantastic talks touching on UI Components which will help you out massively. For me, [Maria Kern](https://twitter.com/maja_kern)'s talk mentioned a few useful Chrome extensions such as [MageSpecialist DevTools](https://chrome.google.com/webstore/detail/magespecialist-devtools-f/odbnbnenehdodpnebgldhhmicbnlmapj) which will give you information on UI Components. I honestly can't wait to try this out on Monday (it's actually got me hyped up about working on UI Components funnily enough).
+PS, keep an eye out for videos from [MageTitans MCR](https://twitter.com/MageTitans) there were two fantastic talks touching on UI Components which will help you out massively. For me, [Maria Kern](https://twitter.com/maja_kern)'s talk mentioned a few useful Chrome extensions such as [MageSpecialist DevTools](https://chrome.google.com/webstore/detail/magespecialist-devtools-f/odbnbnenehdodpnebgldhhmicbnlmapj) which will give you information on UI Components. I honestly can't wait to try this out on Monday.
 
 I feel like I should finish this with some sort of statement we can all get behind...
 
 <img src="/images/uploads/hat.png" alt="Make UI Components Great (Again?)" title="Make UI Components Great Again" width="400"/>
 
 [This too.](https://twitter.com/philwinkle/status/929093121174134784)
+
+Sorry for the long post. Sorry if I ranted, or badly written in places. I was tired when I wrote this, I woke up tired when I proof read this, and rest of my day is being spent working on UI Components. (Yes, I am trying to get sympathy here).
