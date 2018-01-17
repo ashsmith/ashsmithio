@@ -85,11 +85,11 @@ Consider the following:
 </page>
 {%endhighlight%}
 
-The above proposed solution would the exact same as our christmas tree, and at a glance we can see we're referencing the shipping address component. We have achieved high readability, along with reduced code. Furthermore, we would not actually introduce any breaking changes in Magento by implementing this, these are merely new extension points that can be used optionally.
+The above proposed solution would be the exact same as our christmas tree, and at a glance we can see we're referencing the shipping address component. We have achieved high readability, along with reduced code. Furthermore, we would not actually introduce any breaking changes in Magento by implementing this, these are merely new extension points that can be used optionally.
 
 Coupled with good documentation (and good alias coverage from the core), developers would be able to simple changes quickly, without too much hassle.
 
-If you're wondering about the alias path attribute, and what makes it up, to me it takes a fairly simple approach to referencing nodes: if the node we're specifying has a name attribute, we use the name, otherwise we use the node itself. In this case see: `checkout.root/arguments/jsLayout` is actually: `<referenceBlock name=checkout.root><arguments><argument name=jsLayout>`. This will mean `referenceContainer`, `referenceBlock`, `argument`, `item` nodes are all referenced by their name attribute, and the `arguments` node has no attributes to reference by so we simply use the nodes name.
+If you're wondering about the alias path attribute, and what makes it up, to me it takes a fairly simple approach to referencing nodes: if the node we're specifying has a name attribute, we use the name, otherwise we use the node itself. In this case see: `checkout.root/arguments/jsLayout` is actually: `<referenceBlock name=checkout.root><arguments><argument name=jsLayout>`. This will mean `referenceContainer`, `referenceBlock`, `argument`, `item` nodes are all referenced by their name attribute, and the `arguments` node has no attributes to be referenced by so we simply use the nodes name.
 
 An alternative approach could be introduce a new (optional) attribute to the `item` node whereby we can specify this alias name. eg: `<item name="shippingAddress" alias="checkout_step_shipping_address" xsi:type="array">` then use `<referenceAlias name="">` as before. This would skip the node tree path option, but would make it impractical for developers to introduce, we'd be at the mercy of core developers. 
 
@@ -97,7 +97,7 @@ This approach should also apply to UI Component XML within the Admin. These are 
 
 Splitting large XML Files.
 
-Who in their right mind would want to open up a [446 line file](https://github.com/magento/magento2/blob/2.2-develop/app/code/Magento/Checkout/view/frontend/layout/checkout_index_index.xml) and make changes. Not me! 
+Who in their right mind would want to open up a [446 line XML file](https://github.com/magento/magento2/blob/2.2-develop/app/code/Magento/Checkout/view/frontend/layout/checkout_index_index.xml) and make changes. Not me! 
 
 If we split these XML layout files up, we can reduce them down to digestible chunks, then simply extend/rewrite the appropriate layout file. Within layout XML this is already possible, and something we can do today. It's simple:
 
