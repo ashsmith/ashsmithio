@@ -6,7 +6,8 @@ layout: category
 {% if site.categories.laravel.size > 0%}
     {% for post in site.categories.laravel %}
         <li>
-            <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            <h3><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h3>
+            <p>{{ post.short_description | default: post.description }}</p>
             <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
         </li>
     {% endfor %}
