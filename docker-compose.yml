@@ -1,7 +1,17 @@
 version: "2"
 
 services:
-    build_server:
-      build: docker/build_server
+    # build_server:
+    #   build: docker/build_server
+    #   volumes:
+    #     - ./:/usr/src/app
+    jekyll:
+      build: docker/jekyll
+      volumes:
+        - ./:/usr/src/app
+      ports:
+        - 4000:4000
+    node:
+      build: docker/node
       volumes:
         - ./:/usr/src/app

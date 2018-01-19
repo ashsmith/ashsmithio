@@ -2,24 +2,27 @@
 
 ## Requirements:
 
+- Docker
 - Jekyll
 - Gulp
 - Sass
 
 ## Get running:
 
-Get dependencies:
+    docker-compose up -d
 
-    npm install
+This launches two containers by default: the jekyll server, and also runs the gulp watch task on the node container. Port 4000 will be exposed for viewing the website.
 
-Generate the CSS with:
+If you're on Mac I recommend using the latest release of Docker for Mac, as this improves performances (and I know it works!!)
 
-    gulp
+## Build server
 
-Run browser sync:
+The website is deployed via AWS CodeBuild, to generate the site and build assets for production the docker image you'll need to build the image first:
 
-    gulp browser-sync
+    docker build -t build_server docker/build_server
 
-Run the site locally:
+Then you can test it with:
 
-    jekyll serve --incremental
+    docker run -v ./:/usr/src/app build_server
+
+For more info on the deployment process refer to `buildspec.yml`.
