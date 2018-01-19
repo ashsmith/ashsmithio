@@ -1,8 +1,2 @@
-_site
 node_modules
 npm-debug.log
-css
-.sass-cache
-_drafts
-_ssl
-.jekyll-metadata
