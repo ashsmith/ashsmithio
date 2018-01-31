@@ -1,26 +1,67 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components';
+import {styleScheme, calcSize} from '../../config';
 
 
-const PageHeading = styled.h3`
+const HeaderNav = styled.nav`
+    display: inline-block;
+    max-height: 36px;
+`;
+const NavLink = styled(Link)`
+    display: inline-block;
+    width: 36px;
+    max-width: 36px;
+    height: 36px;
+    margin-right: 24px;
+    background-color: ${styleScheme.primaryColor};
+    &:last-child {
+        margin-right: 0;
+    }
+
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &:hover {
+        background-color: #1443b8;
+    }
+`;
+
+const WebsiteTitle = styled.h4`
+    display: inline-block;
+    vertical-align: top;
+    font-size: 20px;
+    line-height: 36px;
+    font-weight: 700;
+    padding: 0;
     margin: 0;
+    margin-right: 1.5rem;
+    a {
+        color: inherit;
+        span {
+            font-weight: normal;
+        }
+    }
+`
+
+const HeaderWrapper = styled.div`
+    margin-bottom: 8rem;
+    margin-left: 4rem;
 `;
 
 class Header extends React.Component {
     render() {
         return (
-            <header>
-                <PageHeading><Link
-            style={{
-              boxShadow: 'none',
-              textDecoration: 'none',
-              color: 'inherit',
-            }}
-            to={'/'}
-          >Ash Smith</Link></PageHeading>
-                <h5>Freelance Certified Magento Developer</h5>
-            </header>
+            <HeaderWrapper>
+                {(<WebsiteTitle><Link to={"/"}>Ash Smith</Link></WebsiteTitle>)}
+                <HeaderNav>
+                    <NavLink to={'/'}>Twitter</NavLink>
+                    <NavLink to={'/'}>GitHub</NavLink>
+                    <NavLink to={'/'}>CommerceHero</NavLink>
+                    <NavLink to={'/'}>StackOverflow</NavLink>
+                </HeaderNav>
+            </HeaderWrapper>
         )
     }
 }
