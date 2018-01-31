@@ -1,11 +1,11 @@
-FROM ruby:2.3.4
+FROM node:9
 
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
-RUN apt-get install nodejs -y
-RUN npm install --global gulp
+RUN npm install --global gatsby-cli
 
 COPY build.sh /build.sh
 
 WORKDIR /usr/src/app
 
 ENTRYPOINT /build.sh
+
+CMD ["gatsby", "build"]

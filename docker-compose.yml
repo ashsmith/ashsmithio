@@ -5,13 +5,14 @@ services:
     #   build: docker/build_server
     #   volumes:
     #     - ./:/usr/src/app
-    jekyll:
-      build: docker/jekyll
-      volumes:
-        - ./:/usr/src/app
-      ports:
-        - 4000:4000
     node:
       build: docker/node
       volumes:
-        - ./:/usr/src/app
+        - ./blog:/usr/src/app
+    gatsby:
+      build: docker/node
+      volumes:
+        - ./blog:/usr/src/app
+      command: gatsby develop -H 0.0.0.0 -p 8000
+      ports:
+        - "8000:8000"
