@@ -21,7 +21,7 @@ module.exports.start_build = (event, context, callback) => {
     projectName = process.env.BUILD_PROJECT;
   }
 
-  if (!githubEvent.ref.indexOf('/develop') || !githubEvent.ref.indexOf('/master')) {
+  if (githubEvent.ref.indexOf('/develop') === -1 && !githubEvent.ref.indexOf('/master') === -1) {
     return callback(null, {
       statusCode: 200,
       body: JSON.stringify({ "message": "Skipped build for feature branch." })
