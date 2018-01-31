@@ -21,6 +21,13 @@ module.exports.start_build = (event, context, callback) => {
     projectName = process.env.BUILD_PROJECT;
   }
 
+  if (!githubEvent.ref.indexOf('/develop') || !githubEvent.ref.indexOf('/master')) {
+    return callback(null, {
+      statusCode: 200,
+      body: JSON.stringify({ "message": "Skipped build for feature branch." })
+    });
+  }
+
   // CodeBuild params
   var params = {
     projectName: projectName,
@@ -40,7 +47,7 @@ module.exports.start_build = (event, context, callback) => {
 
   callback(null, {
       statusCode: 200,
-      body: JSON.stringify({ "message": "Sucess!" })
+      body: JSON.stringify({ "message": "Success!" })
     });
 
 }
