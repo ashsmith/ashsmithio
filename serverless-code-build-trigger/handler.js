@@ -21,33 +21,32 @@ module.exports.start_build = (event, context, callback) => {
     projectName = process.env.BUILD_PROJECT;
   }
 
-  if (githubEvent.ref.indexOf('/develop') === -1 && !githubEvent.ref.indexOf('/master') === -1) {
-    return callback(null, {
-      statusCode: 200,
-      body: JSON.stringify({ "message": "Skipped build for feature branch." })
-    });
-  }
-
   // CodeBuild params
   var params = {
     projectName: projectName,
     sourceVersion: sha
   };
 
-  // start the codebuild process for this project
-  codebuild.startBuild(params, function(err, data) {
+  var shouldTriggerCodeBuild = githubEvent.ref.indexOf('/develop') !== -1 || githubEvent.ref.indexOf('/master') !== -1;
+  if (shouldTriggerCodeBuild) {
 
-    if (err) {
-      console.log(err, err.stack);
-      callback(err);
-    } else {
-      var build = data.build;
-    }
-  });
+    codebuild.startBuild(params, function(err, data) {
+
+      if (err) {
+        console.log(err, err.stack);
+        callback(err);
+      } else {
+        var build = data.build;
+      }
+    });
+
+  }
+
+  let message = shouldTriggerCodeBuild ? 'CodeBuild triggered successfully.': 'Feature Branch detected. Skipping CodeBuild.';
 
   callback(null, {
       statusCode: 200,
-      body: JSON.stringify({ "message": "Success!" })
+      body: JSON.stringify({ "message": message })
     });
 
 }
