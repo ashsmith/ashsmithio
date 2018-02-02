@@ -233,7 +233,7 @@ PS, keep an eye out for videos from [MageTitans MCR](https://twitter.com/MageTit
 
 I feel like I should finish this with some sort of statement we can all get behind...
 
-<a href="./hat.png" title="Make UI Components Great Again" width="400">Make UI Components Great Again</a>. Yeah, that'll do.
+"Make UI Components Great Again". Yeah, that'll do.
 
 [This too.](https://twitter.com/philwinkle/status/929093121174134784)
 
