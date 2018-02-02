@@ -28,12 +28,15 @@ const PostDate = styled.p`color: #9F9F9F; font-size: ${14/16}rem;margin:0;`
 const BlogTitle = styled.h1`font-size: 2.5rem;`;
 
 const PostContainer = styled.div`
-  padding: 0 4rem 4rem;
   margin-bottom: 4rem;
   border-bottom: 1px solid #F1F1F1;
 
   & p:last-child {
     margin: 0;
+  }
+
+  @media (min-width: 700px) {
+    padding: 0 4rem 4rem;
   }
 `;
 const PostNav = styled.div`

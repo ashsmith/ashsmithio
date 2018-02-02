@@ -4,9 +4,10 @@ import profilePic from './profile-pic.jpg'
 import {styleScheme, calcSize} from '../../config';
 
 const ProfilePicture = styled.img`
-align-self: center;
-border-radius: 100%;
-border: 6px solid ${styleScheme.primaryColor};
+    align-self: center;
+    border-radius: 100%;
+    border: 6px solid ${styleScheme.primaryColor};
+    max-width: 120px;
 `
 
 

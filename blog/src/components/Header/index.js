@@ -9,11 +9,11 @@ const HeaderNav = styled.nav`
     max-height: 36px;
 `;
 const NavLink = styled(Link)`
-    display: inline-block;
     width: 36px;
     max-width: 36px;
     height: 36px;
-    margin-right: 24px;
+
+    display: inline-block;
     background-color: ${styleScheme.primaryColor};
     &:last-child {
         margin-right: 0;
@@ -26,6 +26,10 @@ const NavLink = styled(Link)`
     &:hover {
         background-color: #1443b8;
     }
+
+
+        margin-right: 24px;
+
 `;
 
 const WebsiteTitle = styled.h4`
@@ -47,7 +51,9 @@ const WebsiteTitle = styled.h4`
 
 const HeaderWrapper = styled.div`
     margin-bottom: 8rem;
-    margin-left: 4rem;
+    @media (min-width: 700px) {
+        margin-left: 4rem;
+    }
 `;
 
 class Header extends React.Component {

@@ -12,12 +12,17 @@ const BlogLink = styled(Link)`
 
 const pointyHand = "👉";
 const PostItem = styled.div`
+
+
+margin: 0 0 4rem 0;
+
+
+@media (min-width: 700px) {
     display: grid;
     grid-template-columns: 36rem 1fr;
     padding: 2.8rem 4rem;
 
     &:hover {
-        background: #FFFFFF;
         box-shadow: 0 5px 15px -1px rgba(0,0,0,0.20);
         border-radius: 8px;
         grid-template-columns: 4rem 36rem 1fr;
@@ -35,6 +40,7 @@ const PostItem = styled.div`
         font-size: 2.5rem;
         align-self: center;
     }
+}
 `;
 
 const PostDate = styled.small`
@@ -48,6 +54,7 @@ const PostExcerpt = styled.p`
 `;
 
 const PostWrap = styled.p`
+    margin: 0;
     align-self: center;
 `;
 

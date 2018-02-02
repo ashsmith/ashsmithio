@@ -5,13 +5,18 @@ import ProfilePic from '../ProfilePic'
 import {styleScheme, calcSize} from '../../config';
 
 const BioWrapper = styled.div`
-  display: grid;
-  grid-template-columns: ${calcSize(112)} 1fr;
-  grid-column-gap: ${calcSize(32)};
-  padding: ${calcSize(48)} ${calcSize(64)};
-  box-shadow: 0 5px 15px -1px rgba(0,0,0,0.20);
   border-radius: ${calcSize(8)};
   margin-bottom: ${calcSize(64)};
+  text-align:center;
+
+  @media (min-width: 700px) {
+    text-align:inherit;
+    box-shadow: 0 5px 15px -1px rgba(0,0,0,0.20);
+    display: grid;
+    grid-template-columns: ${calcSize(120)} 1fr;
+    grid-column-gap: ${calcSize(32)};
+    padding: ${calcSize(48)} ${calcSize(64)};
+  }
 `;
 
 const Intro = styled.div`

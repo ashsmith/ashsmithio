@@ -15,8 +15,7 @@ const typography = new Typography({
     headerFontFamily: ["Work Sans", "sans-serif"],
     overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
         body: {
-            'margin-left': calcSize(64),
-            'margin-top': calcSize(24)
+            'margin': 0
         },
         a: {
             'color': '#3567E8',

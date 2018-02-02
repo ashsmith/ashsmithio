@@ -9,7 +9,12 @@ import ProfilePic from '../components/ProfilePic'
 import {styleScheme, calcSize} from '../config';
 
 const HeaderTitle = styled.h1`
-font-size: ${calcSize(40)};
+
+font-size: ${calcSize(35)};
+
+@media (min-width: 700px) {
+  font-size: ${calcSize(40)};
+}
 font-weight: 600;
 letter-spacing: -0.5;
 line-height: 1.25;
@@ -17,18 +22,28 @@ margin: 0;
 `
 
 const HomepageHeaderWrapper = styled.div`
-display: grid;
-grid-template-columns: ${calcSize(120)} 1fr;
-grid-column-gap: ${calcSize(32)};
-padding: 0 ${calcSize(64)} ${calcSize(96)};
-border-bottom: 1px solid ${styleScheme.borderColor};
+text-align: center;
 margin-bottom: ${calcSize(40)};
+padding-bottom: ${calcSize(96)};
+border-bottom: 1px solid ${styleScheme.borderColor};
+
+@media (min-width: 700px) {
+  text-align: inherit;
+  display: grid;
+  grid-template-columns: ${calcSize(120)} 1fr;
+  grid-column-gap: ${calcSize(32)};
+  padding-top: 0;
+  padding-left: ${calcSize(64)};
+  padding-right: ${calcSize(64)};
+}
 `
 
 
 const PostWrapper = styled.div`
-display: grid;
-grid-auto-rows: 1fr;
+@media (min-width: 700px) {
+  display: grid;
+  grid-auto-rows: 1fr;
+}
 `
 
 class BlogIndex extends React.Component {
