@@ -1,3 +1,4 @@
 #!/bin/bash
-npm install
+yarn install
+gatsby build
 exec "$@"
