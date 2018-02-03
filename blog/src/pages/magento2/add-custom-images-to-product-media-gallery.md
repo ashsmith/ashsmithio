@@ -1,6 +1,6 @@
 ---
 title: 'Adding custom images to the product media gallery.'
-date: "2018-01-2T12:00:00Z"
+date: "2018-01-02T12:00:00Z"
 description: "Magento 2 tip: Add custom images to the product media gallery"
 author: Ash Smith
 layout: post

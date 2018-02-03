@@ -53,7 +53,7 @@ const PostExcerpt = styled.p`
     margin-bottom: 0;
 `;
 
-const PostWrap = styled.p`
+const PostWrap = styled.div`
     margin: 0;
     align-self: center;
 `;
