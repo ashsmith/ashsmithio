@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="23px" height="27px" viewBox="0 0 23 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Blog" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-184.000000, -29.000000)">
+        <g id="Header" transform="translate(128.000000, 24.000000)" fill="#3567E8" fill-rule="nonzero">
+            <g id="Nav">
+                <g id="StackOverflow" transform="translate(52.000000, 0.000000)">
+                    <g id="Icon">
+                        <path d="M23.4104963,29.598125 L23.4104963,22.393625 L25.8269004,22.393625 L25.8269004,32 L4,32 L4,22.393625 L6.41187475,22.393625 L6.41187475,29.598125 L23.4104963,29.598125 Z M8.83167586,27.197375 L20.9918275,27.197375 L20.9918275,24.79325 L8.83167586,24.79325 L8.83167586,27.197375 Z M9.12495077,21.738875 L20.9918275,24.2015 L21.5025108,21.87275 L9.63789878,19.412375 L9.12495077,21.738875 Z M10.6637948,16.050875 L21.6531115,21.147125 L22.6756105,18.953375 L11.6851615,13.857125 L10.6637948,16.035125 L10.6637948,16.050875 Z M13.7380859,10.66775 L23.0424872,18.379625 L24.5813312,16.557125 L15.2780622,8.8475 L13.7494092,10.666625 L13.7380859,10.66775 Z M19.7473907,5 L17.7703328,6.45575 L25.0229421,16.13525 L27,14.6795 L19.745126,5 L19.7473907,5 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

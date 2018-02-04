@@ -2,19 +2,24 @@ import React from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components';
 import {styleScheme, calcSize} from '../../config';
-
+import twitterIcon from './twitter.svg';
+import commerceheroIcon from './commercehero.svg';
+import githubIcon from './github.svg';
+import stackoverflowIcon from './stack-overflow.svg';
 
 const HeaderNav = styled.nav`
     display: inline-block;
     max-height: 36px;
 `;
-const NavLink = styled(Link)`
+const NavLink = styled.a`
     width: 36px;
     max-width: 36px;
     height: 36px;
 
     display: inline-block;
     background-color: ${styleScheme.primaryColor};
+    mask-size: 100%;
+    mask-repeat: no-repeat;
     &:last-child {
         margin-right: 0;
     }
@@ -24,11 +29,25 @@ const NavLink = styled(Link)`
     overflow: hidden;
 
     &:hover {
-        background-color: #1443b8;
+        color: #1443b8;
     }
 
 
-        margin-right: 24px;
+    margin-right: 24px;
+
+    &.sl-twitter {
+        mask-image: url(${twitterIcon});
+    }
+    &.sl-commercehero {
+        mask-image: url(${commerceheroIcon});
+    }
+    &.sl-github {
+        mask-image: url(${githubIcon});
+    }
+    &.sl-stackoverflow {
+        mask-image: url(${stackoverflowIcon});
+        mask-size: 100% 96%;
+    }
 
 `;
 
@@ -62,10 +81,10 @@ class Header extends React.Component {
             <HeaderWrapper>
                 {(<WebsiteTitle><Link to={"/"}>Ash Smith</Link></WebsiteTitle>)}
                 <HeaderNav>
-                    <NavLink to={'/'}>Twitter</NavLink>
-                    <NavLink to={'/'}>GitHub</NavLink>
-                    <NavLink to={'/'}>CommerceHero</NavLink>
-                    <NavLink to={'/'}>StackOverflow</NavLink>
+                    <NavLink className="sl-twitter" href={'https://twitter.com/ashsmithco'} alt="Twitter">Twitter</NavLink>
+                    <NavLink className="sl-github" href={'https://github.com/ashsmith'} alt="Github">GitHub</NavLink>
+                    <NavLink className="sl-commercehero" href={'https://commercehero.io/ashsmith'} alt="CommerceHero">CommerceHero</NavLink>
+                    <NavLink className="sl-stackoverflow" href={'https://stackoverflow.com/users/614535/ash-smith'} alt="StackOverflow">StackOverflow</NavLink>
                 </HeaderNav>
             </HeaderWrapper>
         )
