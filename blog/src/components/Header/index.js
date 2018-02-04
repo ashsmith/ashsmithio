@@ -18,8 +18,9 @@ const NavLink = styled.a`
 
     display: inline-block;
     background-color: ${styleScheme.primaryColor};
-    mask-size: 100%;
+    mask-size: 26px;
     mask-repeat: no-repeat;
+    mask-position: center;
     &:last-child {
         margin-right: 0;
     }
@@ -46,7 +47,7 @@ const NavLink = styled.a`
     }
     &.sl-stackoverflow {
         mask-image: url(${stackoverflowIcon});
-        mask-size: 100% 96%;
+        mask-size: 22px 96%;
     }
 
 `;
