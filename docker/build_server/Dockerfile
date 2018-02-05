@@ -1,14 +1,9 @@
-FROM node:9
-
-RUN apt-get update && apt-get install apt-transport-https
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update && apt-get install yarn
-
+FROM node:9-alpine
 RUN npm install --global gatsby-cli
-
-COPY build.sh /build.sh
+RUN apk add vips-dev fftw-dev --update-cache --repository https://dl-3.alpinelinux.org/alpine/edge/testing/
+RUN apk add --no-cache build-base python
+COPY build.sh /usr/bin/build.sh
 
 WORKDIR /usr/src/app
 
-ENTRYPOINT /build.sh
+ENTRYPOINT sh /usr/bin/build.sh
