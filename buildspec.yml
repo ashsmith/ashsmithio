@@ -1,10 +1,10 @@
 version: 0.2
 
 phases:
-
   pre_build:
     commands:
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
+      - docker pull $DOCKER_CONTAINER
       - aws configure set preview.cloudfront true
   build:
     commands:
@@ -13,4 +13,3 @@ phases:
     commands:
       - cd blog/public && aws s3 sync --delete --region $AWS_S3_REGION ./ s3://$AWS_S3_BUCKET/
       - aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION --paths '/*'
-
