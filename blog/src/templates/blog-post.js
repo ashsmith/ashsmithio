@@ -54,7 +54,7 @@ const PostNavItem = styled.div`
 
 & a {
   font-size: ${27/16}rem;
-  font-weight: 700;
+  font-weight: 600;
 
 }
 `;
