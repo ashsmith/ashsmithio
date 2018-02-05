@@ -29,6 +29,7 @@ const BlogTitle = styled.h1`font-size: 2.5rem;`;
 
 const PostContainer = styled.div`
   margin-bottom: 4rem;
+  padding-bottom: 4rem;
   border-bottom: 1px solid #F1F1F1;
 
   & p:last-child {
@@ -36,12 +37,14 @@ const PostContainer = styled.div`
   }
 
   @media (min-width: 700px) {
-    padding: 0 4rem 4rem;
+    padding: 0 4rem;
   }
 `;
 const PostNav = styled.div`
   margin-bottom: 4rem;
-  padding: 0 4rem;
+  @media (min-width: 700px) {
+    padding: 0 4rem;
+  }
   `;
 
 const PostNavItem = styled.div`
@@ -55,7 +58,6 @@ const PostNavItem = styled.div`
 & a {
   font-size: ${27/16}rem;
   font-weight: 600;
-
 }
 `;
 
