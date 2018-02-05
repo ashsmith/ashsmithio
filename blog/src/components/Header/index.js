@@ -57,7 +57,7 @@ const WebsiteTitle = styled.h4`
     vertical-align: top;
     font-size: 20px;
     line-height: 36px;
-    font-weight: 700;
+    font-weight: 600;
     padding: 0;
     margin: 0;
     margin-right: 1.5rem;
