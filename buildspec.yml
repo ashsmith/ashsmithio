@@ -8,7 +8,7 @@ phases:
       - aws configure set preview.cloudfront true
   build:
     commands:
-      - docker run -v $CODEBUILD_SRC_DIR/blog:/usr/src/app $DOCKER_CONTAINER
+      - docker run -v $CODEBUILD_SRC_DIR/blog:/usr/src/app -v /usr/local/share/.cache/yarn/v1:/usr/local/share/.cache/yarn/v1 $DOCKER_CONTAINER
   post_build:
     commands:
       - cd blog/public && aws s3 sync --delete --region $AWS_S3_REGION ./ s3://$AWS_S3_BUCKET/
