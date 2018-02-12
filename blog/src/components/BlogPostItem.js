@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link'
 import styled from 'styled-components';
+const _ = require('lodash')
 
 const BlogLink = styled(Link)`
     font-size: 1.6875rem;
@@ -88,7 +89,8 @@ class BlogPostItem extends React.Component
                 <PostDate>Posted on {this.props.date}</PostDate>
                 <PostTitle><BlogLink to={this.props.slug}>{this.props.title}</BlogLink></PostTitle>
             </PostWrap>
-                <Tags>{this.props.category}</Tags>
+                {this.props.category !== null && (<Tags><Link to={'/' + _.toLower(this.props.category.replace(/\s/g, '')) + '/'}>{this.props.category}</Link></Tags>)}
+                
         </PostItem>
         );
     }

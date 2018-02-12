@@ -7,7 +7,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
 
   return new Promise((resolve, reject) => {
-    const blogPost = path.resolve('./src/templates/blog-post.js')
+    const blogPost = path.resolve('./src/templates/blog-post.js');
+    const categoryPage = path.resolve('./src/templates/category-page.js');
     resolve(
       graphql(
         `
@@ -20,6 +21,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                   }
                   frontmatter {
                     title
+                    category
                   }
                 }
               }
@@ -32,12 +34,16 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           reject(result.errors)
         }
 
-        // Create blog posts pages.
         const posts = result.data.allMarkdownRemark.edges;
+        const categorySet = new Set();
 
         _.each(posts, (post, index) => {
           const previous = index === posts.length - 1 ? false : posts[index + 1].node;
           const next = index === 0 ? false : posts[index - 1].node;
+
+          if (post.node.frontmatter.category) {
+            categorySet.add(post.node.frontmatter.category);
+          }
 
           createPage({
             path: post.node.fields.slug,
@@ -49,6 +55,18 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             },
           })
         })
+
+        const categoryList = Array.from(categorySet);
+        categoryList.forEach(category => {
+          return createPage({
+            path: `/${_.toLower(category.replace(/\s/g, ''))}/`,
+            component: categoryPage,
+            context: {
+              category
+            }
+          });
+        });
+
       })
     )
   })

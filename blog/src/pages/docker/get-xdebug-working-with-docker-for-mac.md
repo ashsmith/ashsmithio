@@ -5,7 +5,7 @@ description: "A quick guide on how to configure xdebug to work with Docker for M
 author: Ash Smith
 layout: post
 permalink: /docker/get-xdebug-working-with-docker-for-mac/
-catgory: "Docker"
+category: "Docker"
 comments: true
 ---
 
