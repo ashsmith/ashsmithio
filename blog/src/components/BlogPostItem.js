@@ -13,11 +13,6 @@ const BlogLink = styled(Link)`
 
 const pointyHand = "👉";
 const PostItem = styled.div`
-
-
-margin: 0 0 4rem 0;
-
-
 @media (min-width: 700px) {
     display: grid;
     grid-template-columns: 36rem 1fr;
@@ -78,6 +73,7 @@ const Tags = styled.span`
 
 const PostTitle = styled.h3`
     line-height: 1.5;
+    font-weight: 600;
 `;
 
 class BlogPostItem extends React.Component
