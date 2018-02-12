@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import "prismjs/themes/prism-okaidia.css";
 import "../fonts/work-sans.css";
 import { calcSize } from '../config';
+import Helmet from 'react-helmet'
 
 const Wrapper = styled.div`
   max-width: ${calcSize(904)};
@@ -22,6 +23,9 @@ class Template extends React.Component {
 
     return (
       <Wrapper>
+        <Helmet>
+          <html lang="en" />
+        </Helmet>
       <Header showTitle={((this.props.location.pathname !== '/'))} />
         {children()}
       </Wrapper>
