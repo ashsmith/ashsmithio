@@ -4,6 +4,7 @@ import { Container } from 'react-responsive-grid'
 import Header from '../components/Header'
 import styled from 'styled-components';
 import "prismjs/themes/prism-okaidia.css";
+import "../fonts/work-sans.css";
 import { calcSize } from '../config';
 
 const Wrapper = styled.div`
