@@ -3,7 +3,7 @@ module.exports = {
     title: 'Ash Smith',
     author: 'Ash Smith',
     description: 'Freelance Certified Magento Developer from Bath, UK',
-    siteUrl: 'https://www.ashsmith.io/',
+    siteUrl: 'https://www.ashsmith.io',
   },
   pathPrefix: '/',
   plugins: [
@@ -114,6 +114,9 @@ module.exports = {
       options: {
         pathToConfigModule: `src/utils/typography`
       }
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`
     },
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
