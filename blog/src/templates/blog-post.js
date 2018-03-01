@@ -33,7 +33,7 @@ const PostContainer = styled.div`
   border-bottom: 1px solid #F1F1F1;
 
   & p:last-child {
-    margin: 0;
+    margin: 0 0 4rem 0;
   }
 
   @media (min-width: 700px) {

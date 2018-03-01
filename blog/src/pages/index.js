@@ -10,7 +10,7 @@ import {styleScheme, calcSize} from '../config';
 
 const HeaderTitle = styled.h1`
 
-font-size: ${calcSize(35)};
+font-size: ${calcSize(32)};
 
 @media (min-width: 700px) {
   font-size: ${calcSize(40)};
@@ -19,6 +19,12 @@ font-weight: 600;
 letter-spacing: -0.5;
 line-height: 1.25;
 margin: 0;
+
+small {
+  margin-top: 1rem;
+  display: inline-block;
+  font-size: 1.25rem;
+}
 `
 
 const HomepageHeaderWrapper = styled.div`
@@ -60,7 +66,7 @@ class BlogIndex extends React.Component {
 
         <HomepageHeaderWrapper>
           <ProfilePic />
-          <HeaderTitle>Hey, I’m Ash Smith. A Magento Developer, keen cyclist and aspiring triathlete.</HeaderTitle>
+          <HeaderTitle>I’m Ash! A Magento Developer  and keen triathlete. <small>Magento Developer @ Play Sports Network</small></HeaderTitle>
         </HomepageHeaderWrapper>
 
 

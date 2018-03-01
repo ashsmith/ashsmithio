@@ -52,7 +52,7 @@ const NavLink = styled.a`
 
 `;
 
-const WebsiteTitle = styled.h4`
+const WebsiteTitle = styled.div`
     display: inline-block;
     vertical-align: top;
     font-size: 20px;

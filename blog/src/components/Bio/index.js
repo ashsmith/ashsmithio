@@ -36,11 +36,10 @@ class Bio extends React.Component {
       <BioWrapper>
         <ProfilePic />
         <Intro>
-          <p>I'm Ash, a <strong>freelance Magento 2 Developer</strong>, keen cyclist and aspiring triathlete. 
-          With over {numToWords(experience)} years Magento experience, 
-          I have a wealth of experience with developing Magento stores.</p>
+          <p>I'm Ash, a <strong>Magento 2 Developer @ Play Sports Network</strong>, keen cyclist and aspiring triathlete. 
+          With over {numToWords(experience)} years Magento experience!</p>
 
-          <p>Need a Magento Contractor/Freelancer? <a href="mailto:hello@ashsmith.io">Contact me</a></p>
+          <p><a href="mailto:hello@ashsmith.io">Need a hand with something? Contact me</a></p>
         </Intro>
       </BioWrapper>
     )
