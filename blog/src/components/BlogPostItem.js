@@ -16,7 +16,7 @@ const PostItem = styled.div`
 @media (min-width: 700px) {
     display: grid;
     grid-template-columns: 36rem 1fr;
-    padding: 2.8rem 4rem;
+    padding: 2rem 4rem;
 
     &:hover {
         box-shadow: 0 5px 15px -1px rgba(0,0,0,0.20);
@@ -74,6 +74,7 @@ const Tags = styled.span`
 const PostTitle = styled.h3`
     line-height: 1.5;
     font-weight: 600;
+    margin-bottom: 0;
 `;
 
 class BlogPostItem extends React.Component

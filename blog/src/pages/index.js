@@ -8,6 +8,13 @@ import styled from 'styled-components';
 import ProfilePic from '../components/ProfilePic'
 import {styleScheme, calcSize} from '../config';
 
+const HeaderTitleWrapper = styled.div``;
+
+const JobTitle = styled.h2`
+font-weight: normal;
+color: ${styleScheme.secondaryColor};
+`;
+
 const HeaderTitle = styled.h1`
 
 font-size: ${calcSize(32)};
@@ -18,7 +25,8 @@ font-size: ${calcSize(32)};
 font-weight: 600;
 letter-spacing: -0.5;
 line-height: 1.25;
-margin: 0;
+margin: 0 0 0.3em 0;
+
 
 small {
   margin-top: 1rem;
@@ -66,7 +74,11 @@ class BlogIndex extends React.Component {
 
         <HomepageHeaderWrapper>
           <ProfilePic />
-          <HeaderTitle>I’m Ash! A Magento Developer  and keen triathlete. <small>Magento Developer @ Play Sports Network</small></HeaderTitle>
+          <HeaderTitleWrapper>
+          <HeaderTitle>I’m Ash! A Magento Developer  and keen triathlete.</HeaderTitle>
+          <JobTitle>Magento Developer @ Play Sports Network</JobTitle>
+          </HeaderTitleWrapper>
+          
         </HomepageHeaderWrapper>
 
 
