@@ -14,7 +14,7 @@ We all love stats right? They have almost 4.5 million followers across social me
 
 Needless to say, I'm a huge fan of the channels. I've been following GCN for a number years, and the launch of GTN last year was much welcomed as I've recently been busy training for triathlon! As far as jobs go, I'd say this is pretty close to a dream job!
 
-The main focus of my role will be on their online stores (Check out the [GCN Shop][gcnshop], which are currently on Magento 1.x, part of which is plans to upgrade to 2.x this year.
+The main focus of my role will be on their stores which sell their branded merchandise such as team kits, and branded t-shirts, hoodies and sweatshirts.
 
 Further to this, [SHIFT Active Media][shift] is their sister company, which is a full-service agency focusing on the best cycling brands in the business, so there's opportunity there to work with awesome brands too.
 
