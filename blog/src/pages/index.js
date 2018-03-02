@@ -26,13 +26,6 @@ font-weight: 600;
 letter-spacing: -0.5;
 line-height: 1.25;
 margin: 0 0 0.3em 0;
-
-
-small {
-  margin-top: 1rem;
-  display: inline-block;
-  font-size: 1.25rem;
-}
 `
 
 const HomepageHeaderWrapper = styled.div`

@@ -8,7 +8,7 @@ const BlogLink = styled(Link)`
     box-shadow: none;
     text-decoration: none;
     color: inherit;
-    line-height: 1.5rem;
+    line-height: 1.5;
 `;
 
 const pointyHand = "👉";
@@ -43,6 +43,7 @@ const PostDate = styled.small`
     color: #9F9F9F;
     display: block;
     font-size: 0.875rem;
+    margin-bottom: 0.3rem;
 `;
 
 const PostExcerpt = styled.p`
