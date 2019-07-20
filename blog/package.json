@@ -26,7 +26,7 @@
     "gatsby-source-filesystem": "^1.5.11",
     "gatsby-transformer-remark": "^1.7.28",
     "gatsby-transformer-sharp": "^1.6.16",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "react-responsive-grid": "^0.3.4",
     "styled-components": "^2.4.0",
     "typeface-merriweather": "0.0.43",
