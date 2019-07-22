@@ -6,6 +6,7 @@ import Bio from '../components/Bio'
 import BlogPostItem from '../components/BlogPostItem'
 import styled from 'styled-components';
 import ProfilePic from '../components/ProfilePic'
+import Layout from '../components/layout';
 import {styleScheme, calcSize} from '../config';
 
 const HeaderTitleWrapper = styled.div``;
@@ -60,7 +61,7 @@ class BlogIndex extends React.Component {
     const posts = get(this, 'props.data.allMarkdownRemark.edges')
 
     return (
-      <div>
+      <Layout>
         <Helmet title={siteTitle}>
         <meta name="description" content={siteDescription} />
         </Helmet>
@@ -71,20 +72,19 @@ class BlogIndex extends React.Component {
           <HeaderTitle>I’m Ash! A Magento Developer  and keen triathlete.</HeaderTitle>
           <JobTitle>Magento Developer @ Play Sports Network</JobTitle>
           </HeaderTitleWrapper>
-          
         </HomepageHeaderWrapper>
 
 
         <PostWrapper>
           {posts.map(({ node }) => {
-            return (<BlogPostItem key={node.fields.slug} 
-              slug={node.fields.slug} 
-              title={get(node, 'frontmatter.title') || node.fields.slug} 
-              date={node.frontmatter.date} 
+            return (<BlogPostItem key={node.fields.slug}
+              slug={node.fields.slug}
+              title={get(node, 'frontmatter.title') || node.fields.slug}
+              date={node.frontmatter.date}
               excerpt={node.excerpt} category={node.frontmatter.category} />)
           })}
         </PostWrapper>
-      </div>
+      </Layout>
     )
   }
 }

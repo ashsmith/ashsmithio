@@ -3,6 +3,7 @@ import GatsbyLink from "gatsby-link";
 import BlogPostItem from '../components/BlogPostItem';
 import styled from 'styled-components';
 import get from 'lodash/get'
+import { graphql } from 'gatsby';
 
 const PostWrapper = styled.div`
 @media (min-width: 700px) {
@@ -30,10 +31,10 @@ export default class CategoryTemplate extends React.Component {
                 let node = post.node;
                 console.log(post, node);
                 return (
-                    <BlogPostItem key={post.node.fields.slug} 
-                        slug={post.node.fields.slug} 
-                        title={get(post.node, 'frontmatter.title') || post.node.fields.slug} 
-                        date={post.node.frontmatter.date} 
+                    <BlogPostItem key={post.node.fields.slug}
+                        slug={post.node.fields.slug}
+                        title={get(post.node, 'frontmatter.title') || post.node.fields.slug}
+                        date={post.node.frontmatter.date}
                         excerpt={post.node.excerpt} category={post.node.frontmatter.category} />
                 );
             })}

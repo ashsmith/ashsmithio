@@ -1,7 +1,5 @@
 import React from 'react'
-import Link from 'gatsby-link'
-import { Container } from 'react-responsive-grid'
-import Header from '../components/Header'
+import Header from './Header'
 import styled from 'styled-components';
 import "prismjs/themes/prism-okaidia.css";
 import "../fonts/work-sans.css";
@@ -19,15 +17,15 @@ const Wrapper = styled.div`
 
 class Template extends React.Component {
   render() {
-    const { location, children } = this.props
+    const { children } = this.props
 
     return (
       <Wrapper>
         <Helmet>
           <html lang="en" />
         </Helmet>
-      <Header showTitle={((this.props.location.pathname !== '/'))} />
-        {children()}
+      <Header />
+        {children}
       </Wrapper>
     )
   }
