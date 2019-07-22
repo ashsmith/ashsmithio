@@ -3,7 +3,9 @@ import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import get from 'lodash/get'
 import Bio from '../components/Bio'
+import Layout from '../components/layout';
 import styled from 'styled-components';
+import { graphql } from 'gatsby';
 
 const BlogPostContent = styled.div`
 
@@ -70,7 +72,7 @@ class BlogPostTemplate extends React.Component {
     const { previous, next } = this.props.pathContext
 
     return (
-      <div>
+      <Layout>
         <Helmet title={`${post.frontmatter.title} | ${siteTitle}`}>
           <meta name="description" content={post.frontmatter.description || siteDescription} />
         </Helmet>
@@ -81,7 +83,7 @@ class BlogPostTemplate extends React.Component {
           <BlogPostContent dangerouslySetInnerHTML={{ __html: post.html }} />
         </PostContainer>
 
-        
+
         <PostNav>
           {previous && (
             <PostNavItem>
@@ -103,7 +105,7 @@ class BlogPostTemplate extends React.Component {
         </PostNav>
 
         <Bio />
-      </div>
+      </Layout>
     )
   }
 }
