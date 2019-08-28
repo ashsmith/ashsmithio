@@ -1,10 +1,9 @@
 const _ = require('lodash')
 const Promise = require('bluebird')
 const path = require('path')
-const { createFilePath } = require('gatsby-source-filesystem')
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
 
   return new Promise((resolve, reject) => {
     const blogPost = path.resolve('./src/templates/blog-post.js');
@@ -13,16 +12,12 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       graphql(
         `
           {
-            allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
+            allContentfulBlogPost(sort: {fields: date, order: DESC}) {
               edges {
                 node {
-                  fields {
-                    slug
-                  }
-                  frontmatter {
-                    title
-                    category
-                  }
+                  category
+                  permalink
+                  title
                 }
               }
             }
@@ -34,22 +29,22 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           reject(result.errors)
         }
 
-        const posts = result.data.allMarkdownRemark.edges;
+        const posts = result.data.allContentfulBlogPost.edges;
         const categorySet = new Set();
 
         _.each(posts, (post, index) => {
           const previous = index === posts.length - 1 ? false : posts[index + 1].node;
           const next = index === 0 ? false : posts[index - 1].node;
 
-          if (post.node.frontmatter.category) {
-            categorySet.add(post.node.frontmatter.category);
+          if (post.node.category) {
+            categorySet.add(post.node.category);
           }
 
           createPage({
-            path: post.node.fields.slug,
+            path: post.node.permalink,
             component: blogPost,
             context: {
-              slug: post.node.fields.slug,
+              slug: post.node.permalink,
               previous,
               next,
             },
@@ -72,15 +67,15 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   })
 }
 
-exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
-  const { createNodeField } = boundActionCreators
+// exports.onCreateNode = ({ node, actions, getNode }) => {
+//   const { createNodeField } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
-    })
-  }
-}
+//   if (node.internal.type === `ContentfulBlogPost`) {
+//     const value = createFilePath({ node, getNode })
+//     createNodeField({
+//       name: `slug`,
+//       node,
+//       value,
+//     })
+//   }
+// }

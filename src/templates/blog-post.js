@@ -66,21 +66,21 @@ const PostNavItem = styled.div`
 
 class BlogPostTemplate extends React.Component {
   render() {
-    const post = this.props.data.markdownRemark;
+    const post = this.props.data.contentfulBlogPost;
     const siteTitle = get(this.props, 'data.site.siteMetadata.title');
     const siteDescription = get(this.props, 'data.site.siteMetadata.description');
-    const { previous, next } = this.props.pathContext
+    const { previous, next } = this.props.pageContext
 
     return (
       <Layout>
-        <Helmet title={`${post.frontmatter.title} | ${siteTitle}`}>
-          <meta name="description" content={post.frontmatter.description || siteDescription} />
+        <Helmet title={`${post.title} | ${siteTitle}`}>
+          <meta name="description" content={post.description || siteDescription} />
         </Helmet>
 
         <PostContainer>
-          <PostDate>Posted on {post.frontmatter.date}</PostDate>
-          <BlogTitle>{post.frontmatter.title}</BlogTitle>
-          <BlogPostContent dangerouslySetInnerHTML={{ __html: post.html }} />
+          <PostDate>Posted on {post.date}</PostDate>
+          <BlogTitle>{post.title}</BlogTitle>
+          <BlogPostContent dangerouslySetInnerHTML={{ __html: post.content.childMarkdownRemark.html }} />
         </PostContainer>
 
 
@@ -88,8 +88,8 @@ class BlogPostTemplate extends React.Component {
           {previous && (
             <PostNavItem>
               <span>Previous Post</span>
-              <Link to={previous.fields.slug} rel="prev">
-                {previous.frontmatter.title}
+              <Link to={previous.permalink} rel="prev">
+                {previous.title}
               </Link>
             </PostNavItem>
           )}
@@ -97,8 +97,8 @@ class BlogPostTemplate extends React.Component {
           {next && (
             <PostNavItem>
               <span>Next Post</span>
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title}
+              <Link to={next.permalink} rel="next">
+                {next.title}
               </Link>
             </PostNavItem>
           )}
@@ -121,15 +121,15 @@ export const pageQuery = graphql`
         author
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    contentfulBlogPost(permalink: {eq: $slug}) {
       id
-      html
-      frontmatter {
-        title
-        comments
-        date(formatString: "Do, MMMM YYYY")
-        description
+      content {
+        childMarkdownRemark {
+          html
+        }
       }
+      title
+      date(formatString: "Do, MMMM YYYY")
     }
   }
 `

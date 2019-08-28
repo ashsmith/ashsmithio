@@ -1,5 +1,7 @@
 import React from "react";
 import GatsbyLink from "gatsby-link";
+import Layout from '../components/layout';
+import Helmet from 'react-helmet'
 import BlogPostItem from '../components/BlogPostItem';
 import styled from 'styled-components';
 import get from 'lodash/get'
@@ -19,11 +21,16 @@ margin-left: 4rem;
 export default class CategoryTemplate extends React.Component {
 
     render() {
-        const category = this.props.pathContext.category;
-        const postEdges = this.props.data.allMarkdownRemark.edges;
-        console.log(postEdges);
-        return (<div>
-            <CategoryHeading>{category}</CategoryHeading>
+        const siteTitle = get(this, 'props.data.site.siteMetadata.title')
+        const siteDescription = get(this, 'props.data.site.siteMetadata.description')
+        const category = this.props.pageContext.category;
+        const postEdges = this.props.data.allContentfulBlogPost.edges;
+        return (
+          <Layout>
+            <Helmet title={`${category} blog posts | ${siteTitle}`}>
+              <meta name="description" content={category || siteDescription} />
+            </Helmet>
+            <CategoryHeading>Posts filed under: {category}</CategoryHeading>
 
             <PostWrapper>
             {postEdges.map((post) => {
@@ -31,15 +38,15 @@ export default class CategoryTemplate extends React.Component {
                 let node = post.node;
                 console.log(post, node);
                 return (
-                    <BlogPostItem key={post.node.fields.slug}
-                        slug={post.node.fields.slug}
-                        title={get(post.node, 'frontmatter.title') || post.node.fields.slug}
-                        date={post.node.frontmatter.date}
-                        excerpt={post.node.excerpt} category={post.node.frontmatter.category} />
+                    <BlogPostItem key={post.node.permalink}
+                        slug={post.node.permalink}
+                        title={get(post.node, 'title') || post.node.permalink}
+                        date={post.node.date}
+                        category={post.node.category} />
                 );
             })}
             </PostWrapper>
-        </div>);
+        </Layout>);
 
     }
 }
@@ -47,23 +54,23 @@ export default class CategoryTemplate extends React.Component {
 /* eslint no-undef: "off"*/
 export const pageQuery = graphql`
   query CategoryPage($category: String) {
-    allMarkdownRemark(
+    site {
+      siteMetadata {
+        title
+        description
+      }
+    }
+    allContentfulBlogPost(
       limit: 1000
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { category: { eq: $category } } }
+      sort: { fields: date, order: DESC }
+      filter: { category: { eq: $category } }
     ) {
       edges {
         node {
-          fields {
-            slug
-          }
-          excerpt
-          frontmatter {
-            date(formatString: "Do, MMMM YYYY")
-            title
-            permalink
-            category
-          }
+          permalink
+          date(formatString: "Do, MMMM YYYY")
+          title
+          category
         }
       }
     }

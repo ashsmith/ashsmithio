@@ -1,3 +1,6 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 module.exports = {
   siteMetadata: {
     title: 'Ash Smith',
@@ -8,16 +11,24 @@ module.exports = {
   pathPrefix: '/',
   plugins: [
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-source-contentful`,
       options: {
-        path: `${__dirname}/src/pages`,
-        name: 'pages',
+        spaceId: `hoagspxz8z3s`,
+        // Learn about environment variables: https://gatsby.dev/env-vars
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          {
+            resolve: "gatsby-remark-embed-gist",
+            options: {
+              username: 'ashsmith',
+              includeDefaultCss: true
+            }
+          },
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
@@ -73,30 +84,31 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map(edge => {
-                return Object.assign({}, edge.node.frontmatter, {
-                  description: edge.node.excerpt,
-                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  custom_elements: [{ "content:encoded": edge.node.html }],
+            serialize: ({ query: { site, allContentfulBlogPost } }) => {
+              return allContentfulBlogPost.edges.map(edge => {
+                return Object.assign({}, {
+                  title: edge.node.title,
+                  date: edge.node.date,
+                  description: edge.node.content.childMarkdownRemark.excerpt,
+                  url: site.siteMetadata.siteUrl + edge.node.permalink,
+                  guid: site.siteMetadata.siteUrl + edge.node.permalink,
+                  custom_elements: [{ "content:encoded": edge.node.content.childMarkdownRemark.html }],
                 });
               });
             },
             query: `
               {
-                allMarkdownRemark(
-                  limit: 1000,
-                  sort: { order: DESC, fields: [frontmatter___date] }
-                ) {
+                allContentfulBlogPost(sort: {fields: date, order: DESC}) {
                   edges {
                     node {
-                      excerpt
-                      html
-                      fields { slug }
-                      frontmatter {
-                        title
-                        date
+                      permalink
+                      title
+                      date
+                      content {
+                        childMarkdownRemark {
+                          excerpt
+                          html
+                        }
                       }
                     }
                   }
