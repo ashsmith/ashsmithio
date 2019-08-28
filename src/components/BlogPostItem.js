@@ -56,8 +56,8 @@ const PostWrap = styled.div`
 `;
 
 const Tags = styled.span`
-    align-self: center; 
-    text-align:right; 
+    align-self: center;
+    text-align:right;
     color: #9F9F9F;
     font-size: ${14/16}rem;
 
@@ -88,7 +88,6 @@ class BlogPostItem extends React.Component
                 <PostTitle><BlogLink to={this.props.slug}>{this.props.title}</BlogLink></PostTitle>
             </PostWrap>
                 {this.props.category !== null && (<Tags><Link to={'/' + _.toLower(this.props.category.replace(/\s/g, '')) + '/'}>{this.props.category}</Link></Tags>)}
-                
         </PostItem>
         );
     }

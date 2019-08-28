@@ -1,4 +1,5 @@
 import React from 'react'
+import { graphql } from 'gatsby';
 import Link from 'gatsby-link'
 import get from 'lodash/get'
 import Helmet from 'react-helmet'
@@ -58,7 +59,7 @@ class BlogIndex extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
     const siteDescription = get(this, 'props.data.site.siteMetadata.description')
-    const posts = get(this, 'props.data.allMarkdownRemark.edges')
+    const posts = get(this, 'props.data.allContentfulBlogPost.edges')
 
     return (
       <Layout>
@@ -77,11 +78,10 @@ class BlogIndex extends React.Component {
 
         <PostWrapper>
           {posts.map(({ node }) => {
-            return (<BlogPostItem key={node.fields.slug}
-              slug={node.fields.slug}
-              title={get(node, 'frontmatter.title') || node.fields.slug}
-              date={node.frontmatter.date}
-              excerpt={node.excerpt} category={node.frontmatter.category} />)
+            return (<BlogPostItem key={node.permalink}
+              slug={node.permalink}
+              title={get(node, 'title') || node.permalink}
+              date={node.date} category={node.category} />)
           })}
         </PostWrapper>
       </Layout>
@@ -99,18 +99,13 @@ export const pageQuery = graphql`
         description
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allContentfulBlogPost(sort: {fields: date, order: DESC}) {
       edges {
         node {
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "Do, MMMM YYYY")
-            title
-            permalink
-            category
-          }
+          date(formatString: "Do, MMMM YYYY")
+          title
+          permalink
+          category
         }
       }
     }
