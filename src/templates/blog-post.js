@@ -10,7 +10,6 @@ import { graphql } from 'gatsby';
 const BlogPostContent = styled.div`
 
 & p code {
-  background-color: #EEE;
   padding: .25rem;
   display: inline-block;
   line-height: 1;
