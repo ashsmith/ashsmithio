@@ -26,7 +26,6 @@ const Intro = styled.div`
   }
 `;
 
-// Yes, I've been working with Magento since 2010 folks.
 var experience = (new Date()).getFullYear() - 2010;
 
 class Bio extends React.Component {
@@ -36,8 +35,8 @@ class Bio extends React.Component {
       <BioWrapper>
         <ProfilePic />
         <Intro>
-          <p>I'm Ash, a <strong>Magento 2 Developer @ Play Sports Network</strong>, keen cyclist and aspiring triathlete. 
-          With over {numToWords(experience)} years Magento experience!</p>
+          <p>I'm Ash, a <strong>Magento 2 Developer @ Play Sports Network</strong>, keen cyclist and aspiring triathlete.
+          With over {numToWords(experience)} years Magento experience.</p>
 
           <p><a href="mailto:hello@ashsmith.io">Need a hand with something? Contact me</a></p>
         </Intro>
