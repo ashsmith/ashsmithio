@@ -26,7 +26,7 @@ const BlogPostContent = styled.div`
 
 const PostDate = styled.p`color: #9F9F9F; font-size: ${14/16}rem;margin:0;`
 
-const BlogTitle = styled.h1`font-size: 2.5rem;`;
+const BlogTitle = styled.h1`font-size: 4rem; line-height: 1.25em`;
 
 const PostContainer = styled.div`
   margin-bottom: 4rem;
@@ -77,8 +77,8 @@ class BlogPostTemplate extends React.Component {
         </Helmet>
 
         <PostContainer>
-          <PostDate>Posted on {post.date}</PostDate>
           <BlogTitle>{post.title}</BlogTitle>
+          <PostDate>Posted on {post.date}</PostDate>
           <BlogPostContent dangerouslySetInnerHTML={{ __html: post.content.childMarkdownRemark.html }} />
         </PostContainer>
 

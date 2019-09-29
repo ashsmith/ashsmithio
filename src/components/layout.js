@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   margin: ${calcSize(24)} ${calcSize(32)};
 
   @media (min-width: 700px) {
-    margin-left: ${calcSize(64)};
+    margin: 0 auto;
   }
 `;
 

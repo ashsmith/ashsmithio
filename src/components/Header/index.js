@@ -70,7 +70,7 @@ const WebsiteTitle = styled.div`
 `
 
 const HeaderWrapper = styled.div`
-    margin-bottom: 8rem;
+    margin-bottom: 4rem;
     @media (min-width: 700px) {
         margin-left: 4rem;
     }

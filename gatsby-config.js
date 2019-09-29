@@ -14,14 +14,15 @@ module.exports = {
       resolve: `gatsby-source-contentful`,
       options: {
         spaceId: `hoagspxz8z3s`,
-        // Learn about environment variables: https://gatsby.dev/env-vars
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
+    `gatsby-plugin-twitter`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          `gatsby-remark-embedder`,
           {
             resolve: "gatsby-remark-embed-gist",
             options: {
@@ -55,7 +56,6 @@ module.exports = {
             },
           },
           'gatsby-remark-copy-linked-files',
-          'gatsby-remark-smartypants',
         ],
       },
     },
@@ -116,6 +116,7 @@ module.exports = {
               }
             `,
             output: "/feed.xml",
+            title: "ashsmith.io",
           },
         ],
       },
