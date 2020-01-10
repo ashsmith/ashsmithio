@@ -5,7 +5,7 @@ module.exports = {
   siteMetadata: {
     title: 'Ash Smith',
     author: 'Ash Smith',
-    description: 'Certified Magento Developer @ Play Sports Network. Bath, UK',
+    description: 'DevOps Engineer @ Play Sports Network. Bath, UK',
     siteUrl: 'https://www.ashsmith.io',
   },
   pathPrefix: '/',
