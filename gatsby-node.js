@@ -6,6 +6,7 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   return new Promise((resolve, reject) => {
+    const page = path.resolve('./src/templates/page.js');
     const blogPost = path.resolve('./src/templates/blog-post.js');
     const categoryPage = path.resolve('./src/templates/category-page.js');
     resolve(
@@ -61,6 +62,36 @@ exports.createPages = ({ graphql, actions }) => {
             }
           });
         });
+
+      })
+    );
+
+    resolve(
+      graphql(
+        `{
+          allContentfulPage {
+            nodes {
+              slug
+            }
+          }
+        }
+        `
+      ).then(result => {
+        if (result.errors) {
+          console.log(result.errors)
+          reject(result.errors)
+        }
+
+        const pages = result.data.allContentfulPage.nodes;
+        _.each(pages, (pageContent, index) => {
+          createPage({
+            path: pageContent.slug,
+            component: page,
+            context: {
+              slug: pageContent.slug,
+            },
+          })
+        })
 
       })
     )
