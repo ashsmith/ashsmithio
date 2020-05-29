@@ -70,8 +70,8 @@ class BlogIndex extends React.Component {
         <HomepageHeaderWrapper>
           <ProfilePic />
           <HeaderTitleWrapper>
-          <HeaderTitle>I’m Ash! A DevOps Engineer and keen triathlete.</HeaderTitle>
-          <JobTitle>DevOps Engineer @ Play Sports Network</JobTitle>
+          <HeaderTitle>I’m Ash! eCommerce Engineer and keen triathlete.</HeaderTitle>
+          <JobTitle>eCommerce Engineer @ Play Sports Network</JobTitle>
           </HeaderTitleWrapper>
         </HomepageHeaderWrapper>
 

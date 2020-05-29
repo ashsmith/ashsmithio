@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import numToWords from '../../utils/numberToWord'
 import ProfilePic from '../ProfilePic'
-import {styleScheme, calcSize} from '../../config';
+import { calcSize } from '../../config';
 
 const BioWrapper = styled.div`
   border-radius: ${calcSize(8)};
@@ -35,7 +35,7 @@ class Bio extends React.Component {
       <BioWrapper>
         <ProfilePic />
         <Intro>
-          <p>I'm Ash, a <strong>Magento 2 Developer @ Play Sports Network</strong>, keen cyclist and aspiring triathlete.
+          <p>I'm Ash, a <strong>eCommerce Enginer @ Play Sports Network</strong>, keen cyclist and aspiring triathlete.
           With over {numToWords(experience)} years Magento experience.</p>
 
           <p><a href="mailto:hello@ashsmith.io">Need a hand with something? Contact me</a></p>
