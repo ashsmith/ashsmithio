@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'gatsby-link'
 import styled from 'styled-components';
-const _ = require('lodash')
 
 const BlogLink = styled(Link)`
     font-size: 1.6875rem;
@@ -46,10 +45,6 @@ const PostDate = styled.small`
     margin-bottom: 0.3rem;
 `;
 
-const PostExcerpt = styled.p`
-    margin-bottom: 0;
-`;
-
 const PostWrap = styled.div`
     margin: 0;
     align-self: center;
@@ -78,19 +73,14 @@ const PostTitle = styled.h3`
     margin-bottom: 0;
 `;
 
-class BlogPostItem extends React.Component
-{
-    render() {
-        return (
+export default function BlogPostItem({ date, slug, title, category }) {
+    return (
         <PostItem>
             <PostWrap>
-                <PostDate>Posted on {this.props.date}</PostDate>
-                <PostTitle><BlogLink to={this.props.slug}>{this.props.title}</BlogLink></PostTitle>
+                <PostDate>Posted on {date}</PostDate>
+                <PostTitle><BlogLink to={slug}>{title}</BlogLink></PostTitle>
             </PostWrap>
-                {this.props.category !== null && (<Tags><Link to={'/' + _.toLower(this.props.category.replace(/\s/g, '')) + '/'}>{this.props.category}</Link></Tags>)}
+            {category !== null && (<Tags><Link to={'/' + category.replace(/\s/g, '').toLowerCase() + '/'}>{category}</Link></Tags>)}
         </PostItem>
-        );
-    }
-}
-
-export default BlogPostItem
+    );
+};

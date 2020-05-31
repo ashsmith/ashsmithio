@@ -1,10 +1,10 @@
 import React from 'react'
-import Header from './Header'
 import styled from 'styled-components';
+import Helmet from 'react-helmet';
+import Header from './Header'
 import "prismjs/themes/prism-okaidia.css";
 import "../fonts/work-sans.css";
 import { calcSize } from '../config';
-import Helmet from 'react-helmet'
 
 const Wrapper = styled.div`
   max-width: ${calcSize(904)};
@@ -15,20 +15,14 @@ const Wrapper = styled.div`
   }
 `;
 
-class Template extends React.Component {
-  render() {
-    const { children } = this.props
-
-    return (
-      <Wrapper>
-        <Helmet>
-          <html lang="en" />
-        </Helmet>
-      <Header />
-        {children}
-      </Wrapper>
-    )
-  }
-}
-
-export default Template
+export default function Template({ children }) {
+  return (
+    <Wrapper>
+      <Helmet>
+        <html lang="en" />
+      </Helmet>
+    <Header />
+      {children}
+    </Wrapper>
+  );
+};

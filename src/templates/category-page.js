@@ -1,10 +1,8 @@
 import React from "react";
-import GatsbyLink from "gatsby-link";
 import Layout from '../components/layout';
-import Helmet from 'react-helmet'
+import Helmet from 'react-helmet';
 import BlogPostItem from '../components/BlogPostItem';
 import styled from 'styled-components';
-import get from 'lodash/get'
 import { graphql } from 'gatsby';
 
 const PostWrapper = styled.div`
@@ -18,38 +16,31 @@ const CategoryHeading = styled.h1`
 margin-left: 4rem;
 `;
 
-export default class CategoryTemplate extends React.Component {
+export default function CategoryTemplate({ data, pageContext }) {
+  const {
+    site: { siteMetadata: { title, description } },
+    allContentfulBlogPost: { edges: posts }
+  } = data;
+  const { category } = pageContext;
+  return (
+    <Layout>
+      <Helmet title={`${category} blog posts | ${title}`}>
+        <meta name="description" content={category || description} />
+      </Helmet>
+      <CategoryHeading>Posts filed under: {category}</CategoryHeading>
 
-    render() {
-        const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-        const siteDescription = get(this, 'props.data.site.siteMetadata.description')
-        const category = this.props.pageContext.category;
-        const postEdges = this.props.data.allContentfulBlogPost.edges;
-        return (
-          <Layout>
-            <Helmet title={`${category} blog posts | ${siteTitle}`}>
-              <meta name="description" content={category || siteDescription} />
-            </Helmet>
-            <CategoryHeading>Posts filed under: {category}</CategoryHeading>
-
-            <PostWrapper>
-            {postEdges.map((post) => {
-
-                let node = post.node;
-                console.log(post, node);
-                return (
-                    <BlogPostItem key={post.node.permalink}
-                        slug={post.node.permalink}
-                        title={get(post.node, 'title') || post.node.permalink}
-                        date={post.node.date}
-                        category={post.node.category} />
-                );
-            })}
-            </PostWrapper>
-        </Layout>);
-
-    }
-}
+      <PostWrapper>
+      {posts.map((post) => (
+        <BlogPostItem key={post.node.permalink}
+            slug={post.node.permalink}
+            title={post.node.title || post.node.permalink}
+            date={post.node.date}
+            category={post.node.category} />
+      ))}
+      </PostWrapper>
+    </Layout>
+  );
+};
 
 /* eslint no-undef: "off"*/
 export const pageQuery = graphql`

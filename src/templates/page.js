@@ -8,23 +8,25 @@ import styled from 'styled-components';
 import { graphql } from 'gatsby';
 
 const PageContent = styled.div`
+  & p code {
+    padding: .25rem;
+    display: inline-block;
+    line-height: 1;
+  }
 
-& p code {
-  padding: .25rem;
-  display: inline-block;
-  line-height: 1;
-}
+  & .gatsby-highlight pre {
+    max-height: 150vh;
+  }
 
-& .gatsby-highlight pre {
-  max-height: 150vh;
-}
-
-& .gatsby-highlight {
-  margin-bottom: 1.75em;
-}
+  & .gatsby-highlight {
+    margin-bottom: 1.75em;
+  }
 `;
 
-const BlogTitle = styled.h1`font-size: 4rem; line-height: 1.25em`;
+const BlogTitle = styled.h1`
+  font-size: 4rem;
+  line-height: 1.25em;
+`;
 
 const PostContainer = styled.div`
   margin-bottom: 4rem;
@@ -41,32 +43,30 @@ const PostContainer = styled.div`
 `;
 
 
-class PageTemplate extends React.Component {
-  render() {
-    const page = this.props.data.contentfulPage;
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title');
-    const siteDescription = get(this.props, 'data.site.siteMetadata.description');
+export default function PageTemplate({ data }) {
+  const {
+    profileImage,
+    contentfulPage: page,
+    site: { siteMetadata: { title, description } },
+  } = data;
 
-    return (
-      <Layout>
-        <Helmet title={`${page.title} | ${siteTitle}`}>
-          <meta name="description" content={siteDescription} />
-        </Helmet>
+  return (
+    <Layout>
+      <Helmet title={`${page.title} | ${title}`}>
+        <meta name="description" content={description} />
+      </Helmet>
 
-        <PostContainer>
-          <BlogTitle>{page.title}</BlogTitle>
-          <PageContent>
-            {documentToReactComponents(page.content.json)}
-          </PageContent>
-        </PostContainer>
+      <PostContainer>
+        <BlogTitle>{page.title}</BlogTitle>
+        <PageContent>
+          {documentToReactComponents(page.content.json)}
+        </PageContent>
+      </PostContainer>
 
-        <Bio />
-      </Layout>
-    )
-  }
-}
-
-export default PageTemplate
+      <Bio profileImage={profileImage} />
+    </Layout>
+  )
+};
 
 export const pageQuery = graphql`
   query PageBySlug($slug: String!) {
@@ -83,6 +83,11 @@ export const pageQuery = graphql`
         json
       }
       title
+    }
+    profileImage: imageSharp(fixed: {originalName: {eq: "profile.jpg"}}) {
+      fixed(height: 120, width: 120) {
+        ...GatsbyImageSharpFixed_tracedSVG
+      }
     }
   }
 `

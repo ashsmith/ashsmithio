@@ -1,11 +1,10 @@
-import React from 'react'
-import Link from 'gatsby-link'
+import React from 'react';
+import Link from 'gatsby-link';
 import styled from 'styled-components';
-import {styleScheme, calcSize} from '../../config';
+import {styleScheme} from '../../config';
+
 import twitterIcon from './twitter.svg';
-import commerceheroIcon from './commercehero.svg';
 import githubIcon from './github.svg';
-import stackoverflowIcon from './stack-overflow.svg';
 
 const HeaderNav = styled.nav`
     display: inline-block;
@@ -33,21 +32,13 @@ const NavLink = styled.a`
         color: #1443b8;
     }
 
-
     margin-right: 24px;
 
     &.sl-twitter {
         mask-image: url(${twitterIcon});
     }
-    &.sl-commercehero {
-        mask-image: url(${commerceheroIcon});
-    }
     &.sl-github {
         mask-image: url(${githubIcon});
-    }
-    &.sl-stackoverflow {
-        mask-image: url(${stackoverflowIcon});
-        mask-size: 22px 96%;
     }
 
 `;
@@ -76,20 +67,16 @@ const HeaderWrapper = styled.div`
     }
 `;
 
-class Header extends React.Component {
-    render() {
-        return (
-            <HeaderWrapper>
-                {(<WebsiteTitle><Link to={"/"}>Ash Smith</Link></WebsiteTitle>)}
-                <HeaderNav>
-                    <NavLink className="sl-twitter" href={'https://twitter.com/ashsmithco'} alt="Twitter">Twitter</NavLink>
-                    <NavLink className="sl-github" href={'https://github.com/ashsmith'} alt="Github">GitHub</NavLink>
-                    <NavLink className="sl-commercehero" href={'https://commercehero.io/ashsmith'} alt="CommerceHero">CommerceHero</NavLink>
-                    <NavLink className="sl-stackoverflow" href={'https://stackoverflow.com/users/614535/ash-smith'} alt="StackOverflow">StackOverflow</NavLink>
-                </HeaderNav>
-            </HeaderWrapper>
-        )
-    }
-}
-
-export default Header;
+export default function Header() {
+    return (
+        <HeaderWrapper>
+            <WebsiteTitle>
+                <Link to={"/"}>Ash Smith</Link>
+            </WebsiteTitle>
+            <HeaderNav>
+                <NavLink className="sl-twitter" href={'https://twitter.com/ashsmithco'} alt="Twitter">Twitter</NavLink>
+                <NavLink className="sl-github" href={'https://github.com/ashsmith'} alt="Github">GitHub</NavLink>
+            </HeaderNav>
+        </HeaderWrapper>
+    )
+};

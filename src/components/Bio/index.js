@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
-import numToWords from '../../utils/numberToWord'
-import ProfilePic from '../ProfilePic'
-import { calcSize } from '../../config';
+import React from 'react';
+import styled from 'styled-components';
+import numToWords from '../../utils/numberToWord';
+import ProfilePic from '../ProfilePic';
+import {calcSize} from '../../config';
 
 const BioWrapper = styled.div`
   border-radius: ${calcSize(8)};
@@ -26,23 +26,18 @@ const Intro = styled.div`
   }
 `;
 
-var experience = (new Date()).getFullYear() - 2010;
+const experience = (new Date()).getFullYear() - 2010;
 
-class Bio extends React.Component {
+export default function Bio({ profileImage }) {
+  return (
+    <BioWrapper>
+      <ProfilePic image={profileImage} />
+      <Intro>
+        <p>I'm Ash, a <strong>eCommerce Enginer @ Play Sports Network</strong>, keen cyclist and aspiring triathlete.
+        With over {numToWords(experience)} years Magento experience.</p>
 
-  render() {
-    return (
-      <BioWrapper>
-        <ProfilePic />
-        <Intro>
-          <p>I'm Ash, a <strong>eCommerce Enginer @ Play Sports Network</strong>, keen cyclist and aspiring triathlete.
-          With over {numToWords(experience)} years Magento experience.</p>
-
-          <p><a href="mailto:hello@ashsmith.io">Need a hand with something? Contact me</a></p>
-        </Intro>
-      </BioWrapper>
-    )
-  }
-}
-
-export default Bio
+        <p><a href="mailto:hello@ashsmith.io">Need a hand with something? Contact me</a></p>
+      </Intro>
+    </BioWrapper>
+  );
+};
