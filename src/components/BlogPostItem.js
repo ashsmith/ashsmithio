@@ -21,6 +21,7 @@ const PostItem = styled.div`
         box-shadow: 0 5px 15px -1px rgba(0,0,0,0.20);
         border-radius: 8px;
         grid-template-columns: 4rem 36rem 1fr;
+        padding-left: 0;
         p a {
             color: #3567E8;
             &:hover {
@@ -34,6 +35,7 @@ const PostItem = styled.div`
         content: "${pointyHand}";
         font-size: 2.5rem;
         align-self: center;
+        text-align: center;
     }
 }
 `;
