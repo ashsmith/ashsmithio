@@ -1,8 +1,9 @@
 const withImages = require('next-images');
 const withPlugins = require('next-compose-plugins');
+const path = require('path');
 module.exports = withPlugins(
   [
-    withImages,
+
     {
       webpack(config) {
         config.module.rules.push({
@@ -12,9 +13,11 @@ module.exports = withPlugins(
 
         return config;
       },
-    }
+    },
+    withImages,
   ],
   {
+    exclude: path.resolve(__dirname, 'components/Header'),
     target: 'serverless'
   }
 );

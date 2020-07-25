@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react'
 import Head from 'next/head'
-// import Bio from '../components/Bio'
 import BlogPostItem from '../components/BlogPostItem'
 import styled from 'styled-components';
 import ProfilePic from '../components/ProfilePic'
