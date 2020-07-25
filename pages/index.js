@@ -60,15 +60,15 @@ function HomePage({ posts }) {
   return (
     <>
       <Head>
-        <title>Next.js + Contentful</title>
-        {/* <meta name="description" content={siteDescription} /> */}
+        <title>Ash Smith - Software Engineer. Bath, UK</title>
+        <meta name="description" content="Software Engineer @ Play Sports Network. Bath, UK" />
       </Head>
 
       <HomepageHeaderWrapper>
         <ProfilePic />
         <HeaderTitleWrapper>
-        <HeaderTitle>I’m Ash! A Magento Developer  and keen triathlete.</HeaderTitle>
-        <JobTitle>Magento Developer @ Play Sports Network</JobTitle>
+        <HeaderTitle>I’m Ash! A Software Engineer and keen triathlete.</HeaderTitle>
+        <JobTitle>Working for Play Sports Network</JobTitle>
         </HeaderTitleWrapper>
       </HomepageHeaderWrapper>
 
