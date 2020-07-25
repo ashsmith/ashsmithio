@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'gatsby-link';
+import Link from 'next/link';
 import styled from 'styled-components';
 import {styleScheme} from '../../config';
 
@@ -71,7 +71,7 @@ export default function Header() {
     return (
         <HeaderWrapper>
             <WebsiteTitle>
-                <Link to={"/"}>Ash Smith</Link>
+                <Link href="/"><a>Ash Smith</a></Link>
             </WebsiteTitle>
             <HeaderNav>
                 <NavLink className="sl-twitter" href={'https://twitter.com/ashsmithco'} alt="Twitter">Twitter</NavLink>

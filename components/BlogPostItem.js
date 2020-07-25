@@ -1,8 +1,8 @@
 import React from 'react';
-import Link from 'gatsby-link'
+import Link from 'next/link'
 import styled from 'styled-components';
 
-const BlogLink = styled(Link)`
+const BlogLink = styled.a`
     font-size: 1.6875rem;
     box-shadow: none;
     text-decoration: none;
@@ -80,9 +80,9 @@ export default function BlogPostItem({ date, slug, title, category }) {
         <PostItem>
             <PostWrap>
                 <PostDate>Posted on {date}</PostDate>
-                <PostTitle><BlogLink to={slug}>{title}</BlogLink></PostTitle>
+                <PostTitle><Link href={slug}><BlogLink>{title}</BlogLink></Link></PostTitle>
             </PostWrap>
-            {category !== null && (<Tags><Link to={'/' + category.replace(/\s/g, '').toLowerCase() + '/'}>{category}</Link></Tags>)}
+            {category !== null && (<Tags><Link href={'/' + category.replace(/\s/g, '').toLowerCase() + '/'}><a>{category}</a></Link></Tags>)}
         </PostItem>
     );
 };

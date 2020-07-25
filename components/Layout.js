@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
-import Helmet from 'react-helmet';
+import Head from 'next/head';
 import Header from './Header'
-import "prismjs/themes/prism-okaidia.css";
-import "../fonts/work-sans.css";
 import { calcSize } from '../config';
 
 const Wrapper = styled.div`
@@ -15,13 +13,13 @@ const Wrapper = styled.div`
   }
 `;
 
-export default function Template({ children }) {
+export default function Layout({ children }) {
   return (
     <Wrapper>
-      <Helmet>
+      <Head>
         <html lang="en" />
-      </Helmet>
-    <Header />
+      </Head>
+      <Header />
       {children}
     </Wrapper>
   );

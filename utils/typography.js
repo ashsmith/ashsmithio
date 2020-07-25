@@ -6,6 +6,14 @@ const typography = new Typography({
     baseLineHeight: 1.75,
     bodyFontFamily: ["Work Sans", "sans-serif"],
     headerFontFamily: ["Work Sans", "sans-serif"],
+    googleFonts: [
+        {
+          name: 'Work Sans',
+          styles: [
+            '300', '600&display=swap'
+          ],
+        },
+      ],
     overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
         body: {
             'margin': 0

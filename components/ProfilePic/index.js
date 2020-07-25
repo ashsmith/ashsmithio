@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Image from 'gatsby-image';
+// import Image from './profile-pic.jpg';
 import {styleScheme} from '../../config';
 
-const ProfilePicture = styled(Image)`
+const ProfilePicture = styled.img`
     align-self: center;
     border-radius: 100%;
     border: 6px solid ${styleScheme.primaryColor};
@@ -11,5 +11,5 @@ const ProfilePicture = styled(Image)`
 `;
 
 export default function ProfilePic({ image }) {
-    return <ProfilePicture fixed={image.fixed}  alt="Ash Smith - Freelance Magento Developer"/>
+    return <ProfilePicture src={``}  alt="Ash Smith - Freelance Magento Developer"/>
 };
