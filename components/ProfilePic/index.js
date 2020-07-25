@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-// import Image from './profile-pic.jpg';
+import Image from './profile-pic.jpg';
 import {styleScheme} from '../../config';
 
 const ProfilePicture = styled.img`
@@ -10,6 +10,6 @@ const ProfilePicture = styled.img`
     max-width: 120px;
 `;
 
-export default function ProfilePic({ image }) {
-    return <ProfilePicture src={``}  alt="Ash Smith - Freelance Magento Developer"/>
+export default function ProfilePic() {
+    return <ProfilePicture src={Image}  alt="Ash Smith - Freelance Magento Developer"/>
 };
