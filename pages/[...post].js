@@ -1,49 +1,17 @@
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error'
-import styled from 'styled-components';
-import ReactMarkdown from "react-markdown";
 import dynamic from 'next/dynamic';
-import { fetchBlogPost, fetchBlogPosts } from '../lib/contentful';
 import Head from 'next/head';
+import { Text } from '@geist-ui/react';
+import ReactMarkdown from 'react-markdown';
+import { fetchBlogPost, fetchBlogPosts } from '../lib/contentful';
 
 // Dynamic importing of components so they're only rendered when used!
 const CodeBlock = dynamic(() => import('../components/CodeBlock'))
 const ContentfulImage = dynamic(() => import('../components/ContentfulImage'))
+const Heading = ({ level, children }) => (<Text {...{ [`h${level}`]: true, }}>{children}</Text>);
 
-const BlogPostContent = styled.div`
-& p code {
-  padding: .25rem;
-  display: inline-block;
-  line-height: 1;
-}
-`;
-
-const PostDate = styled.p`
-color: #737373;
-font-size: ${14/16}rem;
-margin:0;
-`;
-
-const BlogTitle = styled.h1`
-  font-size: 4rem;
-  line-height: 1.25em;
-`;
-
-const PostContainer = styled.div`
-  margin-bottom: 4rem;
-  padding-bottom: 4rem;
-  border-bottom: 1px solid #F1F1F1;
-
-  & p:last-child {
-    margin: 0 0 4rem 0;
-  }
-
-  @media (min-width: 700px) {
-    padding: 0 4rem;
-  }
-`;
-
-const PostPage = ({post}) => {
+const Post = ({post}) => {
   const router = useRouter();
   if (!router.isFallback && !post) {
     return <ErrorPage statusCode={404} />
@@ -55,21 +23,25 @@ const PostPage = ({post}) => {
 
   return (
     <>
-    <Head>
-      <title>{post.title}</title>
-      <meta name="description" content={post.title} />
-    </Head>
-      <PostContainer>
-        <BlogTitle>{post.title}</BlogTitle>
-        <PostDate>Posted on {post.date}</PostDate>
-        <BlogPostContent>
-          <ReactMarkdown source={post.content} renderers={{ code: CodeBlock, image: ContentfulImage }} />
-        </BlogPostContent>
-      </PostContainer>
+      <Head>
+        <title>{post.title}</title>
+        <meta name="description" content={post.title} />
+      </Head>
+      <>
+        <Text h1 size="4rem" style={{ textAlign: 'center' }}>{post.title}</Text>
+        <Text type="secondary">Posted on {(new Date(post.date).toLocaleDateString())}</Text>
+        <ReactMarkdown
+          source={post.content}
+          renderers={{
+            code: CodeBlock,
+            image: ContentfulImage,
+            heading: Heading
+          }}
+          />
+      </>
     </>
   )
 };
-
 
 export async function getStaticProps({ params, preview = false }) {
   const data = await fetchBlogPost(params.post.join('/'), preview);
@@ -91,4 +63,4 @@ export async function getStaticPaths() {
   }
 }
 
-export default PostPage;
+export default Post

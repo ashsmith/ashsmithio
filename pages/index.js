@@ -1,56 +1,10 @@
-import Head from 'next/head'
-import BlogPostItem from '../components/BlogPostItem'
-import styled from 'styled-components';
-import ProfilePic from '../components/ProfilePic'
-import {styleScheme, calcSize} from '../config';
+import Head from 'next/head';
+import { Grid, Text } from '@geist-ui/react';
+import BlogPostItem from '../components/BlogPostItem';
 import { fetchBlogPosts } from '../lib/contentful';
 
-const HeaderTitleWrapper = styled.div``;
 
-const JobTitle = styled.h2`
-font-weight: normal;
-color: ${styleScheme.secondaryColor};
-`;
-
-const HeaderTitle = styled.h1`
-
-font-size: ${calcSize(32)};
-
-@media (min-width: 700px) {
-  font-size: ${calcSize(40)};
-}
-font-weight: 600;
-letter-spacing: -0.5;
-line-height: 1.25;
-margin: 0 0 0.3em 0;
-`
-
-const HomepageHeaderWrapper = styled.div`
-text-align: center;
-margin-bottom: ${calcSize(40)};
-padding-bottom: ${calcSize(96)};
-border-bottom: 1px solid ${styleScheme.borderColor};
-
-@media (min-width: 700px) {
-  text-align: inherit;
-  display: grid;
-  grid-template-columns: ${calcSize(120)} 1fr;
-  grid-column-gap: ${calcSize(32)};
-  padding-top: 0;
-  padding-left: ${calcSize(64)};
-  padding-right: ${calcSize(64)};
-}
-`
-
-
-const PostWrapper = styled.div`
-@media (min-width: 700px) {
-  display: grid;
-  grid-auto-rows: 1fr;
-}
-`
-
-function HomePage({ posts }) {
+const Homepage = ({ posts }) => {
   if (!posts) {
     return <p>Loading</p>
   }
@@ -58,27 +12,29 @@ function HomePage({ posts }) {
   return (
     <>
       <Head>
-        <title>Ash Smith - Software Engineer. Bath, UK</title>
-        <meta name="description" content="Software Engineer @ Play Sports Network. Bath, UK" />
+        <title>Ash Smith - Senior Software Engineer. Bath, UK</title>
+        <meta name="description" content="Senior Software Engineer @ Play Sports Network. Bath, UK" />
       </Head>
 
-      <HomepageHeaderWrapper>
-        <ProfilePic />
-        <HeaderTitleWrapper>
-        <HeaderTitle>I’m Ash! A Software Engineer and keen triathlete.</HeaderTitle>
-        <JobTitle>Working for Play Sports Network</JobTitle>
-        </HeaderTitleWrapper>
-      </HomepageHeaderWrapper>
+      <Grid.Container style={{ margin: '8rem 0' }} justify="center">
+        <Grid xs={20} alignContent="center" alignItems="center">
+          <Text h1 size="3em" style={{ textAlign: 'center' }}>👋 Hey, I’m Ash! A Software Engineer and keen triathlete.</Text>
+        </Grid>
+      </Grid.Container>
 
-
-      <PostWrapper>
+      <Text h3 style={{ textAlign: 'center' }}>Here's a few posts of mine...</Text>
+      <Grid.Container gap={4}>
         {posts.map(({ fields }) => {
-          return (<BlogPostItem key={fields.permalink}
-            slug={fields.permalink}
-            title={fields?.title || fields.permalink}
-            date={fields.date} category={fields.category} />)
+          return (
+            <Grid key={fields.permalink} xs={24} md={12}>
+              <BlogPostItem
+                slug={fields.permalink}
+                title={fields?.title || fields.permalink}
+                date={fields.date} category={fields.category}
+              />
+            </Grid>)
         })}
-      </PostWrapper>
+      </Grid.Container>
     </>
   )
 }
@@ -93,4 +49,4 @@ export async function getStaticProps({ preview }) {
   }
 }
 
-export default HomePage
+export default Homepage

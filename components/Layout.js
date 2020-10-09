@@ -1,26 +1,20 @@
 import React from 'react'
-import styled from 'styled-components';
 import Head from 'next/head';
 import Header from './Header'
-import { calcSize } from '../config';
+import { Page } from '@geist-ui/react';
 
-const Wrapper = styled.div`
-  max-width: ${calcSize(904)};
-  margin: ${calcSize(24)} ${calcSize(32)};
-
-  @media (min-width: 700px) {
-    margin: 0 auto;
-  }
-`;
-
-export default function Layout({ children }) {
-  return (
-    <Wrapper>
-      <Head>
-        <html lang="en" />
-      </Head>
+const Layout = ({ children }) => (
+  <Page size="large" dotBackdrop>
+    <Head>
+      <html lang="en" />
+    </Head>
+    <Page.Header>
       <Header />
+    </Page.Header>
+    <Page.Content>
       {children}
-    </Wrapper>
-  );
-};
+    </Page.Content>
+  </Page>
+);
+
+export default Layout;

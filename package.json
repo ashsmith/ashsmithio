@@ -10,19 +10,15 @@
   "dependencies": {
     "@contentful/rich-text-from-markdown": "^14.1.1",
     "@contentful/rich-text-react-renderer": "^14.1.1",
+    "@geist-ui/react": "^2.1.0-canary.0",
+    "@geist-ui/react-icons": "^1.0.0",
     "@moxy/react-contentful-image": "^1.0.0",
-    "@svgr/webpack": "^5.4.0",
     "contentful": "^7.14.6",
-    "next": "9.4.4",
-    "next-compose-plugins": "^2.2.0",
-    "next-images": "^1.4.0",
+    "next": "^9.5",
     "prismjs": "^1.21.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-markdown": "^4.3.1",
-    "react-syntax-highlighter": "^13.0.0",
-    "react-typography": "^0.16.19",
-    "styled-components": "^5.1.1",
-    "typography": "^0.16.19"
+    "react-syntax-highlighter": "^15.2.1"
   }
 }
