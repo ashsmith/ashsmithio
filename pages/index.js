@@ -19,8 +19,9 @@ const Homepage = ({ posts }) => {
       </Head>
 
       <Grid.Container style={{ margin: 'calc(16pt * 2.5) 0 calc(16pt * 5)' }} justify="center">
-        <Grid xs={20} alignContent="center" alignItems="center">
-          <Text h1 size="3em" style={{ textAlign: 'center' }}>👋 Hey, I’m Ash! A Software Engineer and keen triathlete.</Text>
+        <Grid xs={20} alignContent="center" alignItems="center" style={{ textAlign: 'center' }}>
+          <Text h1 size="2.5rem">👋 Hey, I’m Ash!</Text>
+          <Text h2>A Software Engineer and keen triathlete.</Text>
         </Grid>
       </Grid.Container>
 
