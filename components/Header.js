@@ -13,13 +13,13 @@ const Header = () => (
     <Grid xs={12}>
       <Grid.Container gap={2} justify="flex-end">
         <Grid>
-          <a href={'https://twitter.com/ashsmithco'} alt="Twitter" rel="nofollow noopener"><Twitter /></a>
+          <a href={'https://twitter.com/ashsmithco'} name="Twitter" rel="nofollow noopener"><Twitter /></a>
         </Grid>
         <Grid>
-          <a href={'https://github.com/ashsmith'} alt="Github" rel="nofollow noopener"><Github /></a>
+          <a href={'https://github.com/ashsmith'} name="Github" rel="nofollow noopener"><Github /></a>
         </Grid>
         <Grid>
-          <a href={'https://instagram.com/ashsmithtri'} alt="Instagram" rel="nofollow noopener"><Instagram /></a>
+          <a href={'https://instagram.com/ashsmithtri'} name="Instagram" rel="nofollow noopener"><Instagram /></a>
         </Grid>
       </Grid.Container>
     </Grid>
