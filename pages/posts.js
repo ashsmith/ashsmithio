@@ -1,25 +1,13 @@
 import React from 'react';
-import { Grid, Text } from '@geist-ui/react';
-import BlogPostItem from '../components/BlogPostItem';
+import { Text } from '@geist-ui/react';
 import { fetchBlogPosts } from '../lib/contentful';
+import BlogPostGrid from '../components/BlogPostGrid';
 
 const Posts = ({ posts }) => (
-  <Grid.Container gap={4}>
-    <Grid xs={24}>
-      <Text h1>All of my wonderful blog posts...</Text>
-    </Grid>
-  {posts.map(({ fields }) => {
-    return (
-      <Grid key={fields.permalink} xs={24} md={12}>
-        <BlogPostItem
-          slug={fields.permalink}
-          title={fields?.title || fields.permalink}
-          date={fields.date}
-          category={fields.category}
-        />
-      </Grid>)
-  })}
-</Grid.Container>
+  <BlogPostGrid
+    posts={posts}
+    heading={(<Text h1 style={{ textAlign: 'center' }}>All of my wonderful blog posts...</Text>)}
+  />
 );
 
 export async function getStaticProps({ preview }) {
