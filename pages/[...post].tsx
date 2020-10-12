@@ -37,6 +37,7 @@ const Post: FC<Props> = ({ post }) => {
         <Text h1 size="4rem" style={{ textAlign: 'center' }}>{post.title}</Text>
         <Text type="secondary">
           Posted on
+          {' '}
           {(new Date(post.date).toLocaleDateString())}
         </Text>
         <ReactMarkdown
