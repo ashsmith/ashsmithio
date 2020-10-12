@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Link from 'next/link';
 import { Grid, Text } from '@geist-ui/react';
-import Github from '@geist-ui/react-icons/github'
+import Github from '@geist-ui/react-icons/github';
 import Twitter from '@geist-ui/react-icons/twitter';
-import Instagram from '@geist-ui/react-icons/instagram'
-import LinkedIn from '@geist-ui/react-icons/linkedin'
+import Instagram from '@geist-ui/react-icons/instagram';
+import LinkedIn from '@geist-ui/react-icons/linkedin';
 
-const Header = () => (
+const Header: FC = () => (
   <Grid.Container justify="space-between" style={{ marginTop: '.5rem' }}>
     <Grid xs={12}>
       <Text b size="1.5rem">
