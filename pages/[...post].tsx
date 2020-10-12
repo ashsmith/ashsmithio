@@ -34,7 +34,7 @@ const Post: FC<Props> = ({ post }) => {
         <meta name="description" content={post.title} />
       </Head>
       <>
-        <Text h1 size="4rem" style={{ textAlign: 'center' }}>{post.title}</Text>
+        <Text h1 size="2.5rem" style={{ textAlign: 'center' }}>{post.title}</Text>
         <Text type="secondary">
           Posted on
           {' '}
