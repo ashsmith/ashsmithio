@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Text } from '@geist-ui/react';
-import { fetchBlogPosts } from '../lib/contentful';
-import BlogPostGrid from '../components/BlogPostGrid';
 import Head from 'next/head';
+import { GetStaticProps } from 'next';
+import { BlogPostItem, fetchBlogPosts } from '../lib/contentful';
+import BlogPostGrid from '../components/BlogPostGrid';
 
-const Posts = ({ posts }) => (
+interface Props {
+  posts: BlogPostItem[];
+}
+
+const Posts: FC<Props> = ({ posts }) => (
   <>
     <Head>
       <title>Ash Smith - All of my blog posts...</title>
-      <meta name="description" content={`All of my posts... enjoy ;)`} />
+      <meta name="description" content="All of my posts... enjoy ;)" />
     </Head>
     <BlogPostGrid>
       <BlogPostGrid.Header>
@@ -19,14 +24,14 @@ const Posts = ({ posts }) => (
   </>
 );
 
-export async function getStaticProps({ preview }) {
+export const getStaticProps: GetStaticProps = async ({ preview }) => {
   const posts = await fetchBlogPosts(preview);
   return {
     props: {
       preview: preview ?? false,
-      posts: posts ?? []
-    }
-  }
-}
+      posts: posts ?? [],
+    },
+  };
+};
 
 export default Posts;

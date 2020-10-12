@@ -1,4 +1,6 @@
 module.exports = {
+  "parser": '@typescript-eslint/parser',
+  "extends": ['airbnb-typescript'],
   "env": {
     "browser": true,
     "es6": true,
@@ -10,10 +12,10 @@ module.exports = {
     "graphql": false,
   },
   "parserOptions": {
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": true,
-    },
+    "project": ['./tsconfig.json']
+  },
+  "rules": {
+    "react/prop-types": 0,
+    "jsx-a11y/anchor-is-valid": 0
   }
 }

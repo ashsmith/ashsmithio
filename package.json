@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@contentful/rich-text-from-markdown": "^14.1.1",
@@ -20,5 +21,17 @@
     "react-dom": "16.13.1",
     "react-markdown": "^4.3.1",
     "react-syntax-highlighter": "^15.2.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.52",
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/parser": "^4.4.0",
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb-typescript": "^11.0.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "typescript": "^4.0.3"
   }
 }

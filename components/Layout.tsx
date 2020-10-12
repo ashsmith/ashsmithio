@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { FC } from 'react';
 import Head from 'next/head';
-import Header from './Header'
 import { Page } from '@geist-ui/react';
+import Header from './Header';
 
-const Layout = ({ children }) => (
+const Layout: FC = ({ children }) => (
   <Page size="large" dotBackdrop>
     <Head>
       <html lang="en" />
