@@ -28,6 +28,7 @@ const Homepage: FC<Props> = ({ posts }) => {
         <Grid xs={20} alignContent="center" alignItems="center" style={{ textAlign: 'center' }}>
           <Text h1 size="2.5rem">
             <span role="img" aria-labelledby="waving hand" aria-label="waving hand">👋</span>
+            {' '}
             Hey, I’m Ash!
           </Text>
           <Text h2>A Software Engineer and keen triathlete.</Text>
