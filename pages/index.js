@@ -25,16 +25,16 @@ const Homepage = ({ posts }) => {
         </Grid>
       </Grid.Container>
 
-      <BlogPostGrid
-        posts={posts}
-        heading={(<Text h3 style={{ textAlign: 'center' }}>Here's some recent<sup>*</sup> posts of mine...</Text>)}
-        footer={(
-          <>
-            <Text p em style={{ textAlign: 'center' }}>Want to view more? <Link href="/posts"><a>See all of my wonderful blog posts</a></Link></Text>
-            <Text small p em style={{ textAlign: 'center' }}><sup>*</sup> Blog posts may not be recent...</Text>
-          </>
-        )}
-      />
+      <BlogPostGrid>
+        <BlogPostGrid.Header>
+          <Text h3 style={{ textAlign: 'center' }}>Here's some recent<sup>*</sup> posts of mine...</Text>
+        </BlogPostGrid.Header>
+        <BlogPostGrid.Posts posts={posts} />
+        <BlogPostGrid.Footer>
+          <Text p em style={{ textAlign: 'center' }}>Want to view more? <Link href="/posts"><a>See all of my wonderful blog posts</a></Link></Text>
+          <Text small p em style={{ textAlign: 'center' }}><sup>*</sup> Blog posts may not be recent...</Text>
+        </BlogPostGrid.Footer>
+      </BlogPostGrid>
     </>
   )
 }

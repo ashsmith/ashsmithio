@@ -11,7 +11,7 @@ const CodeBlock = dynamic(() => import('../components/CodeBlock'))
 const ContentfulImage = dynamic(() => import('../components/ContentfulImage'))
 const Heading = ({ level, children }) => (<Text {...{ [`h${level}`]: true, }}>{children}</Text>);
 
-const Post = ({post}) => {
+const Post = ({ post }) => {
   const router = useRouter();
   if (!router.isFallback && !post) {
     return <ErrorPage statusCode={404} />

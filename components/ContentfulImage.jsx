@@ -5,7 +5,7 @@ const Image = ({ src, alt }) => (
   <ContentfulImage
     image={ src }
     alt={alt}
-    resize={ { width: 776 } }
+    resize={{ width: 776 }}
     loading="lazy"
   />
 );

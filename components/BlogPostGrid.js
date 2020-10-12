@@ -1,35 +1,28 @@
-import React from 'react';
-import { Grid, Text } from '@geist-ui/react';
+import React, { Component } from 'react';
+import { Grid } from '@geist-ui/react';
 import BlogPostItem from './BlogPostItem';
 
-const BlogPostGrid = ({ heading, footer, posts }) => {
+class BlogPostGrid extends Component {
+  static Header = ({ children }) => (<Grid xs={24}>{children}</Grid>);
+  static Footer = ({ children }) => (<Grid xs={24}>{children}</Grid>);
+  static Posts = ({ posts }) => posts.map(({ fields }) => (
+    <Grid key={fields.permalink} xs={24} md={12} dir="column" style={{display: 'flex'}}>
+      <BlogPostItem
+        slug={fields.permalink}
+        title={fields.title}
+        date={fields.date}
+        category={fields.category}
+      />
+    </Grid>
+  ));
 
-  return (
-    <Grid.Container gap={4}>
-      {typeof heading !== 'undefined' && (
-        <Grid xs={24}>
-          {heading}
-        </Grid>
-      )}
-      {posts.map(({ fields }) => {
-        return (
-          <Grid key={fields.permalink} xs={24} md={12} dir="column" style={{display: 'flex'}}>
-            <BlogPostItem
-              slug={fields.permalink}
-              title={fields?.title || fields.permalink}
-              date={fields.date}
-              category={fields.category}
-            />
-          </Grid>)
-      })}
-
-      {typeof footer !== 'undefined' && (
-        <Grid xs={24}>
-          {footer}
-        </Grid>
-      )}
-    </Grid.Container>
-  );
-};
+  render() {
+    return (
+      <Grid.Container gap={4}>
+        {this.props.children}
+      </Grid.Container>
+    )
+  }
+}
 
 export default BlogPostGrid;
