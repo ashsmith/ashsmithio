@@ -23,6 +23,7 @@ const BlogPostItem: FC<Props> = ({
       {category !== null && (<CategoryLink category={category} />)}
       <Text small type="secondary">
         Posted on
+        {' '}
         {(new Date(date)).toLocaleDateString()}
       </Text>
     </Card.Footer>

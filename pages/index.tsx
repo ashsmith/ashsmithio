@@ -47,6 +47,7 @@ const Homepage: FC<Props> = ({ posts }) => {
         <BlogPostGrid.Footer>
           <Text p em style={{ textAlign: 'center' }}>
             Want to view more?
+            {' '}
             <Link href="/posts"><a>See all of my wonderful blog posts</a></Link>
           </Text>
           <Text small p em style={{ textAlign: 'center' }}>
