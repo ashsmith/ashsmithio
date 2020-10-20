@@ -23,7 +23,7 @@ const Post: FC<Props> = ({ post }) => {
     return <ErrorPage statusCode={404} />;
   }
 
-  if (!post?.title) {
+  if (router.isFallback && !post?.title) {
     return <p>Loading</p>;
   }
 
@@ -67,7 +67,7 @@ export const getStaticProps: GetStaticProps = async ({ params: { post }, preview
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const allPosts = await fetchBlogPosts(true);
+  const allPosts = await fetchBlogPosts(false);
   return {
     paths: allPosts?.map(({ fields: { permalink } }) => `/${permalink}`) ?? [],
     fallback: true,
