@@ -1,16 +1,14 @@
 import React, { FC } from 'react';
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { Text } from '@geist-ui/react';
 import ReactMarkdown from 'react-markdown';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { BlogPostFields, fetchBlogPost, fetchBlogPosts } from '../lib/contentful';
+import CodeBlock from '../components/CodeBlock';
+import ContentfulImage from '../components/ContentfulImage';
 
-// Dynamic importing of components so they're only rendered when used!
-const CodeBlock = dynamic(() => import('../components/CodeBlock'));
-const ContentfulImage = dynamic(() => import('../components/ContentfulImage'));
 const Heading = ({ level, children }) => (<Text {...{ [`h${level}`]: true }}>{children}</Text>);
 
 interface Props {
