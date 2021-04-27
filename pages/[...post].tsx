@@ -42,6 +42,11 @@ const Post: FC<Props> = ({ post }) => {
       <Head>
         <title>{post.title}</title>
         <meta name="description" content={post.title} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="og:image" content={`https://3nrgyfm9aj.execute-api.eu-west-1.amazonaws.com/dev/hello?name=${encodeURI(post.title)}`} />
+        <meta name="og:title" content={post.title} />
+        <meta name="twitter:site" content="@ashsmithco" />
+        <meta name="twitter:creator" content="@ashsmithco" />
       </Head>
       <>
         <Text h1 size="2.5rem" style={{ textAlign: 'center' }}>{post.title}</Text>
