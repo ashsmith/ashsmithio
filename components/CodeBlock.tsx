@@ -9,10 +9,15 @@ interface Props {
 
 const CodeBlock: FC<Props> = ({ className, children }) => {
   const language = className?.replace('language-', '') ?? '';
+
+  if (typeof children === 'string') {
+    return (
+      <SyntaxHighlighter language={language} style={prism}>{children.replace(/^\n|\n$/g, '')}</SyntaxHighlighter>
+    );
+  }
+
   return (
-    <SyntaxHighlighter language={language} style={prism}>
-      {children}
-    </SyntaxHighlighter>
+    <SyntaxHighlighter language={language} style={prism}>{children}</SyntaxHighlighter>
   );
 };
 

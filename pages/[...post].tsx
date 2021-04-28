@@ -12,7 +12,10 @@ import CodeBlock from '../components/CodeBlock';
 import ContentfulImage from '../components/ContentfulImage';
 import * as Headings from '../components/Headings';
 
+const Test = ({ children }) => (<div>{children}</div>);
+
 const components = {
+  pre: Test,
   code: CodeBlock,
   img: ContentfulImage,
   h1: Headings.H1,
@@ -37,6 +40,8 @@ const Post: FC<Props> = ({ post }) => {
   }
   const content = hydrate(post.content, { components });
 
+  const postDate = new Date(post.date);
+
   return (
     <>
       <Head>
@@ -53,7 +58,7 @@ const Post: FC<Props> = ({ post }) => {
         <Text type="secondary">
           Posted on
           {' '}
-          {(new Date(post.date).toLocaleDateString())}
+          {`${postDate.getDate()}/${postDate.getMonth()}/${postDate.getFullYear()}`}
         </Text>
         {content}
       </>
