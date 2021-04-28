@@ -4,7 +4,7 @@ import { Page } from '@geist-ui/react';
 import Header from './Header';
 
 const Layout: FC = ({ children }) => (
-  <Page size="large" dotBackdrop>
+  <Page size="large">
     <Head>
       <html lang="en" />
     </Head>
