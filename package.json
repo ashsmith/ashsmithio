@@ -15,7 +15,7 @@
     "@geist-ui/react-icons": "^1.0.0",
     "@moxy/react-contentful-image": "^1.0.0",
     "contentful": "^8.1.7",
-    "next": "^10.0.0",
+    "next": "^10.2.0",
     "next-mdx-remote": "^2.1.0",
     "prismjs": "^1.21.0",
     "react": "^17.0.0",
