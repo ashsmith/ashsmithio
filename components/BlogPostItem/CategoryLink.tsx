@@ -6,12 +6,15 @@ interface Props {
   category: string;
 }
 const CategoryLink: FC<Props> = ({ category }) => {
-  const categoryPath = category.replace(/\s/g, '-').toLowerCase();
+  const categories = category.split(',').map((cat) => cat.trim());
   return (
     <Text small type="secondary">
       Category:
       {' '}
-      <Link href={`/category/${categoryPath}`}><a>{category}</a></Link>
+      {categories.map((cat) => {
+        const catPath = cat.replace(/\s/g, '-').toLowerCase();
+        return (<Link href={`/category/${catPath}`}><a>{cat}</a></Link>);
+      })}
     </Text>
   );
 };
