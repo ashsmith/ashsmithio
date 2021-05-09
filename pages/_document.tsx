@@ -3,7 +3,6 @@ import Document, {
   DocumentContext, Head, Html, Main, NextScript,
 } from 'next/document';
 import { CssBaseline } from '@geist-ui/react';
-// import Head from 'next/head';
 import { GA_TRACKING_ID } from '../lib/gtag';
 
 class MyDocument extends Document {
