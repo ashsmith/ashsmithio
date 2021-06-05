@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useRouter } from 'next/router';
-import renderToString from 'next-mdx-remote/render-to-string';
-import hydrate from 'next-mdx-remote/hydrate';
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import ErrorPage from 'next/error';
 import Head from 'next/head';
@@ -26,7 +26,7 @@ const components = {
 };
 
 interface Props {
-  post: BlogPostFields;
+  post: BlogPostFields & { content: MDXRemoteSerializeResult };
 }
 
 const Post: FC<Props> = ({ post }) => {
@@ -38,7 +38,6 @@ const Post: FC<Props> = ({ post }) => {
   if (router.isFallback && !post?.title) {
     return <p>Loading</p>;
   }
-  const content = hydrate(post.content, { components });
 
   const postDate = new Date(post.date);
 
@@ -60,7 +59,8 @@ const Post: FC<Props> = ({ post }) => {
           {' '}
           {`${postDate.getDate()}/${postDate.getMonth()}/${postDate.getFullYear()}`}
         </Text>
-        {content}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        <MDXRemote components={components} {...post.content} />
       </>
     </>
   );
@@ -70,7 +70,7 @@ export const getStaticProps: GetStaticProps = async ({ params: { post }, preview
   const permalink = Array.isArray(post) ? post.join('/') : post;
   const data = await fetchBlogPost(permalink, preview);
 
-  const mdxSource = await renderToString(data.fields.content, { components });
+  const mdxSource = await serialize(data.fields.content);
 
   return {
     props: {
