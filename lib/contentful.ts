@@ -8,12 +8,33 @@ export interface BlogPostFields {
   permalink: string;
 }
 
+export interface GuideStepFields {
+  title: string;
+  content: string;
+}
+
+export interface GuideFields {
+  title: string;
+  slug: string;
+  date: string;
+  introduction?: string;
+  steps: {
+    sys: {
+      id: string;
+    }
+    fields: GuideStepFields
+  }[]
+}
+export interface GuideItem {
+  fields: GuideFields;
+}
+
 export interface BlogPostItem {
   fields: BlogPostFields;
 }
 
-export interface EntriesResponse {
-  items: BlogPostItem[];
+export interface EntriesResponse<T> {
+  items: T[];
 }
 
 const client = createClient({
@@ -30,7 +51,7 @@ const previewClient = createClient({
 const getClient = (preview) => (preview ? previewClient : client);
 
 export const fetchBlogPost = async (permalink, preview): Promise<BlogPostItem> => {
-  const entries: EntriesResponse = await getClient(preview).getEntries({
+  const entries: EntriesResponse<BlogPostItem> = await getClient(preview).getEntries({
     content_type: 'blogPost',
     'fields.permalink[in]': permalink,
   });
@@ -42,7 +63,7 @@ export const fetchBlogPost = async (permalink, preview): Promise<BlogPostItem> =
 };
 
 export async function fetchBlogPosts(preview, limit = 1000): Promise<BlogPostItem[]> {
-  const entries: EntriesResponse = await getClient(preview).getEntries({
+  const entries: EntriesResponse<BlogPostItem> = await getClient(preview).getEntries({
     content_type: 'blogPost',
     order: '-fields.date',
     limit,
@@ -56,7 +77,7 @@ export async function fetchBlogPosts(preview, limit = 1000): Promise<BlogPostIte
 }
 
 export async function fetchBlogPostsByCategory(preview, category): Promise<BlogPostItem[]> {
-  const entries: EntriesResponse = await getClient(preview).getEntries({
+  const entries: EntriesResponse<BlogPostItem> = await getClient(preview).getEntries({
     content_type: 'blogPost',
     order: '-fields.date',
     'fields.category[in]': category,
@@ -70,7 +91,7 @@ export async function fetchBlogPostsByCategory(preview, category): Promise<BlogP
 }
 
 export const getAllPostsWithPermalink = async (preview): Promise<BlogPostItem[]> => {
-  const entries: EntriesResponse = await getClient(preview).getEntries({
+  const entries: EntriesResponse<BlogPostItem> = await getClient(preview).getEntries({
     content_type: 'blogPost',
     order: '-fields.date',
   });
@@ -81,3 +102,29 @@ export const getAllPostsWithPermalink = async (preview): Promise<BlogPostItem[]>
 
   return entries.items;
 };
+
+export const fetchGuide = async (slug, preview): Promise<GuideItem> => {
+  const entries: EntriesResponse<GuideItem> = await getClient(preview).getEntries({
+    content_type: 'guides',
+    'fields.slug[in]': slug,
+  });
+  if (!entries.items) {
+    throw new Error('Error getting blog post');
+  }
+
+  return entries.items.pop();
+};
+
+export async function fetchGuides(preview, limit = 1000): Promise<GuideItem[]> {
+  const entries: EntriesResponse<GuideItem> = await getClient(preview).getEntries({
+    content_type: 'guides',
+    order: '-fields.date',
+    limit,
+  });
+
+  if (!entries.items) {
+    throw new Error('Error getting blog posts');
+  }
+
+  return entries.items;
+}

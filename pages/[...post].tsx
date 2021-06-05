@@ -57,7 +57,7 @@ const Post: FC<Props> = ({ post }) => {
         <Text type="secondary">
           Posted on
           {' '}
-          {`${postDate.getDate()}/${postDate.getMonth()}/${postDate.getFullYear()}`}
+          {`${postDate.getDate()}/${postDate.getMonth() + 1}/${postDate.getFullYear()}`}
         </Text>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <MDXRemote components={components} {...post.content} />
