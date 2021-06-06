@@ -37,7 +37,7 @@ interface Props {
     title: string;
     date: string;
     introMdx: MDXRemoteSerializeResult
-    steps: (GuideStepFields & { key: string, content: MDXRemoteSerializeResult })[]
+    steps: { key: string, title: string; content: MDXRemoteSerializeResult }[]
   }
 }
 
@@ -54,6 +54,16 @@ const Post: FC<Props> = ({ guide }) => {
   if (router.isFallback && !guide?.title) {
     return <p>Loading</p>;
   }
+
+  const onNextButtonClick = (index) => () => {
+    setCurrentSection(index + 1);
+
+    if (index === 0) {
+      setVisitedSections(Array.from(new Set([0])));
+      return;
+    }
+    setVisitedSections(Array.from(new Set([...visitedSections, index])));
+  };
 
   const guideDate = new Date(guide.date);
 
@@ -88,57 +98,44 @@ const Post: FC<Props> = ({ guide }) => {
             <Row>
               <Col>
                 <Text h3>Table of contents</Text>
-                <ol>
-                  <li>
-                    <div style={{ marginLeft: '-50px', position: 'absolute' }}>
-                      {visitedSections.includes(0) && <CheckInCircleFill color="#0070F3" />}
-                      {(currentSection === 0 && !visitedSections.includes(0)) && <ChevronRightCircleFill />}
-                    </div>
-                    <a href="#step-0" onClick={(e) => { e.preventDefault(); setCurrentSection(0); }}>
-                      <Text span b={currentSection === 0 || visitedSections.includes(0)}>Introduction</Text>
-                    </a>
-                  </li>
-                  {guide.steps.map((step, index) => (
-                    <li>
-                      <div style={{ marginLeft: '-50px', position: 'absolute' }}>
-                        {visitedSections.includes(index + 1) && <CheckInCircleFill color="#0070F3" />}
-                        {(currentSection === (index + 1) && !visitedSections.includes(index + 1)) && <ChevronRightCircleFill />}
-                      </div>
-                      <a href={`#step-${index + 1}`} onClick={(e) => { e.preventDefault(); setCurrentSection(index + 1);  }}>
-                        <Text span b={currentSection === index + 1 || visitedSections.includes(index + 1)}>{step.title}</Text>
-                      </a>
-                    </li>
-                  ))}
+                <ol start={0}>
+                  {guide.steps.map((step, index) => {
+                    const showCheck = visitedSections.includes(index);
+                    const showChevron = currentSection === index && !showCheck;
+                    return (
+                      <li>
+                        <div style={{ marginLeft: '-50px', position: 'absolute' }}>
+                          {showCheck && <CheckInCircleFill color="#0070F3" />}
+                          {showChevron && <ChevronRightCircleFill />}
+                        </div>
+                        <a href={`#step-${index}`} onClick={(e) => { e.preventDefault(); setCurrentSection(index); }}>
+                          <Text span b={showCheck || showChevron}>{step.title}</Text>
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ol>
               </Col>
             </Row>
           </Grid>
           <Grid md={16}>
-            <div style={{ display: (currentSection === 0) ? 'block' : 'none' }}>
-              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-              <MDXRemote components={components} {...guide.introMdx} />
-              <Row gap={0.8} justify="end" style={{ marginBottom: '15px' }}>
-                <Col span={2}>
-                  <Button auto type="success-light" onClick={() => { setCurrentSection(1); setVisitedSections([0]); }}>Let&apos;s get started!</Button>
-                </Col>
-              </Row>
-            </div>
             {guide.steps.map((step, index) => (
-              <div key={step.key} style={{ display: ((index + 1) === currentSection) ? 'block' : 'none' }}>
-                <Row gap={1} style={{ marginBottom: '15px' }}>
+              <div key={step.key} style={{ display: (index === currentSection) ? 'block' : 'none' }}>
+                <Row gap={0.5} style={{ marginBottom: '15px' }}>
                   <Col span={20}>
                     <Text h2>{step.title}</Text>
                     {/* eslint-disable-next-line react/jsx-props-no-spreading */}
                     <MDXRemote components={components} {...step.content} />
                   </Col>
                 </Row>
-                <Row gap={1} justify="end" style={{ marginBottom: '15px' }}>
+                <Row gap={0.5} justify="end" style={{ marginBottom: '15px' }}>
                   <Col span={4}>
-                    <Button auto type="default" onClick={() => setCurrentSection(index)}>Previous</Button>
+                    {currentSection > 0 && <Button auto type="default" onClick={() => setCurrentSection(index)}>Previous</Button>}
                   </Col>
                   <Spacer x={30} />
                   <Col span={4}>
-                    {currentSection < guide.steps.length && <Button auto type="success-light" onClick={() => { setCurrentSection(index + 2); setVisitedSections([...visitedSections, index + 1]); }}>Next</Button>}
+                    {currentSection === 0 && <Button auto type="success-light" onClick={onNextButtonClick(0)}>Let&apos;s get started!</Button>}
+                    {currentSection > 0 && currentSection < guide.steps.length - 1 && <Button auto type="success-light" onClick={onNextButtonClick(index)}>Next</Button>}
                   </Col>
                 </Row>
               </div>
@@ -159,9 +156,13 @@ export const getStaticProps: GetStaticProps = async ({
   const data = await fetchGuide(permalink, preview);
 
   const introMdxSource = await serialize(data.fields.introduction);
-
-  console.log(data.fields.steps[0]);
-  const steps = [];
+  const steps = [
+    {
+      key: '0',
+      title: 'Introduction',
+      content: introMdxSource,
+    },
+  ];
   /* eslint-disable-next-line no-plusplus */
   for (let index = 0; index < data.fields.steps.length; index++) {
     const element = data.fields.steps[index];
