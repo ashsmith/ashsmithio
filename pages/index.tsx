@@ -24,14 +24,16 @@ const Homepage: FC<Props> = ({ posts }) => {
         <meta name="description" content="Senior Software Engineer @ Play Sports Network. Bath, UK" />
       </Head>
 
-      <Grid.Container style={{ margin: 'calc(16pt * 2.5) 0 calc(16pt * 5)' }} justify="center">
-        <Grid xs={20} alignContent="center" alignItems="center" style={{ textAlign: 'center' }}>
-          <Text h1 size="2.5rem">
+      <Grid.Container style={{ margin: 'calc(16pt * 2.5) 0 calc(16pt * 5)' }}>
+        <Grid xs={24}>
+          <Text h1 style={{ textAlign: 'center', width: '100%' }} size="2.5rem">
             <span role="img" aria-labelledby="waving hand" aria-label="waving hand">👋</span>
             {' '}
             Hey, I’m Ash!
           </Text>
-          <Text h2>A Software Engineer and keen triathlete.</Text>
+        </Grid>
+        <Grid xs={24}>
+          <Text h2 style={{ textAlign: 'center', width: '100%' }}>A Software Engineer and keen triathlete.</Text>
         </Grid>
       </Grid.Container>
 
