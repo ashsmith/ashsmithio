@@ -9,13 +9,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@contentful/rich-text-from-markdown": "^14.1.1",
-    "@contentful/rich-text-react-renderer": "^14.1.1",
-    "@geist-ui/react": "^2.1.0-canary.0",
-    "@geist-ui/react-icons": "^1.0.0",
+    "@geist-ui/react": "^2.1.5",
+    "@geist-ui/react-icons": "^1.0.1",
     "@moxy/react-contentful-image": "^1.0.0",
     "contentful": "^8.1.7",
-    "next": "^10.2.0",
+    "next": "^10.2.3",
     "next-mdx-remote": "^3.0.2",
     "prismjs": "^1.21.0",
     "react": "^17.0.0",

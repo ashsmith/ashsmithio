@@ -69,7 +69,6 @@ const Post: FC<Props> = ({ post }) => {
 export const getStaticProps: GetStaticProps = async ({ params: { post }, preview = false }) => {
   const permalink = Array.isArray(post) ? post.join('/') : post;
   const data = await fetchBlogPost(permalink, preview);
-
   const mdxSource = await serialize(data.fields.content);
 
   return {

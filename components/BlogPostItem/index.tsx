@@ -12,22 +12,25 @@ interface Props {
 
 const BlogPostItem: FC<Props> = ({
   date, permalink, title, category,
-}) => (
-  <Card shadow style={{ display: 'flex', flexDirection: 'column' }}>
-    <Card.Content style={{ flex: '1 0 auto' }}>
-      <Text h3>
-        <Link href={permalink}><a>{title}</a></Link>
-      </Text>
-    </Card.Content>
-    <Card.Footer>
-      {category !== null && (<CategoryLink category={category} />)}
-      <Text small type="secondary">
-        Posted on
-        {' '}
-        {(new Date(date)).toLocaleDateString()}
-      </Text>
-    </Card.Footer>
-  </Card>
-);
+}) => {
+  const postDate = new Date(date);
+  return (
+    <Card shadow style={{ display: 'flex', flexDirection: 'column' }}>
+      <Card.Content style={{ flex: '1 0 auto' }}>
+        <Text h3>
+          <Link href={`/${permalink}`}><a>{title}</a></Link>
+        </Text>
+      </Card.Content>
+      <Card.Footer>
+        {category !== null && (<CategoryLink category={category} />)}
+        <Text small type="secondary">
+          Posted on
+          {' '}
+          {`${postDate.getDate()}/${postDate.getMonth() + 1}/${postDate.getFullYear()}`}
+        </Text>
+      </Card.Footer>
+    </Card>
+  );
+};
 
 export default BlogPostItem;

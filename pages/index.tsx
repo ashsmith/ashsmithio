@@ -40,23 +40,15 @@ const Homepage: FC<Props> = ({ posts }) => {
       <BlogPostGrid>
         <BlogPostGrid.Header>
           <Text h3 style={{ textAlign: 'center' }}>
-            Here&apos;s some recent
-            <sup>*</sup>
-            {' '}
-            posts of mine...
+            Here&apos;s some recent posts of mine...
           </Text>
         </BlogPostGrid.Header>
         <BlogPostGrid.Posts posts={posts} />
         <BlogPostGrid.Footer>
-          <Text p em style={{ textAlign: 'center' }}>
+          <Text p em style={{ textAlign: 'center', width: '100%' }}>
             Want to view more?
             {' '}
             <Link href="/posts"><a>See all of my wonderful blog posts</a></Link>
-          </Text>
-          <Text small p em style={{ textAlign: 'center' }}>
-            <sup>*</sup>
-            {' '}
-            Blog posts may not be recent...
           </Text>
         </BlogPostGrid.Footer>
       </BlogPostGrid>
