@@ -78,53 +78,53 @@ const Guide: FC<Props> = ({ guide }) => {
         <meta name="twitter:site" content="@ashsmithco" />
         <meta name="twitter:creator" content="@ashsmithco" />
       </Head>
-      <h1 style={{ textAlign: 'center' }}>
-        {guide.title}
-      </h1>
-      <span>
-        This guide was created on
-        {' '}
-        {`${guideDate.getDate()}/${guideDate.getMonth() + 1}/${guideDate.getFullYear()}`}
-      </span>
+      <div className="text-center max-w-5xl m-auto bg-white p-8 -mt-14 mb-6">
+        <h1 className="text-4xl max-w-lg m-auto">
+          {guide.title}
+        </h1>
+        <span className="text-sm">
+          Guide created on
+          {' '}
+          {`${guideDate.getDate()}/${guideDate.getMonth() + 1}/${guideDate.getFullYear()}`}
+        </span>
+      </div>
 
-      <div>
-        <div>
-          <div>
-            <div>
-              <h3>Table of contents</h3>
-              <ol start={0}>
-                {guide.steps.map((step, index) => {
-                  const showCheck = visitedSections.includes(index);
-                  const showChevron = currentSection === index && !showCheck;
-                  return (
-                    <li>
-                      <div style={{ marginLeft: '-50px', position: 'absolute' }}>
-                        {showCheck && <FiCheck color="#0070F3" />}
-                        {showChevron && <FiChevronRight />}
-                      </div>
-                      <a href={`#step-${index}`} onClick={(e) => { e.preventDefault(); setCurrentSection(index); }}>
-                        <span>{step.title}</span>
-                      </a>
-                    </li>
-                  );
-                })}
-              </ol>
-            </div>
+      <div className="grid grid-cols-4 max-w-5xl m-auto gap-3">
+        <div className="bg-white p-6">
+          <div className="sticky top-2" style={{ position: '-webkit-sticky' }}>
+            <h3 className="mb-4 font-bold">Table of contents</h3>
+            <ol start={0}>
+              {guide.steps.map((step, index) => {
+                const showCheck = visitedSections.includes(index);
+                const showChevron = currentSection === index && !showCheck;
+                return (
+                  <li className="mb-2">
+                    <div style={{ marginLeft: '-20px', marginTop: '4px', position: 'absolute' }}>
+                      {showCheck && <FiCheck color="#0070F3" />}
+                      {showChevron && <FiChevronRight />}
+                    </div>
+                    <a href={`#step-${index}`} onClick={(e) => { e.preventDefault(); setCurrentSection(index); }} className={`text-blue-600 hover:underline ${(showCheck || showChevron) && 'font-bold'}`}>
+                      <span>{step.title}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ol>
           </div>
         </div>
-        <div>
+        <div className="col-span-3 bg-white p-6">
           {guide.steps.map((step, index) => (
-            <div key={step.key} style={(index !== currentSection) ? { display: 'none' } : { maxWidth: '100%' }}>
-              <h2>{step.title}</h2>
+            <div key={step.key} style={(index !== currentSection) ? { display: 'none' } : {}} className="main-content max-w-full">
+              <h2 style={{ marginTop: 0 }}>{step.title}</h2>
               {/* eslint-disable-next-line react/jsx-props-no-spreading */}
               <MDXRemote components={components} {...step.content} />
-              <div style={{ marginTop: '15px' }}>
-                <div>
-                  {currentSection > 0 && <button type="button" onClick={() => setCurrentSection(index)}>Previous</button>}
+              <div className="mt-4 grid grid-cols-4">
+                <div className="col-start-1">
+                  {currentSection > 0 && <button className="p-2 px-4 bg-gray-200 text-black rounded-md" type="button" onClick={() => setCurrentSection(index)}>Previous</button>}
                 </div>
-                <div>
-                  {currentSection === 0 && <button type="button" onClick={onNextButtonClick(0)}>Let&apos;s get started!</button>}
-                  {currentSection > 0 && currentSection < guide.steps.length - 1 && <button type="button" onClick={onNextButtonClick(index)}>Next</button>}
+                <div className="col-start-4 justify-self-end">
+                  {currentSection === 0 && <button className="p-2 px-4 bg-blue-700 text-white rounded-md" type="button" onClick={onNextButtonClick(0)}>Let&apos;s get started!</button>}
+                  {currentSection > 0 && currentSection < guide.steps.length - 1 && <button className="p-2 px-4 bg-blue-700 text-white rounded-md" type="button" onClick={onNextButtonClick(index)}>Next</button>}
                 </div>
               </div>
             </div>
