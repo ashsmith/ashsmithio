@@ -50,7 +50,7 @@ const Header: FC = () => (
       <div className="max-w-xl m-auto flex justify-center mb-8">
         <Image src={profilePic} alt="Picture of the author" className="rounded-full" width={95} height={95} placeholder="blur" />
         <div className="flex flex-col items-center ml-8">
-          <h1 className="text-5xl">Ash Smith</h1>
+          <h1 className="text-5xl font-extrabold">Ash Smith</h1>
           <h3 className="text-xl">Cloud & Serverless Developer</h3>
         </div>
       </div>
