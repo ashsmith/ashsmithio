@@ -150,9 +150,8 @@ export const getStaticProps: GetStaticProps = async ({
       content: introMdxSource,
     },
   ];
-  // eslint-disable-next-line no-plusplus
-  for (let index = 0; index < data.fields.steps.length; index++) {
-    const element = data.fields.steps[index];
+  // eslint-disable-next-line no-restricted-syntax
+  for (const element of data.fields.steps) {
     if (!element.fields) {
       // eslint-disable-next-line no-continue
       continue;
