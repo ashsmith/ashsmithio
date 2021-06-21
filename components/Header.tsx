@@ -6,7 +6,7 @@ import {
 
 const Header: FC = () => (
   <header className="header text-white pt-2 pb-16">
-    <div className="max-w-screen-lg m-auto">
+    <div className="max-w-4xl m-auto">
       <div className="grid grid-cols-2 gap-2">
         <div className="place-self-start">
           <ul>
