@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { Text } from '@geist-ui/react';
 import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import { BlogPostItem, fetchBlogPosts } from '../lib/contentful';
@@ -17,7 +16,7 @@ const Posts: FC<Props> = ({ posts }) => (
     </Head>
     <BlogPostGrid>
       <BlogPostGrid.Header>
-        <Text h1 style={{ textAlign: 'center' }}>All of my wonderful blog posts...</Text>
+        <h1 style={{ textAlign: 'center' }}>All of my wonderful blog posts...</h1>
       </BlogPostGrid.Header>
       <BlogPostGrid.Posts posts={posts} />
     </BlogPostGrid>

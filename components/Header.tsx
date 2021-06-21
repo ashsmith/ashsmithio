@@ -1,43 +1,54 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
-import { Grid, Text } from '@geist-ui/react';
-import Github from '@geist-ui/react-icons/github';
-import Twitter from '@geist-ui/react-icons/twitter';
-import Instagram from '@geist-ui/react-icons/instagram';
-import LinkedIn from '@geist-ui/react-icons/linkedin';
+import {
+  SiGithub, SiTwitter, SiInstagram, SiLinkedin,
+} from 'react-icons/si';
 
 const Header: FC = () => (
-  <Grid.Container justify="space-between" style={{ marginTop: '.5rem' }}>
-    <Grid xs={12}>
-      <Text b size="1.5rem">
-        <Link href="/"><a>Ash Smith</a></Link>
-      </Text>
-    </Grid>
-    <Grid xs={12}>
-      <Grid.Container gap={2} justify="flex-end">
-        <Grid>
-          <a href="https://twitter.com/ashsmithco" rel="nofollow noopener">
-            <Twitter />
-          </a>
-        </Grid>
-        <Grid>
-          <a href="https://github.com/ashsmith" rel="nofollow noopener">
-            <Github />
-          </a>
-        </Grid>
-        <Grid>
-          <a href="https://instagram.com/ashsmithtri" rel="nofollow noopener">
-            <Instagram />
-          </a>
-        </Grid>
-        <Grid>
-          <a href="https://www.linkedin.com/in/ashsmithco/" rel="nofollow noopener">
-            <LinkedIn />
-          </a>
-        </Grid>
-      </Grid.Container>
-    </Grid>
-  </Grid.Container>
+  <header className="header text-white pt-2 pb-16">
+    <div className="max-w-screen-lg m-auto">
+      <div className="grid grid-cols-2 gap-2">
+        <div className="place-self-start">
+          <ul>
+            <li className="inline-block px-2"><Link href="/">Home</Link></li>
+            {/* <li className="inline-block px-2"><Link href="/">About</Link></li> */}
+            {/* <li className="inline-block px-2"><Link href="/">Blog</Link></li> */}
+          </ul>
+        </div>
+        <div className="place-self-end">
+          <ol>
+            <li className="inline-block px-2">
+              <a href="https://twitter.com/ashsmithco" rel="nofollow noopener">
+                <SiTwitter />
+              </a>
+            </li>
+            <li className="inline-block px-2">
+              <a href="https://github.com/ashsmith" rel="nofollow noopener">
+                <SiGithub />
+              </a>
+            </li>
+            <li className="inline-block px-2">
+              <a href="https://instagram.com/ashsmithtri" rel="nofollow noopener">
+                <SiInstagram />
+              </a>
+            </li>
+            <li className="inline-block px-2">
+              <a href="https://www.linkedin.com/in/ashsmithco/" rel="nofollow noopener">
+                <SiLinkedin />
+              </a>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div className="max-w-xl m-auto flex justify-center mb-8">
+        <img src="https://via.placeholder.com/95" alt="" className="rounded-full" />
+        <div className="flex flex-col items-center ml-8">
+          <h1 className="text-5xl">Ash Smith</h1>
+          <h3 className="text-xl">Cloud & Serverless Developer</h3>
+        </div>
+      </div>
+    </div>
+  </header>
 );
 
 export default Header;

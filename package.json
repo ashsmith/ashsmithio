@@ -9,16 +9,16 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@geist-ui/react": "^2.1.5",
-    "@geist-ui/react-icons": "^1.0.1",
+    "@heroicons/react": "^1.0.1",
     "@moxy/react-contentful-image": "^1.0.0",
-    "contentful": "^8.1.7",
-    "next": "^10.2.3",
+    "contentful": "^8.4.2",
+    "next": "^11.0.0",
     "next-mdx-remote": "^3.0.2",
-    "prismjs": "^1.21.0",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
-    "react-markdown": "^5.0.3",
+    "prismjs": "^1.23.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
+    "react-markdown": "^6.0.2",
     "react-syntax-highlighter": "^15.2.1"
   },
   "devDependencies": {
@@ -26,12 +26,15 @@
     "@types/react": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.4.0",
+    "autoprefixer": "^10.2.6",
     "eslint": "^7.11.0",
     "eslint-config-airbnb-typescript": "^12.0.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.8",
+    "postcss": "^8.3.5",
+    "tailwindcss": "^2.2.2",
     "typescript": "^4.0.3"
   },
   "resolutions": {

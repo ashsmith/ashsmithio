@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Text } from '@geist-ui/react';
 import { BlogPostItem, fetchBlogPostsByCategory } from '../../lib/contentful';
 import BlogPostGrid from '../../components/BlogPostGrid';
 
@@ -35,11 +34,11 @@ const Category: FC<Props> = ({ posts, category }) => {
       </Head>
       <BlogPostGrid>
         <BlogPostGrid.Header>
-          <Text h1 style={{ textAlign: 'center' }}>
+          <h1 style={{ textAlign: 'center' }}>
             {category}
             {' '}
             Posts
-          </Text>
+          </h1>
         </BlogPostGrid.Header>
         <BlogPostGrid.Posts posts={posts} />
       </BlogPostGrid>

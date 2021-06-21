@@ -1,16 +1,14 @@
 import React, { FC } from 'react';
-import { Page } from '@geist-ui/react';
+
 import Header from './Header';
 
 const Layout: FC = ({ children }) => (
-  <Page size="large">
-    <Page.Header>
-      <Header />
-    </Page.Header>
-    <Page.Content>
+  <div className="bg-gray-100 pb-12">
+    <Header />
+    <div className="max-w-3xl m-auto bg-white -mt-14 px-10 py-8">
       {children}
-    </Page.Content>
-  </Page>
+    </div>
+  </div>
 );
 
 export default Layout;

@@ -5,7 +5,6 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import ErrorPage from 'next/error';
 import Head from 'next/head';
-import { Text } from '@geist-ui/react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { BlogPostFields, fetchBlogPost, fetchBlogPosts } from '../lib/contentful';
 import CodeBlock from '../components/CodeBlock';
@@ -52,16 +51,18 @@ const Post: FC<Props> = ({ post }) => {
         <meta name="twitter:site" content="@ashsmithco" />
         <meta name="twitter:creator" content="@ashsmithco" />
       </Head>
-      <>
-        <Text h1 size="2.5rem" style={{ textAlign: 'center' }}>{post.title}</Text>
-        <Text type="secondary">
+      <section>
+        <h1 className="text-4xl text-center mb-2">{post.title}</h1>
+        <p className="text-sm text-center mb-8">
           Posted on
           {' '}
           {`${postDate.getDate()}/${postDate.getMonth() + 1}/${postDate.getFullYear()}`}
-        </Text>
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-        <MDXRemote components={components} {...post.content} />
-      </>
+        </p>
+        <article className="main-content">
+          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+          <MDXRemote components={components} {...post.content} />
+        </article>
+      </section>
     </>
   );
 };

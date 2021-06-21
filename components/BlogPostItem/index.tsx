@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
-import { Card, Text } from '@geist-ui/react';
 import CategoryLink from './CategoryLink';
 
 interface Props {
@@ -15,21 +14,21 @@ const BlogPostItem: FC<Props> = ({
 }) => {
   const postDate = new Date(date);
   return (
-    <Card shadow style={{ display: 'flex', flexDirection: 'column' }}>
-      <Card.Content style={{ flex: '1 0 auto' }}>
-        <Text h3>
+    <div>
+      <div style={{ flex: '1 0 auto' }}>
+        <h3>
           <Link href={`/${permalink}`}><a>{title}</a></Link>
-        </Text>
-      </Card.Content>
-      <Card.Footer>
+        </h3>
+      </div>
+      <div>
         {category !== null && (<CategoryLink category={category} />)}
-        <Text small type="secondary">
+        <span>
           Posted on
           {' '}
           {`${postDate.getDate()}/${postDate.getMonth() + 1}/${postDate.getFullYear()}`}
-        </Text>
-      </Card.Footer>
-    </Card>
+        </span>
+      </div>
+    </div>
   );
 };
 

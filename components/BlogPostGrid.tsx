@@ -1,5 +1,4 @@
 import React, { Component, FC } from 'react';
-import { Grid } from '@geist-ui/react';
 import BlogPostItem from './BlogPostItem';
 import { BlogPostItem as BlogPostItemType } from '../lib/contentful';
 
@@ -8,21 +7,21 @@ interface PostProps {
 }
 
 class BlogPostGrid extends Component {
-  static Header: FC = ({ children }) => (<Grid xs={24}>{children}</Grid>);
+  static Header: FC = ({ children }) => (<div>{children}</div>);
 
-  static Footer: FC = ({ children }) => (<Grid xs={24}>{children}</Grid>);
+  static Footer: FC = ({ children }) => (<div>{children}</div>);
 
   static Posts: FC<PostProps> = ({ posts }) => (
     <>
       {posts.map(({ fields }) => (
-        <Grid key={fields.permalink} xs={24} md={12} dir="column" style={{ display: 'flex' }}>
+        <div key={fields.permalink}>
           <BlogPostItem
             permalink={fields.permalink}
             title={fields.title}
             date={fields.date}
             category={fields.category}
           />
-        </Grid>
+        </div>
       ))}
     </>
   );
@@ -30,9 +29,9 @@ class BlogPostGrid extends Component {
   render() {
     const { children } = this.props;
     return (
-      <Grid.Container gap={4}>
+      <div>
         {children}
-      </Grid.Container>
+      </div>
     );
   }
 }

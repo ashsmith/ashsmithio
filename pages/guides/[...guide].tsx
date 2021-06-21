@@ -4,9 +4,6 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import ErrorPage from 'next/error';
 import Head from 'next/head';
-import {
-  Text, Row, Col, Button, Grid, Spacer,
-} from '@geist-ui/react';
 import CheckInCircleFill from '@geist-ui/react-icons/checkInCircleFill';
 import ChevronRightCircleFill from '@geist-ui/react-icons/chevronRightCircleFill';
 import ArrowLeftCircle from '@geist-ui/react-icons/arrowLeftCircle';
@@ -15,7 +12,6 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import {
   fetchGuide,
   fetchGuides,
-  GuideStepFields,
 } from '../../lib/contentful';
 import CodeBlock from '../../components/CodeBlock';
 import ContentfulImage from '../../components/ContentfulImage';
@@ -85,20 +81,20 @@ const Post: FC<Props> = ({ guide }) => {
         <meta name="twitter:site" content="@ashsmithco" />
         <meta name="twitter:creator" content="@ashsmithco" />
       </Head>
-      <Text h1 size="2.5rem" style={{ textAlign: 'center' }}>
+      <h1 style={{ textAlign: 'center' }}>
         {guide.title}
-      </Text>
-      <Text type="secondary">
+      </h1>
+      <span>
         This guide was created on
         {' '}
         {`${guideDate.getDate()}/${guideDate.getMonth() + 1}/${guideDate.getFullYear()}`}
-      </Text>
+      </span>
 
-      <Grid.Container>
-        <Grid md={6}>
-          <Row>
-            <Col>
-              <Text h3>Table of contents</Text>
+      <div>
+        <div>
+          <div>
+            <div>
+              <h3>Table of contents</h3>
               <ol start={0}>
                 {guide.steps.map((step, index) => {
                   const showCheck = visitedSections.includes(index);
@@ -110,34 +106,34 @@ const Post: FC<Props> = ({ guide }) => {
                         {showChevron && <ChevronRightCircleFill />}
                       </div>
                       <a href={`#step-${index}`} onClick={(e) => { e.preventDefault(); setCurrentSection(index); }}>
-                        <Text span b={showCheck || showChevron}>{step.title}</Text>
+                        <span>{step.title}</span>
                       </a>
                     </li>
                   );
                 })}
               </ol>
-            </Col>
-          </Row>
-        </Grid>
-        <Grid md={18}>
+            </div>
+          </div>
+        </div>
+        <div>
           {guide.steps.map((step, index) => (
             <div key={step.key} style={(index !== currentSection) ? { display: 'none' } : { maxWidth: "100%" }}>
-              <Text h2>{step.title}</Text>
+              <h2>{step.title}</h2>
               {/* eslint-disable-next-line react/jsx-props-no-spreading */}
               <MDXRemote components={components} {...step.content} />
-              <Row justify="space-between" style={{ marginTop: '15px' }}>
-                <Col span={6}>
-                  {currentSection > 0 && <Button type="secondary-light" icon={(<ArrowLeftCircle />)} onClick={() => setCurrentSection(index)}>Previous</Button>}
-                </Col>
-                <Col span={6}>
-                  {currentSection === 0 && <Button type="success-light" icon={(<ArrowRightCircle />)} iconRight onClick={onNextButtonClick(0)}>Let&apos;s get started!</Button>}
-                  {currentSection > 0 && currentSection < guide.steps.length - 1 && <Button type="success-light" icon={(<ArrowRightCircle />)} iconRight onClick={onNextButtonClick(index)}>Next</Button>}
-                </Col>
-              </Row>
+              <div style={{ marginTop: '15px' }}>
+                <div>
+                  {currentSection > 0 && <button type="button" onClick={() => setCurrentSection(index)}>Previous</button>}
+                </div>
+                <div>
+                  {currentSection === 0 && <button type="button" onClick={onNextButtonClick(0)}>Let&apos;s get started!</button>}
+                  {currentSection > 0 && currentSection < guide.steps.length - 1 && <button type="button" onClick={onNextButtonClick(index)}>Next</button>}
+                </div>
+              </div>
             </div>
           ))}
-        </Grid>
-      </Grid.Container>
+        </div>
+      </div>
     </>
   );
 };
