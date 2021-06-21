@@ -9,18 +9,18 @@ interface Props {
 }
 
 const Posts: FC<Props> = ({ posts }) => (
-  <>
+  <div className="max-w-4xl m-auto bg-white -mt-14 px-10 py-8">
     <Head>
       <title>Ash Smith - All of my blog posts...</title>
       <meta name="description" content="All of my posts... enjoy ;)" />
     </Head>
     <BlogPostGrid>
       <BlogPostGrid.Header>
-        <h1 style={{ textAlign: 'center' }}>All of my wonderful blog posts...</h1>
+        <h1 className="text-center w-full text-lg font-bold">All of my wonderful blog posts...</h1>
       </BlogPostGrid.Header>
       <BlogPostGrid.Posts posts={posts} />
     </BlogPostGrid>
-  </>
+  </div>
 );
 
 export const getStaticProps: GetStaticProps = async ({ preview }) => {

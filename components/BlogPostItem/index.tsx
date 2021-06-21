@@ -14,7 +14,7 @@ const BlogPostItem: FC<Props> = ({
 }) => {
   const postDate = new Date(date);
   return (
-    <div className="shadow-md p-5 flex flex-col">
+    <div className="border border-gray-100 shadow-md p-5 flex flex-col">
       <div className="mb-2" style={{ flex: '1 0 auto' }}>
         <h3 className="text-xl">
           <Link href={`/${permalink}`}><a className="text-blue-500 hover:underline">{title}</a></Link>
