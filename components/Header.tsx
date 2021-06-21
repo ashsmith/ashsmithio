@@ -3,6 +3,8 @@ import Link from 'next/link';
 import {
   SiGithub, SiTwitter, SiInstagram, SiLinkedin, SiStrava,
 } from 'react-icons/si';
+import Image from 'next/image';
+import profilePic from '../public/profile.png';
 
 const Header: FC = () => (
   <header className="header text-white pt-2 pb-16">
@@ -46,7 +48,7 @@ const Header: FC = () => (
         </div>
       </div>
       <div className="max-w-xl m-auto flex justify-center mb-8">
-        <img src="https://via.placeholder.com/95" alt="" className="rounded-full" />
+        <Image src={profilePic} alt="Picture of the author" className="rounded-full" width={95} height={95} placeholder="blur" />
         <div className="flex flex-col items-center ml-8">
           <h1 className="text-5xl">Ash Smith</h1>
           <h3 className="text-xl">Cloud & Serverless Developer</h3>
