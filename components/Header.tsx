@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
 import {
-  SiGithub, SiTwitter, SiInstagram, SiLinkedin,
+  SiGithub, SiTwitter, SiInstagram, SiLinkedin, SiStrava,
 } from 'react-icons/si';
 
 const Header: FC = () => (
@@ -19,22 +19,27 @@ const Header: FC = () => (
           <ol>
             <li className="inline-block px-2">
               <a href="https://twitter.com/ashsmithco" rel="nofollow noopener">
-                <SiTwitter />
+                <SiTwitter title="Follow me on Twitter" />
+              </a>
+            </li>
+            <li className="inline-block px-2">
+              <a href="https://www.strava.com/athletes/5154252" rel="nofollow noopener">
+                <SiStrava title="Follow me on Strava" />
               </a>
             </li>
             <li className="inline-block px-2">
               <a href="https://github.com/ashsmith" rel="nofollow noopener">
-                <SiGithub />
+                <SiGithub title="Follw me on GitHub" />
               </a>
             </li>
             <li className="inline-block px-2">
               <a href="https://instagram.com/ashsmithtri" rel="nofollow noopener">
-                <SiInstagram />
+                <SiInstagram title="Follow me on Instagram" />
               </a>
             </li>
             <li className="inline-block px-2">
               <a href="https://www.linkedin.com/in/ashsmithco/" rel="nofollow noopener">
-                <SiLinkedin />
+                <SiLinkedin title="Connect with me on LinkedIn" />
               </a>
             </li>
           </ol>
