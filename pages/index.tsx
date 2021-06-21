@@ -30,7 +30,7 @@ const Homepage: FC<Props> = ({ posts }) => {
           Hey, I’m Ash!
         </h1>
         <h2 className="text-center w-full text-xl font-bold">Software Engineer and keen triathlete.</h2>
-        <p className="max-w-prose m-auto mt-4 text-center">Welcome! I&apos;m a passionate software engineer specialising in cloud and serverless technologies such as AWS and GCP. My blog is mismash of things I have found useful over the years, hopefully you&apos;ll find them useful too!</p>
+        <p className="max-w-prose m-auto mt-4 text-center">Welcome! I&apos;m a passionate software engineer specialising in cloud and serverless technologies such as AWS and GCP. My blog is mismash of things I have found useful over the years, hopefully you&apos;ll find them useful too! When I&apos;m not working I can usually be found swimming, cycling or running.</p>
 
       </div>
       <div className="max-w-4xl m-auto bg-white mt-6 px-10 py-8">
