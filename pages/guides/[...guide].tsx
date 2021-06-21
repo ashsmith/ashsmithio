@@ -4,10 +4,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import ErrorPage from 'next/error';
 import Head from 'next/head';
-import CheckInCircleFill from '@geist-ui/react-icons/checkInCircleFill';
-import ChevronRightCircleFill from '@geist-ui/react-icons/chevronRightCircleFill';
-import ArrowLeftCircle from '@geist-ui/react-icons/arrowLeftCircle';
-import ArrowRightCircle from '@geist-ui/react-icons/arrowRightCircle';
+import { FiCheck, FiChevronRight } from 'react-icons/fi';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import {
   fetchGuide,
@@ -39,7 +36,7 @@ interface Props {
   }
 }
 
-const Post: FC<Props> = ({ guide }) => {
+const Guide: FC<Props> = ({ guide }) => {
   const [currentSection, setCurrentSection] = useState(0);
   const [visitedSections, setVisitedSections] = useState<number[]>([]);
 
@@ -102,8 +99,8 @@ const Post: FC<Props> = ({ guide }) => {
                   return (
                     <li>
                       <div style={{ marginLeft: '-50px', position: 'absolute' }}>
-                        {showCheck && <CheckInCircleFill color="#0070F3" />}
-                        {showChevron && <ChevronRightCircleFill />}
+                        {showCheck && <FiCheck color="#0070F3" />}
+                        {showChevron && <FiChevronRight />}
                       </div>
                       <a href={`#step-${index}`} onClick={(e) => { e.preventDefault(); setCurrentSection(index); }}>
                         <span>{step.title}</span>
@@ -117,7 +114,7 @@ const Post: FC<Props> = ({ guide }) => {
         </div>
         <div>
           {guide.steps.map((step, index) => (
-            <div key={step.key} style={(index !== currentSection) ? { display: 'none' } : { maxWidth: "100%" }}>
+            <div key={step.key} style={(index !== currentSection) ? { display: 'none' } : { maxWidth: '100%' }}>
               <h2>{step.title}</h2>
               {/* eslint-disable-next-line react/jsx-props-no-spreading */}
               <MDXRemote components={components} {...step.content} />
@@ -153,11 +150,15 @@ export const getStaticProps: GetStaticProps = async ({
       content: introMdxSource,
     },
   ];
-  /* eslint-disable-next-line no-plusplus */
+  // eslint-disable-next-line no-plusplus
   for (let index = 0; index < data.fields.steps.length; index++) {
     const element = data.fields.steps[index];
-    /* eslint-disable-next-line no-await-in-loop */
-    const stepContent = await serialize(element.fields.content);
+    if (!element.fields) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+    // eslint-disable-next-line no-await-in-loop
+    const stepContent = await serialize(element.fields?.content);
     steps.push({
       key: element.sys.id,
       title: element.fields.title,
@@ -186,4 +187,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export default Post;
+export default Guide;

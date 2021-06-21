@@ -28,4 +28,9 @@
   .main-content p > code::before, .main-content p > code::after {
     content: "`"
   }
+  .main-content ul {
+    list-style: disc;
+    padding-left: 2rem;
+    @apply my-6;
+  }
 }

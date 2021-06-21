@@ -23,34 +23,33 @@ const Homepage: FC<Props> = ({ posts }) => {
         <meta name="description" content="Senior Software Engineer @ Play Sports Network. Bath, UK" />
       </Head>
 
-      <div style={{ margin: 'calc(16pt * 2.5) 0 calc(16pt * 5)' }}>
-        <div>
-          <h1 style={{ textAlign: 'center', width: '100%' }} size="2.5rem">
-            <span role="img" aria-labelledby="waving hand" aria-label="waving hand">👋</span>
-            {' '}
-            Hey, I’m Ash!
-          </h1>
-        </div>
-        <div>
-          <h2 style={{ textAlign: 'center', width: '100%' }}>A Software Engineer and keen triathlete.</h2>
-        </div>
-      </div>
+      <div className="max-w-4xl m-auto bg-white -mt-14 px-10 py-8">
+        <h1 className="text-center w-full text-3xl font-extrabold">
+          <span role="img" aria-labelledby="waving hand" aria-label="waving hand">👋</span>
+          {' '}
+          Hey, I’m Ash!
+        </h1>
+        <h2 className="text-center w-full text-xl font-bold">Software Engineer and keen triathlete.</h2>
+        <p className="max-w-prose m-auto mt-4 text-center">Welcome! I&apos;m a passionate software engineer specialising in cloud and serverless technologies such as AWS and GCP. My blog is mismash of things I have found useful over the years, hopefully you&apos;ll find them useful too!</p>
 
-      <BlogPostGrid>
-        <BlogPostGrid.Header>
-          <h3 style={{ textAlign: 'center' }}>
-            Here&apos;s some recent posts of mine...
-          </h3>
-        </BlogPostGrid.Header>
-        <BlogPostGrid.Posts posts={posts} />
-        <BlogPostGrid.Footer>
-          <p style={{ textAlign: 'center', width: '100%' }}>
-            Want to view more?
-            {' '}
-            <Link href="/posts"><a>See all of my wonderful blog posts</a></Link>
-          </p>
-        </BlogPostGrid.Footer>
-      </BlogPostGrid>
+      </div>
+      <div className="max-w-4xl m-auto bg-white mt-6 px-10 py-8">
+        <BlogPostGrid>
+          <BlogPostGrid.Header>
+            <h3 className="text-center w-full text-lg font-bold">
+              Here&apos;s some recent posts of mine...
+            </h3>
+          </BlogPostGrid.Header>
+          <BlogPostGrid.Posts posts={posts} />
+          <BlogPostGrid.Footer>
+            <p className="text-center w-full">
+              Want to view more?
+              {' '}
+              <Link href="/posts"><a className="text-blue-500 hover:underline">See all of my wonderful blog posts</a></Link>
+            </p>
+          </BlogPostGrid.Footer>
+        </BlogPostGrid>
+      </div>
     </>
   );
 };

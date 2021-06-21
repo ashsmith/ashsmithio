@@ -12,7 +12,7 @@ const CategoryLink: FC<Props> = ({ category }) => {
       {' '}
       {categories.map((cat) => {
         const catPath = cat.replace(/\s/g, '-').toLowerCase();
-        return (<Link key={catPath} href={`/category/${catPath}`}><a>{cat}</a></Link>);
+        return (<Link key={catPath} href={`/category/${catPath}`}><a className="text-blue-500 hover:underline mr-1">{cat}</a></Link>);
       })}
     </span>
   );

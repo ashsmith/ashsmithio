@@ -14,13 +14,13 @@ const BlogPostItem: FC<Props> = ({
 }) => {
   const postDate = new Date(date);
   return (
-    <div>
-      <div style={{ flex: '1 0 auto' }}>
-        <h3>
-          <Link href={`/${permalink}`}><a>{title}</a></Link>
+    <div className="shadow-md p-5 flex flex-col">
+      <div className="mb-2" style={{ flex: '1 0 auto' }}>
+        <h3 className="text-xl">
+          <Link href={`/${permalink}`}><a className="text-blue-500 hover:underline">{title}</a></Link>
         </h3>
       </div>
-      <div>
+      <div className="border-t text-sm text-gray-500">
         {category !== null && (<CategoryLink category={category} />)}
         <span>
           Posted on

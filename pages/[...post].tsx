@@ -41,7 +41,7 @@ const Post: FC<Props> = ({ post }) => {
   const postDate = new Date(post.date);
 
   return (
-    <>
+    <div className="max-w-prose m-auto bg-white -mt-14 px-10 py-8">
       <Head>
         <title>{post.title}</title>
         <meta name="description" content={post.title} />
@@ -63,7 +63,7 @@ const Post: FC<Props> = ({ post }) => {
           <MDXRemote components={components} {...post.content} />
         </article>
       </section>
-    </>
+    </div>
   );
 };
 

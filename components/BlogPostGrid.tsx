@@ -7,23 +7,22 @@ interface PostProps {
 }
 
 class BlogPostGrid extends Component {
-  static Header: FC = ({ children }) => (<div>{children}</div>);
+  static Header: FC = ({ children }) => (<div className="mb-6">{children}</div>);
 
-  static Footer: FC = ({ children }) => (<div>{children}</div>);
+  static Footer: FC = ({ children }) => (<div className="mt-6">{children}</div>);
 
   static Posts: FC<PostProps> = ({ posts }) => (
-    <>
+    <div className="grid grid-cols-2 gap-4">
       {posts.map(({ fields }) => (
-        <div key={fields.permalink}>
-          <BlogPostItem
-            permalink={fields.permalink}
-            title={fields.title}
-            date={fields.date}
-            category={fields.category}
-          />
-        </div>
+        <BlogPostItem
+          key={fields.permalink}
+          permalink={fields.permalink}
+          title={fields.title}
+          date={fields.date}
+          category={fields.category}
+        />
       ))}
-    </>
+    </div>
   );
 
   render() {
