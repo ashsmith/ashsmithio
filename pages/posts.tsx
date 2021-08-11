@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
 import { GetStaticProps } from 'next';
-import { BlogPostItem, fetchBlogPosts } from '../lib/contentful';
+import { fetchBlogPosts } from '../lib/contentful';
 import BlogPostGrid from '../components/BlogPostGrid';
+import type { BlogPostItem } from '../lib/contentful_types';
 
 interface Props {
   posts: BlogPostItem[];

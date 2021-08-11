@@ -2,8 +2,9 @@ import React, { FC } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { GetStaticProps } from 'next';
-import { fetchBlogPosts, BlogPostItem } from '../lib/contentful';
+import { fetchBlogPosts } from '../lib/contentful';
 import BlogPostGrid from '../components/BlogPostGrid';
+import type { BlogPostItem } from '../lib/contentful_types';
 
 const POST_LIMIT = 6;
 

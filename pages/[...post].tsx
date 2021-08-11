@@ -6,10 +6,11 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import ErrorPage from 'next/error';
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { BlogPostFields, fetchBlogPost, fetchBlogPosts } from '../lib/contentful';
+import { fetchBlogPost, fetchBlogPosts } from '../lib/contentful';
 import CodeBlock from '../components/CodeBlock';
 import ContentfulImage from '../components/ContentfulImage';
 import * as Headings from '../components/Headings';
+import type { BlogPostFields } from '../lib/contentful_types';
 
 const Test = ({ children }) => (<div>{children}</div>);
 

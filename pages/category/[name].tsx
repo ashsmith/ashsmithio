@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { BlogPostItem, fetchBlogPostsByCategory } from '../../lib/contentful';
+import { fetchBlogPostsByCategory } from '../../lib/contentful';
 import BlogPostGrid from '../../components/BlogPostGrid';
+import type { BlogPostItem } from '../../lib/contentful_types';
 
 /**
  * Capitalize first letter of each word in a given string.
