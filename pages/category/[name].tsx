@@ -7,9 +7,8 @@ import BlogPostGrid from '../../components/BlogPostGrid';
 /**
  * Capitalize first letter of each word in a given string.
  */
-/* eslint-disable-next-line no-extend-native,func-names */
-String.prototype.capitalize = function () {
-  const parts = this.split(' ').map((part) => part.charAt(0).toUpperCase() + part.slice(1));
+const capitalize = (str: string) => {
+  const parts = str.split(' ').map((part) => part.charAt(0).toUpperCase() + part.slice(1));
   return parts.join(' ');
 };
 
@@ -28,9 +27,9 @@ const Category: FC<Props> = ({ posts, category }) => {
       <Head>
         <title>
           Ash Smith - Category:
-          {category.capitalize()}
+          {capitalize(category)}
         </title>
-        <meta name="description" content={`Some ${category.capitalize()} posts... enjoy ;)`} />
+        <meta name="description" content={`Some ${capitalize(category)} posts... enjoy ;)`} />
       </Head>
       <BlogPostGrid>
         <BlogPostGrid.Header>
@@ -48,7 +47,7 @@ const Category: FC<Props> = ({ posts, category }) => {
 
 export const getStaticProps: GetStaticProps = async ({ preview, params: { name } }) => {
   const categoryName = Array.isArray(name) ? name.join('') : name;
-  const category = categoryName.replace('-', ' ').capitalize();
+  const category = capitalize(categoryName.replace('-', ' '));
   const posts = await fetchBlogPostsByCategory(preview, category);
   return {
     props: {

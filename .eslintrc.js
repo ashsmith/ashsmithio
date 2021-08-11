@@ -1,6 +1,6 @@
 module.exports = {
   "parser": '@typescript-eslint/parser',
-  "extends": ['airbnb-typescript'],
+  "extends": ['airbnb-typescript', 'plugin:@next/next/recommended'],
   "env": {
     "browser": true,
     "es6": true,
