@@ -1,6 +1,6 @@
 import React, { Component, FC } from 'react';
 import BlogPostItem from './BlogPostItem';
-import { BlogPostItem as BlogPostItemType } from '../lib/contentful';
+import type { BlogPostItem as BlogPostItemType } from '../lib/contentful_types';
 
 interface PostProps {
   posts: BlogPostItemType[];
