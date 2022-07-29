@@ -9,13 +9,13 @@
     "lint": "eslint ."
   },
   "engines": {
-    "node": ">=16.16.0"
+    "node": ">=16.15.0"
   },
   "dependencies": {
     "@heroicons/react": "^1.0.1",
     "@moxy/react-contentful-image": "^1.0.0",
     "contentful": "^8.4.2",
-    "next": "^12.1.0",
+    "next": "^12.2",
     "next-mdx-remote": "^3.0.2",
     "prismjs": "^1.27.0",
     "react": "^17.0.2",
